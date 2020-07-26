@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="R18-Images\" />
+    <Folder Include="R18\" />
   </ItemGroup>
 
 </Project>

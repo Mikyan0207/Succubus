@@ -5,4 +5,16 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Discord.Net" Version="2.2.0" />
+    <PackageReference Include="Discord.Net.Commands" Version="2.2.0" />
+    <PackageReference Include="Discord.Net.WebSocket" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Succubus.Database\Succubus.Database.csproj" />
+    <ProjectReference Include="..\Succubus.Resources\Succubus.Resources.csproj" />
+    <ProjectReference Include="..\Succubus.Store\Succubus.Store.csproj" />
+  </ItemGroup>
+
 </Project>

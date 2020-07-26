@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Succubus.Database.Models;
 using Succubus.Store;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
@@ -18,6 +18,9 @@ namespace Succubus.Database.Context
 
             ConfigurationStore.AddExtension(".json");
         }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Server> Servers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

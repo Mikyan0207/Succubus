@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Succubus.Resources\Succubus.Resources.csproj" />
     <ProjectReference Include="..\Succubus.Store\Succubus.Store.csproj" />
   </ItemGroup>
 

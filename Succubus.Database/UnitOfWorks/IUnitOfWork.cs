@@ -1,14 +1,21 @@
-﻿using System;
+﻿using Succubus.Database.Context;
+using Succubus.Database.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Succubus.Database.UnitOfWorks
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
-        int Save();
+        SuccubusContext Context { get; }
 
-        Task<int> SaveAsync();
+        public IUserRepository Users { get; }
+        public IServerRepository Servers { get; }
+
+        int SaveChanges();
+
+        Task<int> SaveChangesAsync();
     }
 }

@@ -14,7 +14,7 @@ namespace Succubus.Logger
                 Layout = @"${shortdate} [${logger}] ${message}"
             };
 
-            loggingConfig.AddTarget(coloredConsoleTarget);
+            loggingConfig.AddTarget("Console", coloredConsoleTarget);
             loggingConfig.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, coloredConsoleTarget));
 
             LogManager.Configuration = loggingConfig;

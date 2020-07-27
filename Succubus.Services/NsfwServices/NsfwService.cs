@@ -10,7 +10,7 @@ namespace Succubus.Services.NsfwServices
     {
         public ImageData GetRandomImage()
         {
-            string folderPath = System.IO.Directory.GetCurrentDirectory() + "/bin/Debug/netcoreapp3.0/Images/";
+            string folderPath = System.IO.Directory.GetCurrentDirectory() + "/bin/Debug/netcoreapp3.1/Images/";
             Random r = new Random();
             int imgNumber = r.Next(0, 2753);
 

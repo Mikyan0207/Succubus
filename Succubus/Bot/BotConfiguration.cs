@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Succubus.Bot
 {
-    public class Configuration
+    public class BotConfiguration
     {
         public string Token { get; set; }
 

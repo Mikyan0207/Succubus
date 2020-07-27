@@ -5,6 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Configuration\Bot.json" />
+    <None Remove="Configuration\Database.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Configuration\Bot.json" />
+    <EmbeddedResource Include="Configuration\Database.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="R18\" />
   </ItemGroup>
 

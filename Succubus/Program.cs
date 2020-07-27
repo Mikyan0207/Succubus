@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Succubus.Bot;
+using System;
+using System.Threading.Tasks;
 
 namespace Succubus
 {
-    class Program
+    public sealed class Program
     {
-        static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            await new SuccubusBot().RunAsync().ConfigureAwait(false);
         }
     }
 }

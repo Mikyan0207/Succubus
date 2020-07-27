@@ -27,6 +27,7 @@ namespace Succubus.Bot
 
         public SuccubusBot()
         {
+            _Logger = LogManager.GetCurrentClassLogger();
             ConfigurationStore = new NamedResourceStore<byte[]>(new DllResourceStore(new AssemblyName("Succubus.Resources")), @"Configuration");
             
             ConfigurationStore.AddExtension(".json");

@@ -1,6 +1,7 @@
 ﻿using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
+using Succubus.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Succubus.Handlers
 {
-    public class CommandHandler
+    public class CommandHandler : IService
     {
         private readonly DiscordShardedClient Client;
         private readonly CommandService CommandService;

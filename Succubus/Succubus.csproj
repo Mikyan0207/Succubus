@@ -14,11 +14,13 @@
   <ItemGroup>
     <ProjectReference Include="..\Succubus.Database\Succubus.Database.csproj" />
     <ProjectReference Include="..\Succubus.Resources\Succubus.Resources.csproj" />
+    <ProjectReference Include="..\Succubus.Services\Succubus.Services.csproj" />
     <ProjectReference Include="..\Succubus.Store\Succubus.Store.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Commands\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 
 </Project>

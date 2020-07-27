@@ -31,6 +31,11 @@ namespace Succubus.Database.Context
         {
         }
 
-        private string GetConnectionString() => JsonConvert.DeserializeObject<string>(Encoding.UTF8.GetString(ConfigurationStore.Get("Database")));
+        private string GetConnectionString() => JsonConvert.DeserializeObject<DbConfiguration>(Encoding.UTF8.GetString(ConfigurationStore.Get("Database"))).ConnectionString;
+    }
+
+    public class DbConfiguration
+    {
+        public string ConnectionString { get; set; }
     }
 }

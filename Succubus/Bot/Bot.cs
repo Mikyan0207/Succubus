@@ -3,6 +3,8 @@ using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Succubus.Handlers;
+using Succubus.Services;
+using Succubus.Services.UtilityServices;
 using Succubus.Store;
 using System;
 using System.Collections.Generic;
@@ -16,9 +18,10 @@ namespace Succubus.Bot
     {
         private readonly DiscordShardedClient Client;
         private readonly CommandService CommandService;
+        private DbService DbService;
         private readonly NamedResourceStore<byte[]> ConfigurationStore;
         private readonly BotConfiguration BotConfiguration;
-        private readonly IServiceProvider Services;
+        private IServiceProvider Services;
 
         public SuccubusBot()
         {
@@ -27,6 +30,7 @@ namespace Succubus.Bot
             ConfigurationStore.AddExtension(".json");
 
             BotConfiguration = JsonConvert.DeserializeObject<BotConfiguration>(Encoding.UTF8.GetString(ConfigurationStore.Get("Bot")));
+            DbService = new DbService();
 
             Client = new DiscordShardedClient(new DiscordSocketConfig
             {
@@ -74,9 +78,14 @@ namespace Succubus.Bot
             var s = new ServiceCollection()
                 .AddSingleton(CommandService)
                 .AddSingleton(Client)
+                .AddSingleton(DbService)
+                .AddSingleton(DbService.GetDbContext())
                 .AddSingleton(this)
                 .AddMemoryCache();
 
+            s.LoadFrom(Assembly.GetAssembly(typeof(CommandHandler)));
+
+            Services = s.BuildServiceProvider();
         }
     }
 }

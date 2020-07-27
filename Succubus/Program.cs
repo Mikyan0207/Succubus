@@ -6,8 +6,9 @@ namespace Succubus
 {
     public sealed class Program
     {
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
+            Logger.LoggerUtils.InitializeLogger();
             await new SuccubusBot().RunAsync().ConfigureAwait(false);
         }
     }

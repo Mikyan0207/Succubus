@@ -2,6 +2,7 @@
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using NLog;
 using Succubus.Handlers;
 using Succubus.Services;
 using Succubus.Services.UtilityServices;
@@ -22,6 +23,7 @@ namespace Succubus.Bot
         private readonly NamedResourceStore<byte[]> ConfigurationStore;
         private readonly BotConfiguration BotConfiguration;
         private IServiceProvider Services;
+        private NLog.Logger _Logger;
 
         public SuccubusBot()
         {
@@ -50,21 +52,34 @@ namespace Succubus.Bot
 
         public async Task RunAsync()
         {
+            _Logger.Info("Connecting...");
+            
             await Client.LoginAsync(Discord.TokenType.Bot, BotConfiguration.Token).ConfigureAwait(false);
             await Client.StartAsync().ConfigureAwait(false);
+
+            _Logger.Info("Connected.");
 
             try
             {
                 InitializeServices();
             }
-            catch
+            catch (Exception ex)
             {
+                _Logger.Fatal("Failed to initialize services. Bot will shutdown in 5 seconds\n" + ex.Message);
+                
+                await Task.Delay(TimeSpan.FromSeconds(5)).ConfigureAwait(false);
+                await Client.StopAsync().ConfigureAwait(false);
                 throw;
             }
+
+            _Logger.Info("Services Initialized.");
 
             var commandHandler = Services.GetService<CommandHandler>();
 
             await commandHandler.InitializeAsync().ConfigureAwait(false);
+
+            _Logger.Info("CommandHandler Initialized.");
+            _Logger.Info("Bot Ready.");
 
             await Task.Delay(TimeSpan.FromDays(BotConfiguration.AutoRestart)).ConfigureAwait(false);
             await Client.StopAsync().ConfigureAwait(false);

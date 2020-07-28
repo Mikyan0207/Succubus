@@ -6,11 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace Succubus.Database.Repositories
 {
     public class ImageRepository : Repository<Image>, IImageRepository
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         public ImageRepository(SuccubusContext context) : base(context)
         { }
 
@@ -18,34 +21,65 @@ namespace Succubus.Database.Repositories
         {
             int nb = new Random().Next(0, Context.Images.Count() - 1);
 
-            return await Context.Images
-                .Include(x => x.Set)
-                .Include(x => x.Cosplayer)
-                .FirstOrDefaultAsync(x => x.Number == nb + 1);
+            try
+            {
+                Image img = await Context.Images
+                    .Include(x => x.Set)
+                    .Include(x => x.Cosplayer)
+                    .FirstOrDefaultAsync(x => x.Number == nb + 1);
+
+                if (img == null)
+                    Logger.Warn("Failed to get Image from Database.");
+
+                return img;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message);
+
+                return null;
+            }
         }
 
         public Image GetImageFromCosplayer(string name)
         {
-            var cosplayer = Context.Cosplayers
-                .Include(x => x.Sets)
-                .Where(x => x.Name == name || x.Aliases.Contains(name))
-                .FirstOrDefault();
+            try
+            {
+                var cosplayer = Context.Cosplayers
+                    .Include(x => x.Sets)
+                    .Where(x => x.Name == name || x.Aliases.Contains(name))
+                    .FirstOrDefault();
 
-            if (cosplayer == null)
+                if (cosplayer == null)
+                {
+                    Logger.Warn("No Cosplayer found.");
+                    return null;
+                }
+
+                var sets = Context.Sets
+                    .Include(x => x.Cosplayer)
+                    .Include(x => x.Images)
+                    .Where(x => x.Cosplayer.Id == cosplayer.Id)
+                    .ToList();
+
+                if (!sets.Any())
+                {
+                    Logger.Error("No Set found.");
+                    return null;
+                }
+
+                var selectedSet = sets[new Random().Next(0, sets.Count)];
+
+                return selectedSet.Images[new Random().Next(0, (int)selectedSet.Size)];
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message);
                 return null;
+            }
 
-            var sets = Context.Sets
-                .Include(x => x.Cosplayer)
-                .Include(x => x.Images)
-                .Where(x => x.Cosplayer.Id == cosplayer.Id)
-                .ToList();
 
-            if (!sets.Any())
-                return null;
 
-            var selectedSet = sets[new Random().Next(0, sets.Count)];
-
-            return selectedSet.Images[new Random().Next(0, (int)selectedSet.Size)];
         }
     }
 }

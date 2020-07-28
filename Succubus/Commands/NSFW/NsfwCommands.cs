@@ -31,9 +31,15 @@ namespace Succubus.Commands.Nsfw
             Succubus.Database.Models.Image img = null;
 
             if (options == null)
+            {
+                _Logger.Info("Random Image requested.");
                 img = await Service.GetRandomImageAsync().ConfigureAwait(false);
+            }
             else
-                img = Service.GetRandomImageFromCosplayer(options);
+            {
+                _Logger.Info($"Random {options.Trim()} Image requested.");
+                img = Service.GetRandomImageFromCosplayer(options.Trim());
+            }
 
             if (img == null)
             {

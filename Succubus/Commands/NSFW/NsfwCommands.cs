@@ -37,11 +37,11 @@ namespace Succubus.Commands.Nsfw
             }
             else if (options.StartsWith("-u")) // User
             {
-                img = Service.GetRandomImageFromCosplayer(options.Skip(3).ToString());
+                img = Service.GetRandomImageFromCosplayer(options.Skip(2).ToString());
             }
             else if (options.StartsWith("-s")) // Set
             {
-                img = Service.GetRandomImageFromSet(options.Skip(3).ToString());
+                img = Service.GetRandomImageFromSet(options.Skip(2).ToString());
             }
 
             if (img == null)

@@ -71,6 +71,7 @@ namespace Succubus.Database.Context
                 Sets.Add(new Set
                 {
                     Name = @"ふれみこ",
+                    Aliases = "fleiamiko,miko",
                     Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
                     Size = 182,
                     SetPreview = $@"{CloudUrl}Fleia/FleiaMiko/FleiaMiko_001.jpg",
@@ -174,30 +175,33 @@ namespace Succubus.Database.Context
                 SaveChanges();
             }
 
-            //if (!Sets.Any(x => x.Name == "Black or White"))
-            //{
-            //    Sets.Add(new Set
-            //    {
-            //        Name = @"Black or White",
-            //        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
-            //        Size = 322,
-            //        SetPreview = $@"{CloudUrl}Fleia/BoW/BoW_001.jpg"
-            //    });
+            if (!Sets.Any(x => x.Name == "Black or White"))
+            {
+                Sets.Add(new Set
+                {
+                    Name = @"Black or White",
+                    Aliases = "bow",
+                    Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+                    Size = 322,
+                    SetPreview = $@"{CloudUrl}Fleia/BoW/BoW_001.jpg"
+                });
 
-            //    SaveChanges();
+                SaveChanges();
 
-            //    for (int i = 0; i < 321; i += 1)
-            //    {
-            //        Images.Add(new Image
-            //        {
-            //            Name = $@"Black or White {String.Format("{0:000}", i + 1)}",
-            //            Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
-            //            Set = Sets.FirstOrDefault(x => x.Name == @"Black or White"),
-            //            Url = $@"{CloudUrl}Fleia/BoW/BoW_{String.Format("{0:000}", i + 1)}.jpg",
-            //            Number = i + 1
-            //        });
-            //    }
-            //}
+                for (int i = 0; i < 321; i += 1)
+                {
+                    Images.Add(new Image
+                    {
+                        Name = $@"Black or White {String.Format("{0:000}", i + 1)}",
+                        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+                        Set = Sets.FirstOrDefault(x => x.Name == @"Black or White"),
+                        Url = $@"{CloudUrl}Fleia/BoW/BoW_{String.Format("{0:000}", i + 1)}.jpg",
+                        Number = i + 1
+                    });
+                }
+
+                SaveChanges();
+            }
         }
     }
 

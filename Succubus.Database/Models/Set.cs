@@ -10,6 +10,8 @@ namespace Succubus.Database.Models
         [Required]
         public string Name { get; set; }
 
+        public string Aliases { get; set; }
+
         [Required]
         public uint Size { get; set; }
 

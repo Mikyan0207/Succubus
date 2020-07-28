@@ -13,7 +13,7 @@ namespace Succubus.Commands.Nsfw.Services
             _db = db;
         }
 
-        public Image GetRandomImageAsync()
+        public Image GetRandomImage()
         {
             using (var uow = _db.GetDbContext())
             {
@@ -25,7 +25,15 @@ namespace Succubus.Commands.Nsfw.Services
         {
             using (var uow = _db.GetDbContext())
             {
-                return uow.Images.GetImageFromCosplayer(name);
+                return uow.Images.GetImageFromCosplayer(name.Trim());
+            }
+        }
+
+        public Image GetRandomImageFromSet(string set)
+        {
+            using (var uow = _db.GetDbContext())
+            {
+                return uow.Images.GetImageFromSet(set.Trim());
             }
         }
     }

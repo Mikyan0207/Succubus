@@ -82,9 +82,33 @@ namespace Succubus.Database.Repositories
                 Logger.Error(ex.Message);
                 return null;
             }
+        }
 
+        public Image GetImageFromSet(string set)
+        {
+            try
+            {
+                var sets = Context.Sets
+                   .Include(x => x.Cosplayer)
+                   .Include(x => x.Images)
+                   .Where(x => x.Name.ToLowerInvariant() == set)
+                   .ToList();
 
+                if (!sets.Any())
+                {
+                    Logger.Error("No Set found.");
+                    return null;
+                }
 
+                var selectedSet = sets[new Random().Next(0, sets.Count - 1)];
+
+                return selectedSet.Images[new Random().Next(0, (int)selectedSet.Size - 1)];
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message);
+                return null;
+            }
         }
     }
 }

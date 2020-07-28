@@ -11,5 +11,7 @@ namespace Succubus.Database.Repositories
         Image GetRandomImage();
 
         Image GetImageFromCosplayer(string name);
+
+        Image GetImageFromSet(string set);
     }
 }

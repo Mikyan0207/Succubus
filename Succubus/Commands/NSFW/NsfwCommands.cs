@@ -32,11 +32,15 @@ namespace Succubus.Commands.Nsfw
 
             if (options == null)
             {
-                img = Service.GetRandomImageAsync();
+                img = Service.GetRandomImage();
             }
-            else
+            else if (options.StartsWith("-u")) // User
             {
-                img = Service.GetRandomImageFromCosplayer(options.Trim());
+                img = Service.GetRandomImageFromCosplayer(options);
+            }
+            else if (options.StartsWith("-s")) // Set
+            {
+                img = Service.GetRandomImageFromSet(options)
             }
 
             if (img == null)

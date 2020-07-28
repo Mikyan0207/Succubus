@@ -40,7 +40,7 @@ namespace Succubus.Commands.Nsfw
             }
             else if (options.StartsWith("-s")) // Set
             {
-                img = Service.GetRandomImageFromSet(options)
+                img = Service.GetRandomImageFromSet(options);
             }
 
             if (img == null)

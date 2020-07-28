@@ -23,13 +23,13 @@ namespace Succubus.Database.Repositories
 
             try
             {
-                Image img = await Context.Images
+                Image img = Context.Images
                     .Include(x => x.Set)
                     .Include(x => x.Cosplayer)
-                    .FirstOrDefaultAsync(x => x.Number == nb + 1);
+                    .ElementAt(nb);
 
                 if (img == null)
-                    Logger.Warn("Failed to get Image from Database.");
+                    Logger.Warn($"Failed to get Image from Database. Image N°{nb+1}");
 
                 return img;
             }

@@ -16,7 +16,7 @@ namespace Succubus.Database.Repositories
 
         public async Task<Image> GetRandomImage()
         {
-            int nb = new Random().Next(0, Context.Images.Count());
+            int nb = new Random().Next(0, Context.Images.Count() - 1);
 
             return await Context.Images
                 .Include(x => x.Set)

@@ -2,12 +2,9 @@
 using Microsoft.EntityFrameworkCore.Internal;
 using Succubus.Database.Context;
 using Succubus.Database.UnitOfWorks;
-using Succubus.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Succubus.Services;
 
-namespace Succubus.Services.UtilityServices
+namespace Succubus.Services
 {
     public class DbService : IService
     {
@@ -22,6 +19,7 @@ namespace Succubus.Services.UtilityServices
                 }
 
                 context.Database.ExecuteSqlRaw("PRAGMA journal_mode=WAL");
+                context.Initiliaze();
                 context.SaveChanges();
             }
         }

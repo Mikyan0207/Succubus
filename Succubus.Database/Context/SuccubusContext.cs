@@ -92,6 +92,29 @@ namespace Succubus.Database.Context
 
                 SaveChanges();
             }
+
+            if (!Sets.Any(x => x.Name == @"Honey Bunny"))
+            {
+                Sets.Add(new Set
+                {
+                    Name = @"Honey Bunny",
+                    Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+                    Size = 349,
+                    SetPreview = $@"{CloudUrl}Fleia/HoneyBunny/HoneyBunny_001.jpg",
+                });
+
+                for (int i = 0; i < 348; i += 1)
+                {
+                    Images.Add(new Image
+                    {
+                        Name = @$"Honey Bunny {String.Format("{0:000}", i + 1)}",
+                        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+                        Set = Sets.FirstOrDefault(x => x.Name == @"Honey Bunny"),
+                        Url = $@"{CloudUrl}Fleia/HoneyBunny/HoneyBunny_{String.Format("{0:000}", i + 1)}.jpg",
+                        Number = i + 1
+                    });
+                }
+            }
         }
     }
 

@@ -99,6 +99,7 @@ namespace Succubus.Database.Context
                 Sets.Add(new Set
                 {
                     Name = @"Honey Bunny",
+                    Aliases = "",
                     Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
                     Size = 349,
                     SetPreview = $@"{CloudUrl}Fleia/HoneyBunny/HoneyBunny_001.jpg",
@@ -153,6 +154,7 @@ namespace Succubus.Database.Context
                 Sets.Add(new Set
                 {
                     Name = @"Immoral",
+                    Aliases = "",
                     Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
                     Size = 215,
                     SetPreview = $@"{CloudUrl}Fleia/Immoral/Immoral_001.jpg"

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NLog;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Succubus.Database.Repositories
 {
@@ -17,7 +18,7 @@ namespace Succubus.Database.Repositories
         public ImageRepository(SuccubusContext context) : base(context)
         { }
 
-        public async Task<Image> GetRandomImage()
+        public Image GetRandomImage()
         {
             int nb = new Random().Next(0, Context.Images.Count());
 
@@ -26,7 +27,7 @@ namespace Succubus.Database.Repositories
                 Image img = Context.Images
                     .Include(x => x.Set)
                     .Include(x => x.Cosplayer)
-                    .ToList()[nb];
+                    .ElementAt(nb);
 
                 if (img == null)
                     Logger.Warn($"Failed to get Image from Database. Image N°{nb+1}");

@@ -8,7 +8,7 @@ namespace Succubus.Database.Repositories
 {
     public interface IImageRepository : IRepository<Image>
     {
-        Task<Image> GetRandomImage();
+        Image GetRandomImage();
 
         Image GetImageFromCosplayer(string name);
     }

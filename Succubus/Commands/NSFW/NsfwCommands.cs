@@ -33,7 +33,7 @@ namespace Succubus.Commands.Nsfw
             if (options == null)
             {
                 _Logger.Info("Random Image requested.");
-                img = await Service.GetRandomImageAsync().ConfigureAwait(false);
+                img = Service.GetRandomImageAsync();
             }
             else
             {

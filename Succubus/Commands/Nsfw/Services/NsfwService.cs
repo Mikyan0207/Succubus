@@ -13,11 +13,11 @@ namespace Succubus.Commands.Nsfw.Services
             _db = db;
         }
 
-        public async Task<Image> GetRandomImageAsync()
+        public Image GetRandomImageAsync()
         {
             using (var uow = _db.GetDbContext())
             {
-                return await uow.Images.GetRandomImage();
+                return uow.Images.GetRandomImage();
             }
         }
 

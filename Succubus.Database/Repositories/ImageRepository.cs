@@ -26,6 +26,7 @@ namespace Succubus.Database.Repositories
                 Image img = Context.Images
                     .Include(x => x.Set)
                     .Include(x => x.Cosplayer)
+                    .ToList()
                     .ElementAt(nb);
 
                 if (img == null)

@@ -103,6 +103,8 @@ namespace Succubus.Database.Context
                     SetPreview = $@"{CloudUrl}Fleia/HoneyBunny/HoneyBunny_001.jpg",
                 });
 
+                SaveChanges();
+
                 for (int i = 0; i < 348; i += 1)
                 {
                     Images.Add(new Image

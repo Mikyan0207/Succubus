@@ -5,15 +5,13 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Succubus", "Succubus\Succubus.csproj", "{01F661C3-1EFE-4E81-8637-0F7C24B1AAFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Succubus.Database", "Succubus.Database\Succubus.Database.csproj", "{66A192A8-12BB-4734-942B-AD5C4CBDF775}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Succubus.Database", "Succubus.Database\Succubus.Database.csproj", "{66A192A8-12BB-4734-942B-AD5C4CBDF775}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Succubus.Store", "Succubus.Store\Succubus.Store.csproj", "{CBE16F23-E9F4-4DF4-B0A3-4B89D6D19E40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Succubus.Store", "Succubus.Store\Succubus.Store.csproj", "{CBE16F23-E9F4-4DF4-B0A3-4B89D6D19E40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Succubus.Resources", "Succubus.Resources\Succubus.Resources.csproj", "{7A26F0CD-6967-45AE-B805-043054E1249B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Succubus.Resources", "Succubus.Resources\Succubus.Resources.csproj", "{7A26F0CD-6967-45AE-B805-043054E1249B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Succubus.Logger", "Succubus.Logger\Succubus.Logger.csproj", "{C91F8CBF-4C6E-4F26-9C3B-E82FD9D2DC03}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Succubus.Services", "Succubus.Services\Succubus.Services.csproj", "{32DEDAFB-F043-41BF-A833-D781BD6AB26F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Succubus.Logger", "Succubus.Logger\Succubus.Logger.csproj", "{C91F8CBF-4C6E-4F26-9C3B-E82FD9D2DC03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +39,6 @@ Global
 		{C91F8CBF-4C6E-4F26-9C3B-E82FD9D2DC03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C91F8CBF-4C6E-4F26-9C3B-E82FD9D2DC03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C91F8CBF-4C6E-4F26-9C3B-E82FD9D2DC03}.Release|Any CPU.Build.0 = Release|Any CPU
-		{32DEDAFB-F043-41BF-A833-D781BD6AB26F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32DEDAFB-F043-41BF-A833-D781BD6AB26F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32DEDAFB-F043-41BF-A833-D781BD6AB26F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32DEDAFB-F043-41BF-A833-D781BD6AB26F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

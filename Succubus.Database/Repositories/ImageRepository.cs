@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NLog;
 using Microsoft.EntityFrameworkCore.Internal;
+using Succubus.Database.Extensions;
 
 namespace Succubus.Database.Repositories
 {
@@ -52,8 +53,10 @@ namespace Succubus.Database.Repositories
             {
                 var cosplayer = Context.Cosplayers
                     .Include(x => x.Sets)
-                    .Where(x => x.Name == name || x.Aliases.Contains(name))
-                    .FirstOrDefault();
+                    .AsEnumerable()
+                    .Select(x => (x, Distance: x.Name.ToLowerInvariant().LevenshteinDistance(name)))
+                    .Where(x => x.Distance < 3)
+                    .FirstOrDefault().x;
 
                 if (cosplayer == null)
                 {
@@ -84,26 +87,26 @@ namespace Succubus.Database.Repositories
             }
         }
 
-        public Image GetImageFromSet(string set)
+        public Image GetImageFromSet(string setName)
         {
             try
             {
-                var sets = Context.Sets
+                var set = Context.Sets
                    .Include(x => x.Cosplayer)
                    .Include(x => x.Images)
                    .AsEnumerable()
-                   .Where(x => x.Name.ToLowerInvariant() == set.ToLowerInvariant())
-                   .ToList();
+                   .Select(y => (y, Distance: y.Name.LevenshteinDistance(setName)))
+                   .OrderBy(y => y.Distance)
+                   .Where(y => y.Distance < 3)
+                   .FirstOrDefault().y;
 
-                if (!sets.Any())
+                if (set == null)
                 {
                     Logger.Error("No Set found.");
                     return null;
                 }
 
-                var selectedSet = sets[new Random().Next(0, sets.Count - 1)];
-
-                return selectedSet.Images[new Random().Next(0, (int)selectedSet.Size - 1)];
+                return set.Images[new Random().Next(0, (int)set.Size - 1)];
             }
             catch (Exception ex)
             {

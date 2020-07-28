@@ -35,24 +35,33 @@ namespace Succubus.Commands.Nsfw
             else
                 img = Service.GetRandomImageFromCosplayer(options);
 
-            embed.Author = new EmbedAuthorBuilder
+            if (img == null)
             {
-                IconUrl = img.Cosplayer.ProfilePicture,
-                Url = img.Cosplayer.ProfilePicture,
-                Name = img.Cosplayer.Name
-            };
-
-            embed.Footer = new EmbedFooterBuilder
+                embed.WithTitle("No image found");
+                embed.WithColor(new Color(255, 30, 30));
+                await ReplyAsync("", false, embed.Build()).ConfigureAwait(false);
+            }
+            else
             {
-                Text = $"Image {String.Format("{0:000}",img.Number)}/{String.Format("{0:000}", img.Set.Size)}"
-            };
+                embed.Author = new EmbedAuthorBuilder
+                {
+                    IconUrl = img.Cosplayer.ProfilePicture,
+                    Url = img.Cosplayer.Twitter,
+                    Name = img.Cosplayer.Name
+                };
 
-            embed.WithTitle(img.Name);
-            embed.WithImageUrl(img.Url);
-            embed.WithCurrentTimestamp();
-            embed.WithColor(new Color(255, 255, 255));
+                embed.Footer = new EmbedFooterBuilder
+                {
+                    Text = $"{img.Set.Name} {String.Format("{0:000}", img.Number)}/{String.Format("{0:000}", img.Set.Size)}"
+                };
 
-            await ReplyAsync("", false, embed.Build()).ConfigureAwait(false);
+                embed.WithImageUrl(img.Url);
+                embed.WithCurrentTimestamp();
+                embed.WithColor(new Color(255, 255, 255));
+
+                await ReplyAsync("", false, embed.Build()).ConfigureAwait(false);
+            }
+
         }
     }
 }

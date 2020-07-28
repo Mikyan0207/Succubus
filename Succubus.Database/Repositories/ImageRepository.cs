@@ -19,15 +19,14 @@ namespace Succubus.Database.Repositories
 
         public async Task<Image> GetRandomImage()
         {
-            int nb = new Random().Next(0, Context.Images.Count() - 1);
+            int nb = new Random().Next(0, Context.Images.Count());
 
             try
             {
                 Image img = Context.Images
                     .Include(x => x.Set)
                     .Include(x => x.Cosplayer)
-                    .ToList()
-                    .ElementAt(nb);
+                    .ToList()[nb];
 
                 if (img == null)
                     Logger.Warn($"Failed to get Image from Database. Image N°{nb+1}");

@@ -71,7 +71,7 @@ namespace Succubus.Database.Context
                 Sets.Add(new Set
                 {
                     Name = @"ふれみこ",
-                    Aliases = "fleiamiko,miko",
+                    Aliases = "furemiko",
                     Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
                     Size = 182,
                     SetPreview = $@"{CloudUrl}Fleia/FleiaMiko/FleiaMiko_001.jpg",

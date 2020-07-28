@@ -21,7 +21,7 @@ namespace Succubus.Database.Repositories
             return await Context.Images
                 .Include(x => x.Set)
                 .Include(x => x.Cosplayer)
-                .FirstOrDefaultAsync(x => x.Number == nb);
+                .FirstOrDefaultAsync(x => x.Number == nb + 1);
         }
 
         public Image GetImageFromCosplayer(string name)

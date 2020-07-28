@@ -27,8 +27,8 @@ namespace Succubus.Database.Repositories
                 Image img = Context.Images
                     .Include(x => x.Set)
                     .Include(x => x.Cosplayer)
-                    .ToList()
-                    .ElementAt(nb);
+                    .OrderBy(x => new Random().Next())
+                    .Take(1).First();
 
                 if (img == null)
                     Logger.Warn($"Failed to get Image from Database. Image N°{nb+1}");

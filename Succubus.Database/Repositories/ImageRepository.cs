@@ -57,7 +57,7 @@ namespace Succubus.Database.Repositories
 
                 if (cosplayer == null)
                 {
-                    Logger.Warn("No Cosplayer found.");
+                    Logger.Warn("No Cosplayer found. " + name);
                     return null;
                 }
 

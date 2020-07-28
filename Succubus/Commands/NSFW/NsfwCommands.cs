@@ -5,6 +5,7 @@ using NLog;
 using Succubus.Commands.Nsfw.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,11 +37,11 @@ namespace Succubus.Commands.Nsfw
             }
             else if (options.StartsWith("-u")) // User
             {
-                img = Service.GetRandomImageFromCosplayer(options);
+                img = Service.GetRandomImageFromCosplayer(options.Skip(3).ToString());
             }
             else if (options.StartsWith("-s")) // Set
             {
-                img = Service.GetRandomImageFromSet(options);
+                img = Service.GetRandomImageFromSet(options.Skip(3).ToString());
             }
 
             if (img == null)

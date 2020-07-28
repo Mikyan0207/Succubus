@@ -147,32 +147,32 @@ namespace Succubus.Database.Context
             //    SaveChanges();
             //}
 
-            //if (!Sets.Any(x => x.Name == "Immoral"))
-            //{
-            //    Sets.Add(new Set
-            //    {
-            //        Name = @"Immoral",
-            //        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
-            //        Size = 210,
-            //        SetPreview = $@"{CloudUrl}Fleia/Immoral/Immoral_001.jpg"
-            //    });
+            if (!Sets.Any(x => x.Name == "Immoral"))
+            {
+                Sets.Add(new Set
+                {
+                    Name = @"Immoral",
+                    Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+                    Size = 215,
+                    SetPreview = $@"{CloudUrl}Fleia/Immoral/Immoral_001.jpg"
+                });
 
-            //    SaveChanges();
+                SaveChanges();
 
-            //    for (int i = 0; i < 209; i += 1)
-            //    {
-            //        Images.Add(new Image
-            //        {
-            //            Name = $@"Immoral {String.Format("{0:000}", i + 1)}",
-            //            Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
-            //            Set = Sets.FirstOrDefault(x => x.Name == @"Immoral"),
-            //            Url = $@"{CloudUrl}Fleia/Immoral/Immoral_{String.Format("{0:000}", i + 1)}.jpg",
-            //            Number = i + 1
-            //        });
-            //    }
+                for (int i = 0; i < 214; i += 1)
+                {
+                    Images.Add(new Image
+                    {
+                        Name = $@"Immoral {String.Format("{0:000}", i + 1)}",
+                        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+                        Set = Sets.FirstOrDefault(x => x.Name == @"Immoral"),
+                        Url = $@"{CloudUrl}Fleia/Immoral/Immoral_{String.Format("{0:000}", i + 1)}.jpg",
+                        Number = i + 1
+                    });
+                }
 
-            //    SaveChanges();
-            //}
+                SaveChanges();
+            }
 
             //if (!Sets.Any(x => x.Name == "Black or White"))
             //{

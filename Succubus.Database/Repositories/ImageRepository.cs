@@ -68,9 +68,9 @@ namespace Succubus.Database.Repositories
                     return null;
                 }
 
-                var selectedSet = sets[new Random().Next(0, sets.Count)];
+                var selectedSet = sets[new Random().Next(0, sets.Count - 1)];
 
-                return selectedSet.Images[new Random().Next(0, (int)selectedSet.Size)];
+                return selectedSet.Images[new Random().Next(0, (int)selectedSet.Size - 1)];
             }
             catch (Exception ex)
             {

@@ -32,12 +32,10 @@ namespace Succubus.Commands.Nsfw
 
             if (options == null)
             {
-                _Logger.Info("Random Image requested.");
                 img = Service.GetRandomImageAsync();
             }
             else
             {
-                _Logger.Info($"Random {options.Trim()} Image requested.");
                 img = Service.GetRandomImageFromCosplayer(options.Trim());
             }
 

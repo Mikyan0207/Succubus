@@ -114,6 +114,8 @@ namespace Succubus.Database.Context
                         Number = i + 1
                     });
                 }
+
+                SaveChanges();
             }
         }
     }

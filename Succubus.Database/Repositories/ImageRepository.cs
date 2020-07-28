@@ -34,7 +34,7 @@ namespace Succubus.Database.Repositories
                 if (img == null)
                     Logger.Warn($"Failed to get Image from Database. Image N°{nb + 1}");
                 else
-                    Logger.Info($"Image: {img.Name} #{img.Number} | {img.Set.Name} ({img.Url})");
+                    Logger.Info($"Image: {img.Name} #{img.Number} | {img.Set.Name}");
 
                 return img;
             }

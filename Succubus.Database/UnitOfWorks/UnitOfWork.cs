@@ -25,9 +25,6 @@ namespace Succubus.Database.UnitOfWorks
         private IServerRepository serverRepository;
         public IServerRepository Servers => serverRepository ??= new ServerRepository(Context);
 
-        private IImageRepository imageRepository;
-        public IImageRepository Images => imageRepository ??= new ImageRepository(Context);
-
         #endregion
 
         public int SaveChanges() => Context.SaveChanges();

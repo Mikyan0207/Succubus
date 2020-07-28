@@ -1,7 +1,7 @@
 ﻿using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
-using Succubus.Services;
+using Succubus.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -16,15 +16,19 @@ namespace Succubus.Handlers
         private readonly CommandService CommandService;
         private IServiceProvider Services;
 
-        public CommandHandler(DiscordShardedClient client, CommandService commandService, IServiceProvider services)
+        public CommandHandler(DiscordShardedClient client, CommandService commandService)
         {
             Client = client;
             CommandService = commandService;
-            Services = services;
         }
 
         public async Task InitializeAsync()
         {
+            Services = new ServiceCollection()
+                .AddSingleton(Client)
+                .AddSingleton(CommandService)
+                .BuildServiceProvider();
+
             await CommandService.AddModulesAsync(Assembly.GetEntryAssembly(), Services).ConfigureAwait(false);
 
             Client.MessageReceived += HandleCommand;

@@ -119,6 +119,85 @@ namespace Succubus.Database.Context
 
                 SaveChanges();
             }
+
+            //if (!Sets.Any(x => x.Name == @"HeartBreak Morgan"))
+            //{
+            //    Sets.Add(new Set
+            //    {
+            //        Name = @"HeartBreak Morgan",
+            //        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+            //        Size = 243,
+            //        SetPreview = $@"{CloudUrl}Fleia/HeartBreakMorgan/Morgan_001.jpg",
+            //    });
+
+            //    SaveChanges();
+
+            //    for (int i = 0; i < 242; i += 1)
+            //    {
+            //        Images.Add(new Image
+            //        {
+            //            Name = @$"HeartBreak Morgan {String.Format("{0:000}", i + 1)}",
+            //            Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+            //            Set = Sets.FirstOrDefault(x => x.Name == @"HeartBreak Morgan"),
+            //            Url = $@"{CloudUrl}Fleia/HeartBreakMorgan/Morgan_{String.Format("{0:000}", i + 1)}.jpg",
+            //            Number = i + 1
+            //        });
+            //    }
+
+            //    SaveChanges();
+            //}
+
+            //if (!Sets.Any(x => x.Name == "Immoral"))
+            //{
+            //    Sets.Add(new Set
+            //    {
+            //        Name = @"Immoral",
+            //        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+            //        Size = 210,
+            //        SetPreview = $@"{CloudUrl}Fleia/Immoral/Immoral_001.jpg"
+            //    });
+
+            //    SaveChanges();
+
+            //    for (int i = 0; i < 209; i += 1)
+            //    {
+            //        Images.Add(new Image
+            //        {
+            //            Name = $@"Immoral {String.Format("{0:000}", i + 1)}",
+            //            Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+            //            Set = Sets.FirstOrDefault(x => x.Name == @"Immoral"),
+            //            Url = $@"{CloudUrl}Fleia/Immoral/Immoral_{String.Format("{0:000}", i + 1)}.jpg",
+            //            Number = i + 1
+            //        });
+            //    }
+
+            //    SaveChanges();
+            //}
+
+            //if (!Sets.Any(x => x.Name == "Black or White"))
+            //{
+            //    Sets.Add(new Set
+            //    {
+            //        Name = @"Black or White",
+            //        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+            //        Size = 322,
+            //        SetPreview = $@"{CloudUrl}Fleia/BoW/BoW_001.jpg"
+            //    });
+
+            //    SaveChanges();
+
+            //    for (int i = 0; i < 321; i += 1)
+            //    {
+            //        Images.Add(new Image
+            //        {
+            //            Name = $@"Black or White {String.Format("{0:000}", i + 1)}",
+            //            Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+            //            Set = Sets.FirstOrDefault(x => x.Name == @"Black or White"),
+            //            Url = $@"{CloudUrl}Fleia/BoW/BoW_{String.Format("{0:000}", i + 1)}.jpg",
+            //            Number = i + 1
+            //        });
+            //    }
+            //}
         }
     }
 

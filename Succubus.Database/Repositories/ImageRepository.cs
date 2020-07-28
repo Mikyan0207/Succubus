@@ -55,8 +55,8 @@ namespace Succubus.Database.Repositories
                 var cosplayer = Context.Cosplayers
                     .Include(x => x.Sets)
                     .AsEnumerable()
-                    .Select(x => (x, Distance: x.Name.ToLowerInvariant().LevenshteinDistance(name)))
-                    .Where(x => x.Distance < 3 || x.x.Aliases.ToLowerInvariant().LevenshteinDistance(name) < 3)
+                    .Select(x => (x, Distance: x.Name.ToLowerInvariant().LevenshteinDistance(name), AliasDistance: x.Aliases.ToLowerInvariant().LevenshteinDistance(name)))
+                    .Where(x => x.Distance < 3 || x.AliasDistance < 3)
                     .FirstOrDefault().x;
 
                 if (cosplayer == null)
@@ -96,9 +96,9 @@ namespace Succubus.Database.Repositories
                    .Include(x => x.Cosplayer)
                    .Include(x => x.Images)
                    .AsEnumerable()
-                   .Select(y => (y, Distance: y.Name.ToLowerInvariant().LevenshteinDistance(setName)))
+                   .Select(y => (y, Distance: y.Name.ToLowerInvariant().LevenshteinDistance(setName), AliasDistance: y.Aliases.ToLowerInvariant().LevenshteinDistance(setName)))
                    .OrderBy(y => y.Distance)
-                   .Where(y => y.Distance < 3 || y.y.Aliases.ToLowerInvariant().LevenshteinDistance(setName) < 3)
+                   .Where(y => y.Distance < 3 || y.AliasDistance < 3)
                    .FirstOrDefault().y;
 
                 if (set == null)

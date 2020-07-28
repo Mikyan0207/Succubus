@@ -91,7 +91,8 @@ namespace Succubus.Database.Repositories
                 var sets = Context.Sets
                    .Include(x => x.Cosplayer)
                    .Include(x => x.Images)
-                   .Where(x => x.Name.ToLowerInvariant() == set)
+                   .AsEnumerable()
+                   .Where(x => x.Name.ToLowerInvariant() == set.ToLowerInvariant())
                    .ToList();
 
                 if (!sets.Any())

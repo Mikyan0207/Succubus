@@ -27,6 +27,7 @@ namespace Succubus.Database.Repositories
                 Image img = Context.Images
                     .Include(x => x.Set)
                     .Include(x => x.Cosplayer)
+                    .ToList()
                     .OrderBy(x => new Random().Next())
                     .Take(1).First();
 

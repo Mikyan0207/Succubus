@@ -268,7 +268,7 @@ namespace Succubus.Database.Context
                         Name = $@"Skinny {String.Format("{0:00}", i + 1)}",
                         Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"いくみ"),
                         Set = Sets.FirstOrDefault(x => x.Name == @"Skinny"),
-                        Url = $@"{CloudUrl}iKkyu/Skinny/Skinny_{String.Format("{0:00}", i + 1)}.jpg",
+                        Url = $@"{CloudUrl}iKkyu/Skinny/skinny_{String.Format("{0:00}", i + 1)}.jpg",
                         Number = i + 1
                     });
                 }

@@ -59,7 +59,7 @@ namespace Succubus.Commands.Nsfw
             foreach (var set in cosplayer.Sets)
             {
                 sb.Append(set.Name);
-                sb.Append(' ', 20 - set.Name.Length);
+                sb.Append(' ', 10 - set.Name.Length);
                 sb.Append($"{set.Size} Images\n");
             }
 

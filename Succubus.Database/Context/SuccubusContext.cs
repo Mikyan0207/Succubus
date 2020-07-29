@@ -247,6 +247,34 @@ namespace Succubus.Database.Context
 
                 SaveChanges();
             }
+
+            if (!Sets.Any(x => x.Name == "Skinny"))
+            {
+                Sets.Add(new Set
+                {
+                    Name = @"Skinny",
+                    Aliases = "",
+                    Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"いくみ"),
+                    SetPreview = $@"{CloudUrl}iKkyu/Skinny/Skinny_01.jpg",
+                    Size = 50
+                });
+
+                SaveChanges();
+
+                for (int i = 0; i < 49; i += 1)
+                {
+                    Images.Add(new Image
+                    {
+                        Name = $@"Skinny {String.Format("{0:000}", i + 1)}",
+                        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"いくみ"),
+                        Set = Sets.FirstOrDefault(x => x.Name == @"Skinny"),
+                        Url = $@"{CloudUrl}iKkyu/Skinny/Skinny_{String.Format("{0:000}", i + 1)}.jpg",
+                        Number = i + 1
+                    });
+                }
+
+                SaveChanges();
+            }
         }
     }
 

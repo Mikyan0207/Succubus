@@ -55,7 +55,7 @@ namespace Succubus.Commands.Nsfw
             cosplayer.Sets.ForEach(x => totalPictures += x.Size);
 
             StringBuilder sb = new StringBuilder();
-            cosplayer.Sets.ForEach(x => sb.AppendLine($"{x.Name} ({x.Size} Images)"));
+            cosplayer.Sets.ForEach(x => sb.AppendLine($"{x.Name.PadRight(10 - x.Name.Length)} {x.Size} Images"));
 
             embed.Footer = new EmbedFooterBuilder
             {
@@ -68,8 +68,7 @@ namespace Succubus.Commands.Nsfw
             embed.WithColor(new Color(156, 39, 176));
 
             embed.AddField($"Sets", $"{cosplayer.Sets.Count}", true);
-            embed.AddField($"Images", $"{totalPictures}", true);
-            embed.AddField(" ", " ", true);
+            embed.AddField($"Images", $"{totalPictures}", false);
             embed.AddField($"Twitter", $"[Link]({cosplayer.Twitter})", true);
             embed.AddField($"Instagram", $"[Link]({cosplayer.Instagram})", true);
             embed.AddField($"Booth", $"[Link]({cosplayer.Booth})", true);

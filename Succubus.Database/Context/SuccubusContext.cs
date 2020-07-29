@@ -295,7 +295,7 @@ namespace Succubus.Database.Context
                     {
                         Name = $@"BeastMode {String.Format("{0:000}", i + 1)}",
                         Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
-                        Set = Sets.FirstOrDefault(x => x.Name == @"BeastMode"),
+                        Set = Sets.FirstOrDefault(x => x.Name == @"Beast Mode"),
                         Url = $@"{CloudUrl}Fleia/BeastMode/BeastMode_{String.Format("{0:000}", i + 1)}.jpg",
                         Number = i + 1
                     });

@@ -265,10 +265,10 @@ namespace Succubus.Database.Context
                 {
                     Images.Add(new Image
                     {
-                        Name = $@"Skinny {String.Format("{0:000}", i + 1)}",
+                        Name = $@"Skinny {String.Format("{0:00}", i + 1)}",
                         Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"いくみ"),
                         Set = Sets.FirstOrDefault(x => x.Name == @"Skinny"),
-                        Url = $@"{CloudUrl}iKkyu/Skinny/Skinny_{String.Format("{0:000}", i + 1)}.jpg",
+                        Url = $@"{CloudUrl}iKkyu/Skinny/Skinny_{String.Format("{0:00}", i + 1)}.jpg",
                         Number = i + 1
                     });
                 }

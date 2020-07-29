@@ -248,6 +248,34 @@ namespace Succubus.Database.Context
                 SaveChanges();
             }
 
+            if (!Sets.Any(x => x.Name == "Danmachi"))
+            {
+                Sets.Add(new Set
+                {
+                    Name = @"Danmachi",
+                    Aliases = "hestia",
+                    Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+                    SetPreview = $@"{CloudUrl}Fleia/Danmachi/Danmachi_001.jpg",
+                    Size = 264
+                });
+
+                SaveChanges();
+
+                for (int i = 0; i < 263; i += 1)
+                {
+                    Images.Add(new Image
+                    {
+                        Name = $@"Danmachi {String.Format("{0:000}", i + 1)}",
+                        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+                        Set = Sets.FirstOrDefault(x => x.Name == @"Danmachi"),
+                        Url = $@"{CloudUrl}Fleia/Danmachi/Danmachi_{String.Format("{0:000}", i + 1)}.jpg",
+                        Number = i + 1
+                    });
+                }
+
+                SaveChanges();
+            }
+
             if (!Sets.Any(x => x.Name == "Ikumi Trip"))
             {
                 Sets.Add(new Set

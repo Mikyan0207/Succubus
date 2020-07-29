@@ -428,6 +428,34 @@ namespace Succubus.Database.Context
                 SaveChanges();
             }
 
+            if (!Sets.Any(x => x.Name == @"冴えない彼女の裏のかお"))
+            {
+                Sets.Add(new Set
+                {
+                    Name = @"冴えない彼女の裏のかお",
+                    Aliases = "saenai kanojo",
+                    Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"りずな"),
+                    SetPreview = $@"{CloudUrl}Rizuna/SaenaiKanojo/SaenaiKanojo_001.jpg",
+                    Size = 100
+                });
+
+                SaveChanges();
+
+                for (int i = 0; i < 99; i += 1)
+                {
+                    Images.Add(new Image
+                    {
+                        Name = $@"冴えない彼女の裏のかお {String.Format("{0:000}", i + 1)}",
+                        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"りずな"),
+                        Set = Sets.FirstOrDefault(x => x.Name == @"冴えない彼女の裏のかお"),
+                        Url = $@"{CloudUrl}Rizuna/SaenaiKanojo/SaenaiKanojo_{String.Format("{0:000}", i + 1)}.jpg",
+                        Number = i + 1
+                    });
+                }
+
+                SaveChanges();
+            }
+
             #endregion
 
             #region Ponyo

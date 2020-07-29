@@ -220,6 +220,34 @@ namespace Succubus.Database.Context
                 SaveChanges();
             }
 
+            if (!Sets.Any(x => x.Name == "Rem"))
+            {
+                Sets.Add(new Set
+                {
+                    Name = @"Rem",
+                    Aliases = "",
+                    Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+                    Size = 166,
+                    SetPreview = $@"{CloudUrl}Fleia/Rem/Rem_001.jpg"
+                });
+
+                SaveChanges();
+
+                for (int i = 0; i < 165; i += 1)
+                {
+                    Images.Add(new Image
+                    {
+                        Name = $@"Rem {String.Format("{0:000}", i + 1)}",
+                        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+                        Set = Sets.FirstOrDefault(x => x.Name == @"Rem"),
+                        Url = $@"{CloudUrl}Fleia/Rem/Rem_{String.Format("{0:000}", i + 1)}.jpg",
+                        Number = i + 1
+                    });
+                }
+
+                SaveChanges();
+            }
+
             if (!Sets.Any(x => x.Name == "Ikumi Trip"))
             {
                 Sets.Add(new Set

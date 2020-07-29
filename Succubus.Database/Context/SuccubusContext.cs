@@ -233,7 +233,7 @@ namespace Succubus.Database.Context
 
                 SaveChanges();
 
-                for (int i = 0; i < 199; i += 1)
+                for (int i = 0; i < 188; i += 1)
                 {
                     Images.Add(new Image
                     {

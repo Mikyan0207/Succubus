@@ -55,7 +55,12 @@ namespace Succubus.Commands.Nsfw
             cosplayer.Sets.ForEach(x => totalPictures += x.Size);
 
             StringBuilder sb = new StringBuilder();
-            cosplayer.Sets.ForEach(x => sb.AppendLine($"{x.Name} {x.Size.ToString().PadRight(30 - x.Name.Length)} Images"));
+
+            foreach (var set in cosplayer.Sets)
+            {
+                sb.Append(set.Name.PadRight(20 - set.Name.Length));
+                sb.Append($"{set.Size} Images\n");
+            }
 
             embed.Footer = new EmbedFooterBuilder
             {

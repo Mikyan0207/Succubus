@@ -68,7 +68,8 @@ namespace Succubus.Commands.Nsfw
             embed.WithColor(new Color(156, 39, 176));
 
             embed.AddField($"Sets", $"{cosplayer.Sets.Count}", true);
-            embed.AddField($"Images", $"{totalPictures}", false);
+            embed.AddField($"Images", $"{totalPictures}", true);
+            embed.AddField($"", $"", true);
             embed.AddField($"Twitter", $"[Link]({cosplayer.Twitter})", true);
             embed.AddField($"Instagram", $"[Link]({cosplayer.Instagram})", true);
             embed.AddField($"Booth", $"[Link]({cosplayer.Booth})", true);

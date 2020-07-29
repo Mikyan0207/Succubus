@@ -69,10 +69,10 @@ namespace Succubus.Commands.Nsfw
 
             embed.AddField($"Sets", $"{cosplayer.Sets.Count}", true);
             embed.AddField($"Images", $"{totalPictures}", true);
-            embed.AddField($"Twitter", $"[Link]({cosplayer.Twitter})", false);
+            embed.AddField($"Twitter", $"[Link]({cosplayer.Twitter})", true);
             embed.AddField($"Instagram", $"[Link]({cosplayer.Instagram})", true);
             embed.AddField($"Booth", $"[Link]({cosplayer.Booth})", true);
-            embed.AddField($"Sets Collection", $"{sb}", false);
+            embed.AddField($"Collection", $"{sb}", false);
 
             await ReplyAsync("", false, embed.Build()).ConfigureAwait(false);
         }

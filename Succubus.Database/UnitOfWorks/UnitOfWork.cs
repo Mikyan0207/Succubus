@@ -28,6 +28,9 @@ namespace Succubus.Database.UnitOfWorks
         private IImageRepository imageRepository;
         public IImageRepository Images => imageRepository ??= new ImageRepository(Context);
 
+        private ICosplayerRepository cosplayerRepository;
+        public ICosplayerRepository Cosplayers => cosplayerRepository ??= new CosplayerRepository(Context);
+
         #endregion
 
         public int SaveChanges() => Context.SaveChanges();

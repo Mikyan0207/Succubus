@@ -22,8 +22,6 @@ namespace Succubus.Database.Repositories
 
         public Image GetRandomImage()
         {
-            int nb = new Random().Next(0, Context.Images.Count());
-
             try
             {
                 Image img = Context.Images
@@ -34,9 +32,7 @@ namespace Succubus.Database.Repositories
                     .Take(1).First();
 
                 if (img == null)
-                    Logger.Warn($"Failed to get Image from Database. Image N°{nb + 1}");
-                else
-                    Logger.Info($"Image: {img.Name} #{img.Number} | {img.Set.Name}");
+                    Logger.Warn($"Failed to get Image from Database.");
 
                 return img;
             }

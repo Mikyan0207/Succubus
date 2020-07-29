@@ -276,6 +276,34 @@ namespace Succubus.Database.Context
                 SaveChanges();
             }
 
+            if (!Sets.Any(x => x.Name == "Beast Mode"))
+            {
+                Sets.Add(new Set
+                {
+                    Name = @"Beast Mode",
+                    Aliases = "bm",
+                    Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+                    SetPreview = $@"{CloudUrl}Fleia/BeastMode/BeastMode_001.jpg",
+                    Size = 319
+                });
+
+                SaveChanges();
+
+                for (int i = 0; i < 318; i += 1)
+                {
+                    Images.Add(new Image
+                    {
+                        Name = $@"BeastMode {String.Format("{0:000}", i + 1)}",
+                        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
+                        Set = Sets.FirstOrDefault(x => x.Name == @"BeastMode"),
+                        Url = $@"{CloudUrl}Fleia/BeastMode/BeastMode_{String.Format("{0:000}", i + 1)}.jpg",
+                        Number = i + 1
+                    });
+                }
+
+                SaveChanges();
+            }
+
             if (!Sets.Any(x => x.Name == "Ikumi Trip"))
             {
                 Sets.Add(new Set

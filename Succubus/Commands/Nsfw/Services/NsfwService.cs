@@ -13,6 +13,14 @@ namespace Succubus.Commands.Nsfw.Services
             _db = db;
         }
 
+        public Cosplayer GetCosplayer(string name)
+        {
+            using (var uow = _db.GetDbContext())
+            {
+                return uow.Cosplayers.GetCosplayerByName(name.Trim());
+            }
+        }
+
         public Image GetRandomImage()
         {
             using (var uow = _db.GetDbContext())

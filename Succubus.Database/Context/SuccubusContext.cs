@@ -456,6 +456,34 @@ namespace Succubus.Database.Context
                 SaveChanges();
             }
 
+            if (!Sets.Any(x => x.Name == @"Hedonistic Labyrinth"))
+            {
+                Sets.Add(new Set
+                {
+                    Name = @"Hedonistic Labyrinth",
+                    Aliases = "labyrinth",
+                    Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"りずな"),
+                    SetPreview = $@"{CloudUrl}Rizuna/HedonisticLabyrinth/HedonisticLabyrinth_001.jpg",
+                    Size = 100
+                });
+
+                SaveChanges();
+
+                for (int i = 0; i < 99; i += 1)
+                {
+                    Images.Add(new Image
+                    {
+                        Name = $@"Hedonistic Labyrinth {String.Format("{0:000}", i + 1)}",
+                        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"りずな"),
+                        Set = Sets.FirstOrDefault(x => x.Name == @"Hedonistic Labyrinth"),
+                        Url = $@"{CloudUrl}Rizuna/HedonisticLabyrinth/HedonisticLabyrinth_{String.Format("{0:000}", i + 1)}.jpg",
+                        Number = i + 1
+                    });
+                }
+
+                SaveChanges();
+            }
+
             #endregion
 
             #region Ponyo

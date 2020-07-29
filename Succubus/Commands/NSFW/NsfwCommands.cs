@@ -69,7 +69,7 @@ namespace Succubus.Commands.Nsfw
 
             embed.AddField($"Sets", $"{cosplayer.Sets.Count}", true);
             embed.AddField($"Images", $"{totalPictures}", true);
-            embed.AddField($"", $"", true);
+            embed.AddField(" ", " ", true);
             embed.AddField($"Twitter", $"[Link]({cosplayer.Twitter})", true);
             embed.AddField($"Instagram", $"[Link]({cosplayer.Instagram})", true);
             embed.AddField($"Booth", $"[Link]({cosplayer.Booth})", true);

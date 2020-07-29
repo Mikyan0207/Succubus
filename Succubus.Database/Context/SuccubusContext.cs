@@ -56,11 +56,26 @@ namespace Succubus.Database.Context
                 Cosplayers.Add(new Cosplayer
                 {
                     Name = @"ふれいあ",
-                    Aliases = @"fleia,flemani,ふれまに",
+                    Aliases = @"fleia",
                     Twitter = "https://twitter.com/fleia0124",
                     Instagram = "https://instagram.com/fleia0124",
                     Booth = "https://flemani.booth.pm/",
                     ProfilePicture = @$"{CloudUrl}Fleia/ProfilePicture.jpg"
+                });
+
+                SaveChanges();
+            }
+
+            if (!Cosplayers.Any(x => x.Name == "いくみ"))
+            {
+                Cosplayers.Add(new Cosplayer
+                {
+                    Name = @"いくみ",
+                    Aliases = @"iKkyu",
+                    Twitter = "https://twitter.com/193azs",
+                    Instagram = "",
+                    Booth = "https://ikkyu3.booth.pm/",
+                    ProfilePicture = @$"{CloudUrl}iKkyu/ProfilePicture.jpg"
                 });
 
                 SaveChanges();
@@ -198,6 +213,34 @@ namespace Succubus.Database.Context
                         Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ふれいあ"),
                         Set = Sets.FirstOrDefault(x => x.Name == @"Black or White"),
                         Url = $@"{CloudUrl}Fleia/BoW/BoW_{String.Format("{0:000}", i + 1)}.jpg",
+                        Number = i + 1
+                    });
+                }
+
+                SaveChanges();
+            }
+
+            if (!Sets.Any(x => x.Name == "Ikumi Trip"))
+            {
+                Sets.Add(new Set
+                {
+                    Name = @"Ikumi Trip",
+                    Aliases = "",
+                    Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"いくみ"),
+                    SetPreview = $@"{CloudUrl}iKkyu/IkumiTrip/IkumiTrip_001.jpg",
+                    Size = 189
+                });
+
+                SaveChanges();
+
+                for (int i = 0; i < 199; i += 1)
+                {
+                    Images.Add(new Image
+                    {
+                        Name = $@"Ikumi Trip {String.Format("{0:000}", i + 1)}",
+                        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"いくみ"),
+                        Set = Sets.FirstOrDefault(x => x.Name == @"Ikumi Trip"),
+                        Url = $@"{CloudUrl}iKkyu/IkumiTrip/IkumiTrip_{String.Format("{0:000}", i + 1)}.jpg",
                         Number = i + 1
                     });
                 }

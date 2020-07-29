@@ -81,6 +81,38 @@ namespace Succubus.Database.Context
                 SaveChanges();
             }
 
+            if (!Cosplayers.Any(x => x.Name == @"りずな"))
+            {
+                Cosplayers.Add(new Cosplayer
+                {
+                    Name = @"りずな",
+                    Aliases = @"rizuna",
+                    Twitter = @"https://mobile.twitter.com/rizunya",
+                    Instagram = @"https://www.instagram.com/rizuna1228/",
+                    Booth = @"https://rizunya.booth.pm/",
+                    ProfilePicture = @$"{CloudUrl}Rizuna/ProfilePicture.jpg"
+                });
+
+                SaveChanges();
+            }
+
+            if (!Cosplayers.Any(x => x.Name == @"ぽにょ"))
+            {
+                Cosplayers.Add(new Cosplayer
+                {
+                    Name = @"ぽにょ",
+                    Aliases = @"ponyo",
+                    Twitter = @"https://twitter.com/white613like",
+                    Instagram = @"https://www.instagram.com/ponyoouji/",
+                    Booth = @"https://ponyophoto.booth.pm/",
+                    ProfilePicture = @$"{CloudUrl}Ponyo/ProfilePicture.jpg"
+                });
+
+                SaveChanges();
+            }
+
+            #region Fleia
+
             if (!Sets.Any(x => x.Name == @"ふれみこ"))
             {
                 Sets.Add(new Set
@@ -304,6 +336,10 @@ namespace Succubus.Database.Context
                 SaveChanges();
             }
 
+            #endregion
+
+            #region Ikumi
+
             if (!Sets.Any(x => x.Name == "Ikumi Trip"))
             {
                 Sets.Add(new Set
@@ -359,6 +395,72 @@ namespace Succubus.Database.Context
 
                 SaveChanges();
             }
+
+            #endregion
+
+            #region Rizuna
+
+            if (!Sets.Any(x => x.Name == @"Great Ocean"))
+            {
+                Sets.Add(new Set
+                {
+                    Name = @"Great Ocean",
+                    Aliases = "go",
+                    Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"りずな"),
+                    SetPreview = $@"{CloudUrl}Rizuna/GreatOcean/GreatOcean_001.jpg",
+                    Size = 101
+                });
+
+                SaveChanges();
+
+                for (int i = 0; i < 100; i += 1)
+                {
+                    Images.Add(new Image
+                    {
+                        Name = $@"Great Ocean {String.Format("{0:000}", i + 1)}",
+                        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"りずな"),
+                        Set = Sets.FirstOrDefault(x => x.Name == @"Great Ocean"),
+                        Url = $@"{CloudUrl}Rizuna/GreatOcean/GreatOcean_{String.Format("{0:000}", i + 1)}.jpg",
+                        Number = i + 1
+                    });
+                }
+
+                SaveChanges();
+            }
+
+            #endregion
+
+            #region Ponyo
+
+            if (!Sets.Any(x => x.Name == @"Succubus"))
+            {
+                Sets.Add(new Set
+                {
+                    Name = @"Succubus",
+                    Aliases = "",
+                    Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ぽにょ"),
+                    SetPreview = $@"{CloudUrl}Ponyo/Succubus/Succubus_001.jpg",
+                    Size = 218
+                });
+
+                SaveChanges();
+
+                for (int i = 0; i < 217; i += 1)
+                {
+                    Images.Add(new Image
+                    {
+                        Name = $@"Succubus {String.Format("{0:000}", i + 1)}",
+                        Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"ぽにょ"),
+                        Set = Sets.FirstOrDefault(x => x.Name == @"Succubus"),
+                        Url = $@"{CloudUrl}Ponyo/Succubus/Succubus_{String.Format("{0:000}", i + 1)}.jpg",
+                        Number = i + 1
+                    });
+                }
+
+                SaveChanges();
+            }
+
+            #endregion
         }
     }
 

@@ -16,8 +16,6 @@
     <EmbeddedResource Include="Configuration\Database.json" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="R18\" />
-  </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

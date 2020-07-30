@@ -436,7 +436,8 @@ namespace Succubus.Database.Context
                     Aliases = "saenai kanojo",
                     Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"りずな"),
                     SetPreview = $@"{CloudUrl}Rizuna/SaenaiKanojo/SaenaiKanojo_001.jpg",
-                    Size = 100
+                    Size = 100,
+                    YabaiLevel = YabaiLevel.NotSafe
                 });
 
                 SaveChanges();
@@ -464,7 +465,8 @@ namespace Succubus.Database.Context
                     Aliases = "labyrinth",
                     Cosplayer = Cosplayers.FirstOrDefault(x => x.Name == @"りずな"),
                     SetPreview = $@"{CloudUrl}Rizuna/HedonisticLabyrinth/HedonisticLabyrinth_001.jpg",
-                    Size = 100
+                    Size = 100,
+                    YabaiLevel = YabaiLevel.NotSafe
                 });
 
                 SaveChanges();

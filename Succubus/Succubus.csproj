@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.8.0" />
     <PackageReference Include="Discord.Net" Version="2.2.0" />
     <PackageReference Include="Discord.Net.Commands" Version="2.2.0" />
     <PackageReference Include="Discord.Net.WebSocket" Version="2.2.0" />
@@ -21,10 +22,6 @@
     <ProjectReference Include="..\Succubus.Logger\Succubus.Logger.csproj" />
     <ProjectReference Include="..\Succubus.Resources\Succubus.Resources.csproj" />
     <ProjectReference Include="..\Succubus.Store\Succubus.Store.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Attributes\" />
   </ItemGroup>
 
 </Project>

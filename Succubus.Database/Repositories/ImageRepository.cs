@@ -10,6 +10,7 @@ using NLog;
 using Microsoft.EntityFrameworkCore.Internal;
 using Succubus.Database.Extensions;
 using System.Security.Cryptography.X509Certificates;
+using Succubus.Database.Options;
 
 namespace Succubus.Database.Repositories
 {
@@ -20,25 +21,23 @@ namespace Succubus.Database.Repositories
         public ImageRepository(SuccubusContext context) : base(context)
         { }
 
-        public Image GetRandomImage()
+        public async Task<Image> GetImageAsync(YabaiOptions options)
         {
             try
             {
-                Image img = Context.Images
+                return await Context.Images
                     .Include(x => x.Set)
                     .Include(x => x.Cosplayer)
-                    .ToList()
                     .OrderBy(x => new Random().Next())
-                    .Take(1).First();
-
-                if (img == null)
-                    Logger.Warn($"Failed to get Image from Database.");
-
-                return img;
+                    .ConditionalWhere(options.Set != null, x => x.Set.Name.ToLowerInvariant().LevenshteinDistance(options.Set) < 3 || x.Set.Aliases.ToLowerInvariant().LevenshteinDistance(options.Set) < 3)
+                    .ConditionalWhere(options.User != null, x => x.Cosplayer.Name.ToLowerInvariant().LevenshteinDistance(options.User) < 3 || x.Cosplayer.Aliases.ToLowerInvariant().LevenshteinDistance(options.User) < 3)
+                    .Where(x => options.SafeMode ? x.Set.YabaiLevel == YabaiLevel.Safe : x.Set.YabaiLevel >= YabaiLevel.Safe)
+                    .FirstOrDefaultAsync()
+                    .ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger.Warn($"Error during SQL Request. {ex.Message}");
 
                 return null;
             }

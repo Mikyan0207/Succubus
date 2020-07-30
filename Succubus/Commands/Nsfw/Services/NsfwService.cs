@@ -1,4 +1,5 @@
 ﻿using Succubus.Database.Models;
+using Succubus.Database.Options;
 using Succubus.Services;
 using System.Threading.Tasks;
 
@@ -21,11 +22,11 @@ namespace Succubus.Commands.Nsfw.Services
             }
         }
 
-        public Image GetRandomImage()
+        public async Task<Image> GetImageAsync(YabaiOptions options)
         {
             using (var uow = _db.GetDbContext())
             {
-                return uow.Images.GetRandomImage();
+                return await uow.Images.GetImageAsync(options).ConfigureAwait(false);
             }
         }
 

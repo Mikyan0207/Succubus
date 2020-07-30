@@ -21,5 +21,13 @@ namespace Succubus.Database.Models
         public List<Image> Images { get; set; }
 
         public Cosplayer Cosplayer { get; set; }
+
+        public YabaiLevel YabaiLevel { get; set; } = YabaiLevel.Safe;
+    }
+
+    public enum YabaiLevel
+    {
+        Safe,
+        NotSafe
     }
 }

@@ -2,13 +2,16 @@
 using Discord.Commands;
 using Discord.WebSocket;
 using NLog;
+using Succubus.Attributes;
 using Succubus.Commands.Nsfw.Services;
+using Succubus.Database.Models;
+using Succubus.Database.Options;
+using Succubus.Utils;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
+using Image = Succubus.Database.Models.Image;
 
 namespace Succubus.Commands.Nsfw
 {
@@ -78,27 +81,15 @@ namespace Succubus.Commands.Nsfw
         }
 
         [Command("yabai", RunMode = RunMode.Async)]
+        [Options(typeof(YabaiOptions))]
         [RequireBotPermission(ChannelPermission.SendMessages)]
         [RequireBotPermission(GuildPermission.EmbedLinks)]
-        public async Task YabaiAsync([Remainder] string options = null)
+        public async Task YabaiAsync(params string[] options)
         {
-            var embed = new EmbedBuilder();
-            Succubus.Database.Models.Image img = null;
+            EmbedBuilder embed = new EmbedBuilder();
+            Image image = await Service.GetImageAsync(OptionsParser.Parse<YabaiOptions>(options)).ConfigureAwait(false);
 
-            if (options == null)
-            {
-                img = Service.GetRandomImage();
-            }
-            else if (options.StartsWith("-u")) // User
-            {
-                img = Service.GetRandomImageFromCosplayer(options.Remove(0, 2));
-            }
-            else if (options.StartsWith("-s")) // Set
-            {
-                img = Service.GetRandomImageFromSet(options.Remove(0, 2));
-            }
-
-            if (img == null)
+            if (image == null)
             {
                 embed.WithTitle("No image found");
                 embed.WithColor(new Color(255, 30, 30));
@@ -109,17 +100,17 @@ namespace Succubus.Commands.Nsfw
 
             embed.Author = new EmbedAuthorBuilder
             {
-                IconUrl = img.Cosplayer.ProfilePicture,
-                Url = img.Cosplayer.Twitter,
-                Name = img.Cosplayer.Name
+                IconUrl = image.Cosplayer.ProfilePicture,
+                Url = image.Cosplayer.Twitter,
+                Name = image.Cosplayer.Name
             };
 
             embed.Footer = new EmbedFooterBuilder
             {
-                Text = $"{img.Set.Name} {String.Format("{0:000}", img.Number)}/{String.Format("{0:000}", img.Set.Size)}"
+                Text = $"{image.Set.Name} {String.Format("{0:000}", image.Number)}/{String.Format("{0:000}", image.Set.Size)}"
             };
 
-            embed.WithImageUrl(img.Url);
+            embed.WithImageUrl(image.Url);
             embed.WithCurrentTimestamp();
             embed.WithColor(new Color(255, 255, 255));
 

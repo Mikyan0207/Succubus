@@ -1,4 +1,5 @@
 ﻿using Succubus.Database.Models;
+using Succubus.Database.Options;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Succubus.Database.Repositories
 {
     public interface IImageRepository : IRepository<Image>
     {
-        Image GetRandomImage();
+        Task<Image> GetImageAsync(YabaiOptions options);
 
         Image GetImageFromCosplayer(string name);
 

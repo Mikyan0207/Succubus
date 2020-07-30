@@ -23,17 +23,19 @@ namespace Succubus.Database.Repositories
 
         public async Task<Image> GetImageAsync(YabaiOptions options)
         {
+            int order = new Random().Next();
+
             try
             {
-                return await Context.Images
+                return Context.Images
                     .Include(x => x.Set)
                     .Include(x => x.Cosplayer)
                     .ConditionalWhere(options.Set != null, x => x.Set.Name.ToLowerInvariant().LevenshteinDistance(options.Set) < 3 || x.Set.Aliases.ToLowerInvariant().LevenshteinDistance(options.Set) < 3)
                     .ConditionalWhere(options.User != null, x => x.Cosplayer.Name.ToLowerInvariant().LevenshteinDistance(options.User) < 3 || x.Cosplayer.Aliases.ToLowerInvariant().LevenshteinDistance(options.User) < 3)
                     .Where(x => options.SafeMode ? x.Set.YabaiLevel == YabaiLevel.Safe : x.Set.YabaiLevel >= YabaiLevel.Safe)
-                    .OrderBy(x => new Random().Next())
-                    .FirstOrDefaultAsync()
-                    .ConfigureAwait(false);
+                    .ToList()
+                    .OrderBy(x => order)
+                    .FirstOrDefault();
             }
             catch (Exception ex)
             {

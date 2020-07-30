@@ -31,10 +31,10 @@ namespace Succubus.Database.Repositories
                 return Context.Images
                     .Include(x => x.Set)
                     .Include(x => x.Cosplayer)
-                    .ConditionalWhere(options.Set != null, x => x.Set.Name.ToLowerInvariant().LevenshteinDistance(options.Set) < 3 || x.Set.Aliases.ToLowerInvariant().LevenshteinDistance(options.Set) < 3)
-                    .ConditionalWhere(options.User != null, x => x.Cosplayer.Name.ToLowerInvariant().LevenshteinDistance(options.User) < 3 || x.Cosplayer.Aliases.ToLowerInvariant().LevenshteinDistance(options.User) < 3)
-                    .Where(x => options.SafeMode ? x.Set.YabaiLevel == YabaiLevel.Safe : x.Set.YabaiLevel >= YabaiLevel.Safe)
                     .ToList()
+                    .Where(x => options.SafeMode ? x.Set.YabaiLevel == YabaiLevel.Safe : x.Set.YabaiLevel >= YabaiLevel.Safe)
+                    .ConditionalWhere(options.Set != null, x => x.Set.Name.ToLowerInvariant().LevenshteinDistance(options.Set.ToLowerInvariant()) < 3 || x.Set.Aliases.ToLowerInvariant().LevenshteinDistance(options.Set.ToLowerInvariant()) < 3)
+                    .ConditionalWhere(options.User != null, x => x.Cosplayer.Name.ToLowerInvariant().LevenshteinDistance(options.User) < 3 || x.Cosplayer.Aliases.ToLowerInvariant().LevenshteinDistance(options.User) < 3)
                     .OrderBy(x => new Random().Next())
                     .Take(1)
                     .FirstOrDefault();

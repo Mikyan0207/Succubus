@@ -23,8 +23,6 @@ namespace Succubus.Database.Repositories
 
         public async Task<Image> GetImageAsync(YabaiOptions options)
         {
-            int order = new Random().Next();
-
             try
             {
                 return Context.Images
@@ -34,7 +32,8 @@ namespace Succubus.Database.Repositories
                     .ConditionalWhere(options.User != null, x => x.Cosplayer.Name.ToLowerInvariant().LevenshteinDistance(options.User) < 3 || x.Cosplayer.Aliases.ToLowerInvariant().LevenshteinDistance(options.User) < 3)
                     .Where(x => options.SafeMode ? x.Set.YabaiLevel == YabaiLevel.Safe : x.Set.YabaiLevel >= YabaiLevel.Safe)
                     .ToList()
-                    .OrderBy(x => order)
+                    .OrderBy(x => new Random().Next())
+                    .Take(1)
                     .FirstOrDefault();
             }
             catch (Exception ex)

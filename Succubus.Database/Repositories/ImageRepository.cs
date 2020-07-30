@@ -24,8 +24,6 @@ namespace Succubus.Database.Repositories
         public async Task<Image> GetImageAsync(YabaiOptions options)
         {
 
-            Logger.Info($"{options}");
-
             try
             {
                 return Context.Images

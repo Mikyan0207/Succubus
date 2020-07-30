@@ -1,6 +1,7 @@
 ﻿using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
+using NLog;
 using Succubus.Services;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Succubus.Handlers
 {
     public class CommandHandler : IService
     {
+        private static readonly NLog.Logger _Logger = LogManager.GetCurrentClassLogger();
         private readonly DiscordShardedClient Client;
         private readonly CommandService CommandService;
         private IServiceProvider Services;
@@ -51,6 +53,8 @@ namespace Succubus.Handlers
             if (context.Message.HasStringPrefix("!", ref argPos, StringComparison.CurrentCultureIgnoreCase))
             {
                 await HandleCommandAsync(context, argPos);
+
+                _Logger.Info($"Command Executed\nUser: {message.Author.Username}\nChannel: {message.Channel.Name}\nCommand: {message.Content}");
             }
         }
 
@@ -75,7 +79,7 @@ namespace Succubus.Handlers
             }
             catch (Exception e)
             {
-                // TO DO: Error Message+Log
+                _Logger.Error(e.Message);
             }
         }
     }

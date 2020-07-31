@@ -22,6 +22,7 @@ namespace Succubus.Database.Context
         {
         }
 
+        public DbSet<Color> Colors { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Server> Servers { get; set; }
         public DbSet<Cosplayer> Cosplayers { get; set; }

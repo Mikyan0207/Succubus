@@ -31,6 +31,9 @@ namespace Succubus.Database.UnitOfWorks
         private ICosplayerRepository cosplayerRepository;
         public ICosplayerRepository Cosplayers => cosplayerRepository ??= new CosplayerRepository(Context);
 
+        private IColorRepository colorRepository;
+        public IColorRepository Colors => colorRepository ??= new ColorRepository(Context);
+
         #endregion
 
         public int SaveChanges() => Context.SaveChanges();

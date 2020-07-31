@@ -1,0 +1,24 @@
+﻿{
+  "Name": "いくみ",
+  "Aliases": "iKkyu",
+  "Twitter": "https://twitter.com/193azs",
+  "Instagram": "",
+  "Booth": "https://ikkyu3.booth.pm/",
+  "ProfilePicture": "iKkyu/ProfilePicture.jpg",
+  "Sets": [
+    {
+      "Name": "Ikumi Trip",
+      "Aliases": "",
+      "Size": 189,
+      "FolderName": "IkumiTrip",
+      "YabaiLevel": 0
+    },
+    {
+      "Name": "Skinny",
+      "Aliases": "",
+      "Size": 50,
+      "FolderName": "Skinny",
+      "YabaiLevel": 0
+    }
+  ]
+}

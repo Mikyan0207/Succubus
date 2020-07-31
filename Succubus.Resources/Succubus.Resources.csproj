@@ -8,12 +8,18 @@
     <None Remove="Configuration\Bot.json" />
     <None Remove="Configuration\Cloud.json" />
     <None Remove="Configuration\Database.json" />
+    <None Remove="Yabai\Fleia.json" />
+    <None Remove="Yabai\Ikumi.json" />
+    <None Remove="Yabai\Rizuna.json" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Configuration\Bot.json" />
     <EmbeddedResource Include="Configuration\Cloud.json" />
     <EmbeddedResource Include="Configuration\Database.json" />
+    <EmbeddedResource Include="Yabai\Fleia.json" />
+    <EmbeddedResource Include="Yabai\Ikumi.json" />
+    <EmbeddedResource Include="Yabai\Rizuna.json" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>

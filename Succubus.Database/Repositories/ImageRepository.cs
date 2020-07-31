@@ -26,7 +26,7 @@ namespace Succubus.Database.Repositories
 
             try
             {
-                return Context.Images
+                var result = Context.Images
                     .Include(x => x.Set)
                     .Include(x => x.Cosplayer)
                     .ToList()
@@ -36,6 +36,8 @@ namespace Succubus.Database.Repositories
                     .OrderBy(x => new Random().Next())
                     .Take(1)
                     .FirstOrDefault();
+
+                return result;
             }
             catch (Exception ex)
             {

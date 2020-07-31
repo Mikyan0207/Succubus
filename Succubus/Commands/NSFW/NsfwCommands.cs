@@ -25,6 +25,66 @@ namespace Succubus.Commands.Nsfw
         {
             Client = client;
             _Logger = LogManager.GetCurrentClassLogger();
+
+            Client.ReactionAdded += Client_ReactionAdded;
+            Client.ReactionRemoved += Client_ReactionRemoved;
+        }
+
+        private async Task Client_ReactionRemoved(Cacheable<IUserMessage, ulong> message, ISocketMessageChannel channel, SocketReaction reaction)
+        {
+            if ((reaction.Emote.Name != "❤️") || reaction.User.Value.IsBot)
+                return;
+
+            var embedBuilder = new EmbedBuilder();
+            var msg = await message.GetOrDownloadAsync().ConfigureAwait(false);
+            var embed = msg.Embeds.FirstOrDefault();
+            var set = embed.Footer.GetValueOrDefault().Text.Split('-')[0].Trim();
+            var number = int.Parse(embed.Footer.GetValueOrDefault().Text.Split('-')[1].Split('/')[0]);
+
+            bool result = await Service.RemoveImageFromCollectionAsync(reaction.User.Value, set, number).ConfigureAwait(false);
+
+            if (result)
+            {
+                embedBuilder.WithTitle("Image removed");
+                embedBuilder.WithColor(new Color(30, 30, 200));
+                await channel.SendMessageAsync("", false, embedBuilder.Build()).ConfigureAwait(false);
+            }
+        }
+
+        private async Task Client_ReactionAdded(Cacheable<IUserMessage, ulong> message, ISocketMessageChannel channel, SocketReaction reaction)
+        {
+            if ((reaction.Emote.Name != "❤️" && reaction.Emote.Name != "❌") || reaction.User.Value.IsBot)
+                return;
+
+            var embedBuilder = new EmbedBuilder();
+            var msg = await message.GetOrDownloadAsync().ConfigureAwait(false);
+            var embed = msg.Embeds.FirstOrDefault();
+            var set = embed.Footer.GetValueOrDefault().Text.Split('-')[0].Trim();
+            var number = int.Parse(embed.Footer.GetValueOrDefault().Text.Split('-')[1].Split('/')[0]);
+
+            if (reaction.Emote.Name == "❤️")
+            {
+                bool result = await Service.AddImageToCollectionAsync(reaction.User.Value, set, number).ConfigureAwait(false);
+
+                if (result)
+                {
+                    embedBuilder.WithTitle("Image added");
+                    embedBuilder.WithColor(new Color(30, 250, 30));
+                    await channel.SendMessageAsync("", false, embedBuilder.Build()).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                bool result = await Service.RemoveImageFromCollectionAsync(reaction.User.Value, set, number).ConfigureAwait(false);
+
+                if (result)
+                {
+                    embedBuilder.WithTitle("Image removed");
+                    embedBuilder.WithColor(new Color(30, 30, 200));
+                    await channel.SendMessageAsync("", false, embedBuilder.Build()).ConfigureAwait(false);
+                }
+            }
+
         }
 
         [Command("cosplayer", RunMode = RunMode.Async)]
@@ -107,7 +167,7 @@ namespace Succubus.Commands.Nsfw
 
             embed.Footer = new EmbedFooterBuilder
             {
-                Text = $"{image.Set.Name} {String.Format("{0:000}", image.Number)}/{String.Format("{0:000}", image.Set.Size)}"
+                Text = $"{image.Set.Name} - {String.Format("{0:000}", image.Number)}/{String.Format("{0:000}", image.Set.Size)}"
             };
 
             embed.WithImageUrl(image.Url);

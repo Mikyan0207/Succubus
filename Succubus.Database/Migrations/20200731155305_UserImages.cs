@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Succubus.Database.Migrations
 {
-    public partial class CosplayUpdate : Migration
+    public partial class UserImages : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -63,9 +63,11 @@ namespace Succubus.Database.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     DateAdded = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: false),
+                    Aliases = table.Column<string>(nullable: true),
                     Size = table.Column<uint>(nullable: false),
                     SetPreview = table.Column<string>(nullable: false),
-                    CosplayerId = table.Column<Guid>(nullable: true)
+                    CosplayerId = table.Column<Guid>(nullable: true),
+                    YabaiLevel = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,6 +109,32 @@ namespace Succubus.Database.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserImages",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    DateAdded = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
+                    ImageId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserImages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserImages_Images_ImageId",
+                        column: x => x.ImageId,
+                        principalTable: "Images",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserImages_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Images_CosplayerId",
                 table: "Images",
@@ -121,15 +149,28 @@ namespace Succubus.Database.Migrations
                 name: "IX_Sets_CosplayerId",
                 table: "Sets",
                 column: "CosplayerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserImages_ImageId",
+                table: "UserImages",
+                column: "ImageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserImages_UserId",
+                table: "UserImages",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Images");
+                name: "Servers");
 
             migrationBuilder.DropTable(
-                name: "Servers");
+                name: "UserImages");
+
+            migrationBuilder.DropTable(
+                name: "Images");
 
             migrationBuilder.DropTable(
                 name: "Users");

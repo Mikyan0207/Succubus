@@ -18,5 +18,7 @@ namespace Succubus.Database.Models
         public Set Set { get; set; }
 
         public int Number { get; set; }
+
+        public List<UserImage> Users { get; set; }
     }
 }

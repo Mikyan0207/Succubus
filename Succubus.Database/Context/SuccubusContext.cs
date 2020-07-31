@@ -27,6 +27,8 @@ namespace Succubus.Database.Context
         public DbSet<Cosplayer> Cosplayers { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Set> Sets { get; set; }
+        public DbSet<UserImage> UserImages { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -48,6 +50,16 @@ namespace Succubus.Database.Context
             modelBuilder.Entity<Set>()
                 .HasOne(x => x.Cosplayer)
                 .WithMany(x => x.Sets);
+
+            modelBuilder.Entity<UserImage>()
+                .HasOne(x => x.Image)
+                .WithMany(x => x.Users)
+                .HasForeignKey(x => x.ImageId);
+
+            modelBuilder.Entity<UserImage>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.Collection)
+                .HasForeignKey(x => x.UserId);
         }
 
         public void Initiliaze()

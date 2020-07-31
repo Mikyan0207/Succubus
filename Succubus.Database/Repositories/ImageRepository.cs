@@ -8,6 +8,7 @@ using NLog;
 using Microsoft.EntityFrameworkCore.Internal;
 using Succubus.Database.Extensions;
 using Succubus.Database.Options;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Succubus.Database.Repositories
 {
@@ -23,7 +24,26 @@ namespace Succubus.Database.Repositories
 
             try
             {
-                var result = Context.Images
+                if (options.FromCollection)
+                {
+                    return Context.Users
+                        .Include(x => x.Collection)
+                            .ThenInclude(y => y.Image)
+                                .ThenInclude(z => z.Set)
+                                .ThenInclude(z => z.Cosplayer)
+                        .Select(x => x.Collection)
+                        .ToList()
+                        .Where(x => x.Any(y => options.SafeMode ? y.Image.Set.YabaiLevel == YabaiLevel.Safe : y.Image.Set.YabaiLevel >= YabaiLevel.Safe))
+                        .ConditionalWhere(options.Set != null, x => x.Any(y => y.Image.Set.Name.ToLowerInvariant().LevenshteinDistance(options.Set.ToLowerInvariant()) < 2 || y.Image.Set.Aliases.ToLowerInvariant().LevenshteinDistance(options.Set.ToLowerInvariant()) < 2))
+                        .ConditionalWhere(options.User != null, x => x.Any(y => y.Image.Cosplayer.Name.ToLowerInvariant().LevenshteinDistance(options.User) < 2 || y.Image.Cosplayer.Aliases.ToLowerInvariant().LevenshteinDistance(options.User) < 2))
+                        .OrderBy(x => new Random().Next())
+                        .Take(1)
+                        .FirstOrDefault()
+                        .Select(x => x.Image)
+                        .FirstOrDefault();
+                }
+
+                return Context.Images
                     .Include(x => x.Set)
                     .Include(x => x.Cosplayer)
                     .ToList()
@@ -33,8 +53,6 @@ namespace Succubus.Database.Repositories
                     .OrderBy(x => new Random().Next())
                     .Take(1)
                     .FirstOrDefault();
-
-                return result;
             }
             catch (Exception ex)
             {

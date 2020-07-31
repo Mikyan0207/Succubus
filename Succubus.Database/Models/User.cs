@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Succubus.Database.Models
 {
@@ -16,6 +17,8 @@ namespace Succubus.Database.Models
         public ulong Experience { get; set; }
 
         public ulong Level { get; set; }
+
+        public List<UserImage> Collection { get; set; }
 
         public override string ToString() => $@"{Username}#{Discriminator}";
     }

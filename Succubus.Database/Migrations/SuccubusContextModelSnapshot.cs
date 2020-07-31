@@ -172,6 +172,30 @@ namespace Succubus.Database.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Succubus.Database.Models.UserImage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ImageId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserImages");
+                });
+
             modelBuilder.Entity("Succubus.Database.Models.Image", b =>
                 {
                     b.HasOne("Succubus.Database.Models.Cosplayer", "Cosplayer")
@@ -188,6 +212,21 @@ namespace Succubus.Database.Migrations
                     b.HasOne("Succubus.Database.Models.Cosplayer", "Cosplayer")
                         .WithMany("Sets")
                         .HasForeignKey("CosplayerId");
+                });
+
+            modelBuilder.Entity("Succubus.Database.Models.UserImage", b =>
+                {
+                    b.HasOne("Succubus.Database.Models.Image", "Image")
+                        .WithMany("Users")
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Succubus.Database.Models.User", "User")
+                        .WithMany("Collection")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

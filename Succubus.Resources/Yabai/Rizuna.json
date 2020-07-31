@@ -10,7 +10,8 @@
       "Name": "Great Ocean",
       "Aliases": "",
       "Size": 101,
-      "FolderName":  "GreatOcean",
+      "FolderName": "GreatOcean",
+      "FilePrefix": null,
       "YabaiLevel": 0
     },
     {
@@ -18,6 +19,7 @@
       "Aliases": "Saenai Kanojo",
       "Size": 100,
       "FolderName": "SaenaiKanojo",
+      "FilePrefix": null,
       "YabaiLevel": 1
     },
     {
@@ -25,6 +27,7 @@
       "Aliases": "Labyrinth",
       "Size": 100,
       "FolderName": "HedonisticLabyrinth",
+      "FilePrefix": null,
       "YabaiLevel": 1
     }
   ]

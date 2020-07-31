@@ -11,6 +11,7 @@
       "Aliases": "FleiaMiko",
       "Size": 182,
       "FolderName": "FleiaMiko",
+      "FilePrefix": null,
       "YabaiLevel": 0
     },
     {
@@ -18,6 +19,7 @@
       "Aliases": "",
       "Size": 349,
       "FolderName": "HoneyBunny",
+      "FilePrefix": null,
       "YabaiLevel": 0
 
     },
@@ -26,6 +28,7 @@
       "Aliases": "",
       "Size": 215,
       "FolderName": "Immoral",
+      "FilePrefix": null,
       "YabaiLevel": 0
     },
     {
@@ -33,6 +36,7 @@
       "Aliases": "BoW",
       "Size": 322,
       "FolderName": "BoW",
+      "FilePrefix": null,
       "YabaiLevel": 0
     },
     {
@@ -40,6 +44,7 @@
       "Aliases": "Rem",
       "Size": 166,
       "FolderName": "Rem",
+      "FilePrefix": null,
       "YabaiLevel": 0
     },
     {
@@ -47,6 +52,7 @@
       "Aliases": "Danmachi",
       "Size": 264,
       "FolderName": "Danmachi",
+      "FilePrefix": null,
       "YabaiLevel": 0
     },
     {
@@ -54,6 +60,15 @@
       "Aliases": "",
       "Size": 319,
       "FolderName": "BeastMode",
+      "FilePrefix": null,
+      "YabaiLevel": 0
+    },
+    {
+      "Name": "Summer Island",
+      "Aliases": "",
+      "Size": 265,
+      "FolderName": "SummerIsland",
+      "FilePrefix": "Shimakaze",
       "YabaiLevel": 0
     }
   ]

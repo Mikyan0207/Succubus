@@ -100,7 +100,7 @@ namespace Succubus.Database.Context
                         Aliases = set.Aliases,
                         Cosplayer = Cosplayers.FirstOrDefault(y => y.Name == cp.Name),
                         Size = (uint)set.Size,
-                        SetPreview = $@"{CloudUrl}{cp.Aliases}/{set.FolderName}/{set.FolderName}_001.jpg",
+                        SetPreview = $@"{CloudUrl}{cp.Aliases}/{set.FolderName}/{set.FilePrefix ?? set.FolderName}_001.jpg",
                         YabaiLevel = (YabaiLevel)set.YabaiLevel
                     });
 
@@ -113,7 +113,7 @@ namespace Succubus.Database.Context
                             Name = $"{set.Name} {String.Format("{0:000}", i + 1)}",
                             Cosplayer = Cosplayers.FirstOrDefault(y => y.Name == cp.Name),
                             Set = Sets.FirstOrDefault(y => y.Name == set.Name),
-                            Url = $"{CloudUrl}{cp.Aliases}/{set.FolderName}/{set.FolderName}_{String.Format("{0:000}", i + 1)}.jpg",
+                            Url = $"{CloudUrl}{cp.Aliases}/{set.FolderName}/{set.FilePrefix ?? set.FolderName}_{String.Format("{0:000}", i + 1)}.jpg",
                             Number = i + 1
                         });
                     }

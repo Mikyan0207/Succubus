@@ -10,6 +10,7 @@ namespace Succubus.Database.Context
         public string Aliases { get; set; }
         public int Size { get; set; }
         public string FolderName { get; set; }
+        public string FilePrefix { get; set; }
         public int YabaiLevel { get; set; }
     }
 

@@ -114,7 +114,13 @@ namespace Succubus.Commands.Nsfw
             embed.WithCurrentTimestamp();
             embed.WithColor(new Color(255, 255, 255));
 
-            await ReplyAsync("", false, embed.Build()).ConfigureAwait(false);
+            var msg = await ReplyAsync("", false, embed.Build()).ConfigureAwait(false);
+
+            await msg.AddReactionsAsync(new Emoji[]
+            {
+                new Emoji("❤️"),
+                new Emoji("❌")
+            }).ConfigureAwait(false);
         }
     }
 }

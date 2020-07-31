@@ -2,14 +2,11 @@
 using Succubus.Database.Context;
 using Succubus.Database.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using NLog;
 using Microsoft.EntityFrameworkCore.Internal;
 using Succubus.Database.Extensions;
-using System.Security.Cryptography.X509Certificates;
 using Succubus.Database.Options;
 
 namespace Succubus.Database.Repositories

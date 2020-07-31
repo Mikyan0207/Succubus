@@ -10,6 +10,8 @@
     <None Remove="Configuration\Database.json" />
     <None Remove="Yabai\Fleia.json" />
     <None Remove="Yabai\Ikumi.json" />
+    <None Remove="Yabai\Miri.json" />
+    <None Remove="Yabai\Ponyo.json" />
     <None Remove="Yabai\Rizuna.json" />
   </ItemGroup>
 
@@ -19,6 +21,8 @@
     <EmbeddedResource Include="Configuration\Database.json" />
     <EmbeddedResource Include="Yabai\Fleia.json" />
     <EmbeddedResource Include="Yabai\Ikumi.json" />
+    <EmbeddedResource Include="Yabai\Miri.json" />
+    <EmbeddedResource Include="Yabai\Ponyo.json" />
     <EmbeddedResource Include="Yabai\Rizuna.json" />
   </ItemGroup>
 

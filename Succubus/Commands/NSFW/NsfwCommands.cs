@@ -11,6 +11,7 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Color = Discord.Color;
 using Image = Succubus.Database.Models.Image;
 
 namespace Succubus.Commands.Nsfw

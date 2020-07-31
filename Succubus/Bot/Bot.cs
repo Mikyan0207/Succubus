@@ -26,7 +26,7 @@ namespace Succubus.Bot
         public SuccubusBot()
         {
             ConfigurationStore = new NamedResourceStore<byte[]>(new DllResourceStore(new AssemblyName("Succubus.Resources")), @"Configuration");
-            
+
             ConfigurationStore.AddExtension(".json");
 
             BotConfiguration = JsonConvert.DeserializeObject<BotConfiguration>(Encoding.UTF8.GetString(ConfigurationStore.Get("Bot")));
@@ -51,7 +51,7 @@ namespace Succubus.Bot
         public async Task RunAsync()
         {
             _Logger.Info("Connecting...");
-            
+
             await Client.LoginAsync(Discord.TokenType.Bot, BotConfiguration.Token).ConfigureAwait(false);
             await Client.StartAsync().ConfigureAwait(false);
 
@@ -64,7 +64,7 @@ namespace Succubus.Bot
             catch (Exception ex)
             {
                 _Logger.Fatal("Failed to initialize services. Bot will shutdown in 5 seconds\n" + ex.Message);
-                
+
                 await Task.Delay(TimeSpan.FromSeconds(5)).ConfigureAwait(false);
                 await Client.StopAsync().ConfigureAwait(false);
                 throw;

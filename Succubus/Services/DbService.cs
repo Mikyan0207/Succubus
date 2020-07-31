@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore.Internal;
 using Succubus.Database.Context;
 using Succubus.Database.UnitOfWorks;
-using Succubus.Services;
 
 namespace Succubus.Services
 {
@@ -28,7 +27,7 @@ namespace Succubus.Services
         {
             var context = new SuccubusContext();
             context.Database.SetCommandTimeout(60);
-            
+
             var conn = context.Database.GetDbConnection();
             conn.Open();
 

@@ -11,7 +11,16 @@
       "Aliases": "Prisma Summer",
       "Size": 120,
       "FolderName": "PrismaSummer",
-      "YabaiLevel": 0
+      "FilePrefix": null,
+      "YabaiLevel": 1
+    },
+    {
+      "Name": "いっぱいだして💛よくってよ！",
+      "Aliases": "Elena",
+      "Size": 121,
+      "FolderName": "Elena",
+      "FilePrefix": null,
+      "YabaiLevel": 1
     }
   ]
 }

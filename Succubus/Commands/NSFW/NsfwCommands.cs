@@ -85,7 +85,6 @@ namespace Succubus.Commands.Nsfw
                     await channel.SendMessageAsync("", false, embedBuilder.Build()).ConfigureAwait(false);
                 }
             }
-
         }
 
         [Command("cosplayer", RunMode = RunMode.Async)]
@@ -133,9 +132,24 @@ namespace Succubus.Commands.Nsfw
 
             embed.AddField($"Sets", $"{cosplayer.Sets.Count}", true);
             embed.AddField($"Images", $"{totalPictures}", false);
-            embed.AddField($"Twitter", $"[Link]({cosplayer.Twitter})", true);
-            embed.AddField($"Instagram", $"[Link]({cosplayer.Instagram})", true);
-            embed.AddField($"Booth", $"[Link]({cosplayer.Booth})", true);
+            embed.AddField(efb =>
+            {
+                efb.Name = "";
+                efb.Value = !string.IsNullOrEmpty(cosplayer.Twitter) ? $"[Link]({cosplayer.Twitter})" : "None";
+                efb.IsInline = true;
+            });
+            embed.AddField(efb =>
+            {
+                efb.Name = "";
+                efb.Value = !string.IsNullOrEmpty(cosplayer.Instagram) ? $"[Link]({cosplayer.Instagram})" : "None";
+                efb.IsInline = true;
+            });
+            embed.AddField(efb =>
+            {
+                efb.Name = "";
+                efb.Value = !string.IsNullOrEmpty(cosplayer.Booth) ? $"[Link]({cosplayer.Booth})" : "None";
+                efb.IsInline = true;
+            });
             embed.AddField($"Collection", $"{sb}", false);
 
             await ReplyAsync("", false, embed.Build()).ConfigureAwait(false);

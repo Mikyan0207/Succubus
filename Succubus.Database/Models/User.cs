@@ -7,7 +7,7 @@ namespace Succubus.Database.Models
     {
         [Required]
         public string Username { get; set; }
-        
+
         [Required]
         public string Discriminator { get; set; }
 

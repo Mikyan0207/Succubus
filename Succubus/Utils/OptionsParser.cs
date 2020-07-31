@@ -1,10 +1,5 @@
 ﻿using CommandLine;
-using Succubus.Commands;
 using Succubus.Database.Options;
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
 
 namespace Succubus.Utils
 {

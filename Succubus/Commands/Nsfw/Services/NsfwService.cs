@@ -48,7 +48,6 @@ namespace Succubus.Commands.Nsfw.Services
             }
         }
 
-
         public Image GetRandomImageFromCosplayer(string name)
         {
             using (var uow = _db.GetDbContext())
@@ -65,5 +64,4 @@ namespace Succubus.Commands.Nsfw.Services
             }
         }
     }
-
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Succubus.Database.Models
+﻿namespace Succubus.Database.Models
 {
     public class Color : Entity
     {

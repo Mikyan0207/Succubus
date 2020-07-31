@@ -25,7 +25,7 @@ namespace Succubus.Database.Repositories
                     ServerId = server.Id,
                     Name = server.Name
                 }).ConfigureAwait(false);
-                
+
                 await Context.SaveChangesAsync().ConfigureAwait(false);
 
                 return guild.Entity;

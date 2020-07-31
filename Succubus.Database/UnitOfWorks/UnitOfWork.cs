@@ -1,9 +1,6 @@
-﻿using Discord;
-using Succubus.Database.Context;
+﻿using Succubus.Database.Context;
 using Succubus.Database.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Succubus.Database.UnitOfWorks
@@ -34,7 +31,7 @@ namespace Succubus.Database.UnitOfWorks
         private IColorRepository colorRepository;
         public IColorRepository Colors => colorRepository ??= new ColorRepository(Context);
 
-        #endregion
+        #endregion Repositories
 
         public int SaveChanges() => Context.SaveChanges();
 

@@ -36,7 +36,7 @@ namespace Succubus.Database.Repositories
 
         public async Task AddAsync(T entity)
         {
-           await Set.AddAsync(entity).ConfigureAwait(false);
+            await Set.AddAsync(entity).ConfigureAwait(false);
         }
 
         public void AddRange(IEnumerable<T> entities)

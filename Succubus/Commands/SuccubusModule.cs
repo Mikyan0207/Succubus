@@ -1,8 +1,5 @@
 ﻿using Discord.Commands;
 using Succubus.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Succubus.Commands
 {

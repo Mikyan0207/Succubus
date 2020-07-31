@@ -1,14 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using NLog;
 using Succubus.Database.Context;
+using Succubus.Database.Extensions;
 using Succubus.Database.Models;
+using Succubus.Database.Options;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using NLog;
-using Microsoft.EntityFrameworkCore.Internal;
-using Succubus.Database.Extensions;
-using Succubus.Database.Options;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Succubus.Database.Repositories
 {
@@ -21,7 +20,6 @@ namespace Succubus.Database.Repositories
 
         public async Task<Image> GetImageAsync(YabaiOptions options)
         {
-
             try
             {
                 if (options.FromCollection)

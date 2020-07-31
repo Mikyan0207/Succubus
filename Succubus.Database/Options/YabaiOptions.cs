@@ -1,7 +1,4 @@
 ﻿using CommandLine;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Succubus.Database.Options
 {
@@ -18,10 +15,5 @@ namespace Succubus.Database.Options
 
         [Option('s', "set", Default = null, HelpText = "Succubus choose a random image from this set.")]
         public string Set { get; set; }
-
-        public override string ToString()
-        {
-            return $"User : {(User ?? "null")} | Set : {(Set ?? "null")} | Safe : {SafeMode}";
-        }
     }
 }

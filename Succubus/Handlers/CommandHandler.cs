@@ -1,12 +1,9 @@
 ﻿using Discord.Commands;
 using Discord.WebSocket;
-using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using Succubus.Services;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Succubus.Handlers

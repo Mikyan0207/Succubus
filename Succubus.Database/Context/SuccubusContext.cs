@@ -3,11 +3,9 @@ using Succubus.Database.Models;
 using Succubus.Store;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Succubus.Database.Context
 {
@@ -29,7 +27,6 @@ namespace Succubus.Database.Context
         public DbSet<Image> Images { get; set; }
         public DbSet<Set> Sets { get; set; }
         public DbSet<UserImage> UserImages { get; set; }
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

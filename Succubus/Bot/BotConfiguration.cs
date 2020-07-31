@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Succubus.Bot
+﻿namespace Succubus.Bot
 {
     public class BotConfiguration
     {

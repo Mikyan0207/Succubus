@@ -1,8 +1,5 @@
 ﻿using Discord;
-using NLog.Targets;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Succubus.Extensions
 {

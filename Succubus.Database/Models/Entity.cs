@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Succubus.Database.Models
 {
@@ -11,6 +9,5 @@ namespace Succubus.Database.Models
         public Guid Id { get; set; } = Guid.NewGuid();
 
         public DateTime DateAdded { get; set; } = DateTime.UtcNow;
-
     }
 }

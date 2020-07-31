@@ -1,5 +1,4 @@
 ﻿using Succubus.Bot;
-using System;
 using System.Threading.Tasks;
 
 namespace Succubus

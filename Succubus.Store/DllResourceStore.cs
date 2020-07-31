@@ -107,6 +107,5 @@ namespace Succubus.Store
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
     }
 }

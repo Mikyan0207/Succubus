@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Succubus.Database.Extensions
 {
@@ -50,6 +48,5 @@ namespace Succubus.Database.Extensions
             // Step 7
             return d[n, m];
         }
-
     }
 }

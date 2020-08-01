@@ -70,7 +70,7 @@ namespace Succubus.Database.Context
                     v => JsonConvert.DeserializeObject<List<string>>(v));
         }
 
-        public async void Initiliaze()
+        public async void Initialize()
         {
             #region Cosplayers
 
@@ -152,12 +152,31 @@ namespace Succubus.Database.Context
                 {
                     Name = channel.Name,
                     Keywords = channel.Keywords,
-                    ChannelId = channel.ChannelId
+                    ChannelId = channel.ChannelId,
+                    Icon = channel.Icon
 
                 }).ConfigureAwait(false);
             }
 
             await SaveChangesAsync().ConfigureAwait(false);
+
+            #endregion
+
+            #region Colors
+
+            if (!Colors.Any(x => x.Name == "Korone Ch. 戌神ころね"))
+            {
+                await Colors.AddAsync(new Color()
+                {
+                    Name = "Korone Ch. 戌神ころね",
+                    Red = 196,
+                    Green = 145,
+                    Blue = 132
+
+                }).ConfigureAwait(false);
+
+                await SaveChangesAsync().ConfigureAwait(false);
+            }
 
             #endregion
         }

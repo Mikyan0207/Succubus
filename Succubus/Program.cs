@@ -1,5 +1,6 @@
-﻿using Succubus.Bot;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Succubus.Bot;
+using Succubus.Logger;
 
 namespace Succubus
 {
@@ -7,7 +8,7 @@ namespace Succubus
     {
         public static async Task Main()
         {
-            Logger.LoggerUtils.InitializeLogger();
+            LoggerUtils.InitializeLogger();
             await new SuccubusBot().RunAsync().ConfigureAwait(false);
         }
     }

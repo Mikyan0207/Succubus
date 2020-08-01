@@ -2,6 +2,7 @@
 using Succubus.Database.Repositories;
 using System;
 using System.Threading.Tasks;
+using Succubus.Database.Repositories.Interfaces;
 
 namespace Succubus.Database.UnitOfWorks
 {
@@ -16,20 +17,23 @@ namespace Succubus.Database.UnitOfWorks
 
         #region Repositories
 
-        private IUserRepository userRepository;
-        public IUserRepository Users => userRepository ??= new UserRepository(Context);
+        private IUserRepository _userRepository;
+        public IUserRepository Users => _userRepository ??= new UserRepository(Context);
 
-        private IServerRepository serverRepository;
-        public IServerRepository Servers => serverRepository ??= new ServerRepository(Context);
+        private IServerRepository _serverRepository;
+        public IServerRepository Servers => _serverRepository ??= new ServerRepository(Context);
 
-        private IImageRepository imageRepository;
-        public IImageRepository Images => imageRepository ??= new ImageRepository(Context);
+        private IImageRepository _imageRepository;
+        public IImageRepository Images => _imageRepository ??= new ImageRepository(Context);
 
-        private ICosplayerRepository cosplayerRepository;
-        public ICosplayerRepository Cosplayers => cosplayerRepository ??= new CosplayerRepository(Context);
+        private ICosplayerRepository _cosplayerRepository;
+        public ICosplayerRepository Cosplayers => _cosplayerRepository ??= new CosplayerRepository(Context);
 
-        private IColorRepository colorRepository;
-        public IColorRepository Colors => colorRepository ??= new ColorRepository(Context);
+        private IColorRepository _colorRepository;
+        public IColorRepository Colors => _colorRepository ??= new ColorRepository(Context);
+
+        private IYoutubeChannelRepository _youtubeChannelRepository;
+        public IYoutubeChannelRepository YoutubeChannels => _youtubeChannelRepository ??= new YoutubeChannelRepository(Context);
 
         #endregion Repositories
 

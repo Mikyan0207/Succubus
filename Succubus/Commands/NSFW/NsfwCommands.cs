@@ -1,23 +1,17 @@
-﻿using Discord;
+﻿using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using NLog;
 using Succubus.Attributes;
 using Succubus.Commands.Nsfw.Services;
-using Succubus.Database.Models;
 using Succubus.Database.Options;
 using Succubus.Utils;
-using System;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Color = Discord.Color;
-using Image = Succubus.Database.Models.Image;
 
 namespace Succubus.Commands.Nsfw
 {
-    [RequireNsfw]
     public class NsfwCommands : SuccubusModule<NsfwService>
     {
         private readonly NLog.Logger _Logger;
@@ -32,9 +26,10 @@ namespace Succubus.Commands.Nsfw
             Client.ReactionRemoved += Client_ReactionRemoved;
         }
 
-        private async Task Client_ReactionRemoved(Cacheable<IUserMessage, ulong> message, ISocketMessageChannel channel, SocketReaction reaction)
+        private async Task Client_ReactionRemoved(Cacheable<IUserMessage, ulong> message, ISocketMessageChannel channel,
+            SocketReaction reaction)
         {
-            if ((reaction.Emote.Name != "❤️") || reaction.User.Value.IsBot)
+            if (reaction.Emote.Name != "❤️" || reaction.User.Value.IsBot)
                 return;
 
             var embedBuilder = new EmbedBuilder();
@@ -43,7 +38,8 @@ namespace Succubus.Commands.Nsfw
             var set = embed.Footer.GetValueOrDefault().Text.Split('-')[0].Trim();
             var number = int.Parse(embed.Footer.GetValueOrDefault().Text.Split('-')[1].Split('/')[0]);
 
-            bool result = await Service.RemoveImageFromCollectionAsync(reaction.User.Value, set, number).ConfigureAwait(false);
+            var result = await Service.RemoveImageFromCollectionAsync(reaction.User.Value, set, number)
+                .ConfigureAwait(false);
 
             if (result)
             {
@@ -54,9 +50,10 @@ namespace Succubus.Commands.Nsfw
             }
         }
 
-        private async Task Client_ReactionAdded(Cacheable<IUserMessage, ulong> message, ISocketMessageChannel channel, SocketReaction reaction)
+        private async Task Client_ReactionAdded(Cacheable<IUserMessage, ulong> message, ISocketMessageChannel channel,
+            SocketReaction reaction)
         {
-            if ((reaction.Emote.Name != "❤️" && reaction.Emote.Name != "❌") || reaction.User.Value.IsBot)
+            if (reaction.Emote.Name != "❤️" && reaction.Emote.Name != "❌" || reaction.User.Value.IsBot)
                 return;
 
             var embedBuilder = new EmbedBuilder();
@@ -67,7 +64,8 @@ namespace Succubus.Commands.Nsfw
 
             if (reaction.Emote.Name == "❤️")
             {
-                bool result = await Service.AddImageToCollectionAsync(reaction.User.Value, set, number).ConfigureAwait(false);
+                var result = await Service.AddImageToCollectionAsync(reaction.User.Value, set, number)
+                    .ConfigureAwait(false);
 
                 if (result)
                 {
@@ -79,7 +77,8 @@ namespace Succubus.Commands.Nsfw
             }
             else
             {
-                bool result = await Service.RemoveImageFromCollectionAsync(reaction.User.Value, set, number).ConfigureAwait(false);
+                var result = await Service.RemoveImageFromCollectionAsync(reaction.User.Value, set, number)
+                    .ConfigureAwait(false);
 
                 if (result)
                 {
@@ -121,7 +120,7 @@ namespace Succubus.Commands.Nsfw
             uint totalPictures = 0;
             cosplayer.Sets.ForEach(x => totalPictures += x.Size);
 
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             cosplayer.Sets.OrderBy(x => x.Name).ToList().ForEach(x => sb.AppendLine($"{x.Name}"));
 
             embed.Footer = new EmbedFooterBuilder
@@ -134,8 +133,8 @@ namespace Succubus.Commands.Nsfw
             embed.WithCurrentTimestamp();
             embed.WithColor(new Color(156, 39, 176));
 
-            embed.AddField($"Sets", $"{cosplayer.Sets.Count}", true);
-            embed.AddField($"Images", $"{totalPictures}", false);
+            embed.AddField("Sets", $"{cosplayer.Sets.Count}", true);
+            embed.AddField("Images", $"{totalPictures}");
             embed.AddField(efb =>
             {
                 efb.Name = "";
@@ -154,7 +153,7 @@ namespace Succubus.Commands.Nsfw
                 efb.Value = !string.IsNullOrEmpty(cosplayer.Booth) ? $"[Link]({cosplayer.Booth})" : "None";
                 efb.IsInline = true;
             });
-            embed.AddField($"Collection", $"{sb}", false);
+            embed.AddField("Collection", $"{sb}");
 
             await ReplyAsync("", false, embed.Build()).ConfigureAwait(false);
         }
@@ -165,8 +164,8 @@ namespace Succubus.Commands.Nsfw
         [RequireBotPermission(GuildPermission.EmbedLinks)]
         public async Task YabaiAsync(params string[] options)
         {
-            EmbedBuilder embed = new EmbedBuilder();
-            Image image = await Service.GetImageAsync(OptionsParser.Parse<YabaiOptions>(options)).ConfigureAwait(false);
+            var embed = new EmbedBuilder();
+            var image = await Service.GetImageAsync(OptionsParser.Parse<YabaiOptions>(options)).ConfigureAwait(false);
 
             if (image == null)
             {
@@ -186,7 +185,8 @@ namespace Succubus.Commands.Nsfw
 
             embed.Footer = new EmbedFooterBuilder
             {
-                Text = $"{image.Set.Name} - {String.Format("{0:000}", image.Number)}/{String.Format("{0:000}", image.Set.Size)}"
+                Text =
+                    $"{image.Set.Name} - {string.Format("{0:000}", image.Number)}/{string.Format("{0:000}", image.Set.Size)}"
             };
 
             embed.WithImageUrl(image.Url);
@@ -195,7 +195,7 @@ namespace Succubus.Commands.Nsfw
 
             var msg = await ReplyAsync("", false, embed.Build()).ConfigureAwait(false);
 
-            await msg.AddReactionsAsync(new Emoji[]
+            await msg.AddReactionsAsync(new[]
             {
                 new Emoji("❤️"),
                 new Emoji("❌")

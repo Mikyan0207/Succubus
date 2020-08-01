@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Succubus.Services
 {
@@ -10,7 +10,7 @@ namespace Succubus.Services
     {
         public static IEnumerable<Type> LoadFrom(this IServiceCollection collection, Assembly assembly)
         {
-            List<Type> added = new List<Type>();
+            var added = new List<Type>();
             Type[] allTypes;
 
             try
@@ -23,7 +23,8 @@ namespace Succubus.Services
             }
 
             var services = new Queue<Type>(allTypes
-                .Where(x => x.GetInterfaces().Contains(typeof(IService)) && !x.GetTypeInfo().IsInterface && !x.GetTypeInfo().IsAbstract)
+                .Where(x => x.GetInterfaces().Contains(typeof(IService)) && !x.GetTypeInfo().IsInterface &&
+                            !x.GetTypeInfo().IsAbstract)
                 .ToArray());
 
             added.AddRange(services);

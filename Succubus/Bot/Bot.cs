@@ -1,4 +1,9 @@
-﻿using Discord.Commands;
+﻿using System;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+using Discord;
+using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -6,36 +11,34 @@ using NLog;
 using Succubus.Handlers;
 using Succubus.Services;
 using Succubus.Store;
-using System;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Succubus.Bot
 {
     public class SuccubusBot : IBot
     {
+        private static readonly NLog.Logger _Logger = LogManager.GetCurrentClassLogger();
+        private readonly BotConfiguration BotConfiguration;
         private readonly DiscordShardedClient Client;
         private readonly CommandService CommandService;
-        private DbService DbService;
         private readonly NamedResourceStore<byte[]> ConfigurationStore;
-        private readonly BotConfiguration BotConfiguration;
+        private readonly DbService DbService;
         private IServiceProvider Services;
-        private static NLog.Logger _Logger = LogManager.GetCurrentClassLogger();
 
         public SuccubusBot()
         {
-            ConfigurationStore = new NamedResourceStore<byte[]>(new DllResourceStore(new AssemblyName("Succubus.Resources")), @"Configuration");
+            ConfigurationStore =
+                new NamedResourceStore<byte[]>(new DllResourceStore(new AssemblyName("Succubus.Resources")),
+                    @"Configuration");
 
             ConfigurationStore.AddExtension(".json");
 
-            BotConfiguration = JsonConvert.DeserializeObject<BotConfiguration>(Encoding.UTF8.GetString(ConfigurationStore.Get("Bot")));
-            DbService = new DbService();
+            BotConfiguration =
+                JsonConvert.DeserializeObject<BotConfiguration>(Encoding.UTF8.GetString(ConfigurationStore.Get("Bot")));
 
             Client = new DiscordShardedClient(new DiscordSocketConfig
             {
                 MessageCacheSize = 0,
-                LogLevel = Discord.LogSeverity.Warning,
+                LogLevel = LogSeverity.Warning,
                 ConnectionTimeout = int.MaxValue,
                 AlwaysDownloadUsers = false
             });
@@ -43,16 +46,18 @@ namespace Succubus.Bot
             CommandService = new CommandService(new CommandServiceConfig
             {
                 CaseSensitiveCommands = false,
-                LogLevel = Discord.LogSeverity.Info,
+                LogLevel = LogSeverity.Info,
                 DefaultRunMode = RunMode.Async
             });
+
+            DbService = new DbService();
         }
 
         public async Task RunAsync()
         {
             _Logger.Info("Connecting...");
 
-            await Client.LoginAsync(Discord.TokenType.Bot, BotConfiguration.Token).ConfigureAwait(false);
+            await Client.LoginAsync(TokenType.Bot, BotConfiguration.Token).ConfigureAwait(false);
             await Client.StartAsync().ConfigureAwait(false);
 
             _Logger.Info("Connected.");

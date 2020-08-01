@@ -18,10 +18,7 @@ namespace Succubus.Database.Repositories
         {
             var color = Context.Colors.FirstOrDefault(x => x.Name.ToLowerInvariant().LevenshteinDistance(name) < 2);
 
-            if (color == null)
-                return new Discord.Color(0, 0, 0);
-
-            return new Discord.Color(color.Red, color.Green, color.Blue);
+            return color == null ? new Discord.Color(0, 0, 0) : new Discord.Color(color.Red, color.Green, color.Blue);
         }
     }
 }

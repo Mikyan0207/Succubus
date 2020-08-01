@@ -1,5 +1,5 @@
-﻿using Discord;
-using System;
+﻿using System;
+using Discord;
 
 namespace Succubus.Extensions
 {
@@ -10,7 +10,9 @@ namespace Succubus.Extensions
             if (usr.AvatarId == null)
                 return null;
 
-            return new Uri(usr.AvatarId.StartsWith("a_", StringComparison.InvariantCulture) ? $"{DiscordConfig.CDNUrl}avatars/{usr.Id}/{usr.AvatarId}.gif" : usr.GetAvatarUrl(ImageFormat.Auto));
+            return new Uri(usr.AvatarId.StartsWith("a_", StringComparison.InvariantCulture)
+                ? $"{DiscordConfig.CDNUrl}avatars/{usr.Id}/{usr.AvatarId}.gif"
+                : usr.GetAvatarUrl());
         }
     }
 }

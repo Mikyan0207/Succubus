@@ -18,7 +18,7 @@ namespace Succubus.Services
                 }
 
                 context.Database.ExecuteSqlRaw("PRAGMA journal_mode=WAL");
-                context.Initiliaze();
+                context.Initialize();
                 context.SaveChanges();
             }
         }
@@ -40,6 +40,9 @@ namespace Succubus.Services
             return context;
         }
 
-        public IUnitOfWork GetDbContext() => new UnitOfWork(GetDbContextInternal());
+        public IUnitOfWork GetDbContext()
+        {
+            return new UnitOfWork(GetDbContextInternal());
+        }
     }
 }

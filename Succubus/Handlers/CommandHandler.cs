@@ -1,10 +1,10 @@
-﻿using Discord.Commands;
+﻿using System;
+using System.Reflection;
+using System.Threading.Tasks;
+using Discord.Commands;
 using Discord.WebSocket;
 using NLog;
 using Succubus.Services;
-using System;
-using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Succubus.Handlers
 {
@@ -13,7 +13,7 @@ namespace Succubus.Handlers
         private static readonly NLog.Logger _Logger = LogManager.GetCurrentClassLogger();
         private readonly DiscordShardedClient Client;
         private readonly CommandService CommandService;
-        private IServiceProvider Services;
+        private readonly IServiceProvider Services;
 
         public CommandHandler(DiscordShardedClient client, CommandService commandService, IServiceProvider services)
         {
@@ -51,7 +51,8 @@ namespace Succubus.Handlers
             {
                 await HandleCommandAsync(context, argPos);
 
-                _Logger.Info($"Command Executed\nUser: {message.Author.Username}\nChannel: {message.Channel.Name}\nCommand: {message.Content}");
+                _Logger.Info(
+                    $"Command Executed\nUser: {message.Author.Username}\nChannel: {message.Channel.Name}\nCommand: {message.Content}");
             }
         }
 
@@ -62,10 +63,7 @@ namespace Succubus.Handlers
                 var searchResult = CommandService.Search(context, argPos);
 
                 // If no command were found, return
-                if (searchResult.Commands == null || searchResult.Commands.Count == 0)
-                {
-                    return;
-                }
+                if (searchResult.Commands == null || searchResult.Commands.Count == 0) return;
 
                 var result = await CommandService.ExecuteAsync(context, argPos, Services).ConfigureAwait(false);
 

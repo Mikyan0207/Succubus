@@ -2,6 +2,7 @@
 using Succubus.Database.Models;
 using System;
 using System.Threading.Tasks;
+using Succubus.Database.Repositories.Interfaces;
 
 namespace Succubus.Database.Repositories
 {

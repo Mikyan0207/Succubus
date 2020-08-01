@@ -3,6 +3,7 @@ using Succubus.Database.Context;
 using Succubus.Database.Extensions;
 using Succubus.Database.Models;
 using System.Linq;
+using Succubus.Database.Repositories.Interfaces;
 
 namespace Succubus.Database.Repositories
 {

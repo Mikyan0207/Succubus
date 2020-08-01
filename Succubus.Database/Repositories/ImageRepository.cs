@@ -8,6 +8,7 @@ using Succubus.Database.Options;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Succubus.Database.Repositories.Interfaces;
 
 namespace Succubus.Database.Repositories
 {

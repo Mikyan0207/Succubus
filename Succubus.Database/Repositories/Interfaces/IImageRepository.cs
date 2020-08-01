@@ -2,7 +2,7 @@
 using Succubus.Database.Options;
 using System.Threading.Tasks;
 
-namespace Succubus.Database.Repositories
+namespace Succubus.Database.Repositories.Interfaces
 {
     public interface IImageRepository : IRepository<Image>
     {

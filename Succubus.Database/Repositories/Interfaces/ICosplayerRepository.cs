@@ -1,6 +1,6 @@
 ﻿using Succubus.Database.Models;
 
-namespace Succubus.Database.Repositories
+namespace Succubus.Database.Repositories.Interfaces
 {
     public interface ICosplayerRepository : IRepository<Cosplayer>
     {

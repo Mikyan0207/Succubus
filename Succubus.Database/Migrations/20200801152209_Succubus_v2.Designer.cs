@@ -9,8 +9,8 @@ using Succubus.Database.Context;
 namespace Succubus.Database.Migrations
 {
     [DbContext(typeof(SuccubusContext))]
-    [Migration("20200801145041_YtChannel")]
-    partial class YtChannel
+    [Migration("20200801152209_Succubus_v2")]
+    partial class Succubus_v2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -261,6 +261,9 @@ namespace Succubus.Database.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateAdded")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Keywords")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")

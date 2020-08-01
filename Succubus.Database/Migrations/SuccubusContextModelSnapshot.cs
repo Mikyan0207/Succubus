@@ -261,6 +261,9 @@ namespace Succubus.Database.Migrations
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Keywords")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 

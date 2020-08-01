@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Succubus.Database.Models;
 using Succubus.Store;
 using System;
@@ -61,6 +62,12 @@ namespace Succubus.Database.Context
                 .HasOne(x => x.User)
                 .WithMany(x => x.Collection)
                 .HasForeignKey(x => x.UserId);
+
+            modelBuilder.Entity<YoutubeChannel>()
+                .Property(e => e.Keywords)
+                .HasConversion(
+                    v => JsonConvert.SerializeObject(v),
+                    v => JsonConvert.DeserializeObject<List<string>>(v));
         }
 
         public async void Initiliaze()
@@ -144,6 +151,7 @@ namespace Succubus.Database.Context
                 await YoutubeChannels.AddAsync(new YoutubeChannel
                 {
                     Name = channel.Name,
+                    Keywords = channel.Keywords,
                     ChannelId = channel.ChannelId
 
                 }).ConfigureAwait(false);

@@ -132,7 +132,7 @@ namespace Succubus.Database.Context
             #region YouTube
 
             using var ytStore = new NamedResourceStore<byte[]>(new DllResourceStore(new AssemblyName("Succubus.Resources")), @"Youtube");
-            store.AddExtension(".json");
+            ytStore.AddExtension(".json");
 
             List<YoutubeModel> channels = Utf8Json.JsonSerializer.Deserialize<List<YoutubeModel>>(ytStore.Get("Channels"));
 

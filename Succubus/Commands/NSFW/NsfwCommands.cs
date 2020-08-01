@@ -9,6 +9,7 @@ using Succubus.Database.Options;
 using Succubus.Utils;
 using System;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Color = Discord.Color;
@@ -46,7 +47,8 @@ namespace Succubus.Commands.Nsfw
 
             if (result)
             {
-                embedBuilder.WithTitle("Image removed");
+                embedBuilder.WithTitle($"{set} n°{number}");
+                embedBuilder.WithDescription($"❌ Image removed from {reaction.User.Value.Username}'s Collection");
                 embedBuilder.WithColor(new Color(30, 30, 200));
                 await channel.SendMessageAsync("", false, embedBuilder.Build()).ConfigureAwait(false);
             }
@@ -69,7 +71,8 @@ namespace Succubus.Commands.Nsfw
 
                 if (result)
                 {
-                    embedBuilder.WithTitle("Image added");
+                    embedBuilder.WithTitle($"{set} n°{number}");
+                    embedBuilder.WithDescription($"✅ Image added to {reaction.User.Value.Username}'s Collection");
                     embedBuilder.WithColor(new Color(30, 250, 30));
                     await channel.SendMessageAsync("", false, embedBuilder.Build()).ConfigureAwait(false);
                 }
@@ -80,7 +83,8 @@ namespace Succubus.Commands.Nsfw
 
                 if (result)
                 {
-                    embedBuilder.WithTitle("Image removed");
+                    embedBuilder.WithTitle($"{set} n°{number}");
+                    embedBuilder.WithDescription($"❌ Image removed from {reaction.User.Value.Username}'s Collection");
                     embedBuilder.WithColor(new Color(30, 30, 200));
                     await channel.SendMessageAsync("", false, embedBuilder.Build()).ConfigureAwait(false);
                 }

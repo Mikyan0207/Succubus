@@ -1,4 +1,4 @@
-﻿namespace Succubus.Database.Options
+﻿namespace Succubus.Utils
 {
     public interface ICommandOptions
     {

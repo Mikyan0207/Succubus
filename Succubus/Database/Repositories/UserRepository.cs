@@ -74,7 +74,7 @@ namespace Succubus.Database.Repositories
 
             try
             {
-                Context.SaveChanges();
+                await Context.SaveChangesAsync().ConfigureAwait(false);
             }
             catch (DbUpdateConcurrencyException ex)
             {

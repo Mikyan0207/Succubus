@@ -6,8 +6,8 @@ using Discord.Commands;
 using Discord.WebSocket;
 using NLog;
 using Succubus.Attributes;
+using Succubus.Commands.Nsfw.Options;
 using Succubus.Commands.Nsfw.Services;
-using Succubus.Database.Options;
 using Succubus.Utils;
 
 namespace Succubus.Commands.Nsfw

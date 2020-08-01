@@ -1,6 +1,7 @@
 ﻿using CommandLine;
+using Succubus.Utils;
 
-namespace Succubus.Database.Options
+namespace Succubus.Commands.Nsfw.Options
 {
     public class YabaiOptions : ICommandOptions
     {

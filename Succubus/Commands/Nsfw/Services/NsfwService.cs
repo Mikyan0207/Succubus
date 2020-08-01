@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Discord;
+using Succubus.Commands.Nsfw.Options;
 using Succubus.Database.Models;
-using Succubus.Database.Options;
 using Succubus.Services;
 using Image = Succubus.Database.Models.Image;
 

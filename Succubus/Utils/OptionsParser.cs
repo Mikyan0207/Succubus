@@ -1,5 +1,4 @@
 ﻿using CommandLine;
-using Succubus.Database.Options;
 
 namespace Succubus.Utils
 {

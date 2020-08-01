@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 
 namespace Succubus.Database.Context
 {
@@ -27,6 +28,8 @@ namespace Succubus.Database.Context
         public DbSet<Image> Images { get; set; }
         public DbSet<Set> Sets { get; set; }
         public DbSet<UserImage> UserImages { get; set; }
+        public DbSet<DiscordChannel> DiscordChannels { get; set; }
+        public DbSet<YoutubeChannel> YoutubeChannels { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -60,8 +63,10 @@ namespace Succubus.Database.Context
                 .HasForeignKey(x => x.UserId);
         }
 
-        public void Initiliaze()
+        public async void Initiliaze()
         {
+            #region Cosplayers
+
             using var store = new NamedResourceStore<byte[]>(new DllResourceStore(new AssemblyName("Succubus.Resources")), @"Yabai");
             store.AddExtension(".json");
 
@@ -71,9 +76,9 @@ namespace Succubus.Database.Context
             {
                 CosplayerData cp = Utf8Json.JsonSerializer.Deserialize<CosplayerData>(store.Get(cosplayer));
 
-                if (!Cosplayers.Any(x => x.Name == cp.Name))
+                if (!await Cosplayers.AsQueryable().AnyAsync(x => x.Name == cp.Name).ConfigureAwait(false))
                 {
-                    Cosplayers.Add(new Cosplayer
+                    await Cosplayers.AddAsync(new Cosplayer
                     {
                         Name = cp.Name,
                         Aliases = cp.Aliases,
@@ -81,17 +86,18 @@ namespace Succubus.Database.Context
                         Instagram = cp.Instagram,
                         Booth = cp.Booth,
                         ProfilePicture = $"{CloudUrl}{cp.ProfilePicture}"
-                    });
 
-                    SaveChanges();
+                    }).ConfigureAwait(false);
+
+                    await SaveChangesAsync().ConfigureAwait(false);
                 }
 
                 foreach (SetData set in cp.Sets)
                 {
-                    if (Sets.Any(x => x.Name == set.Name))
+                    if (await Sets.AsQueryable().AnyAsync(x => x.Name == set.Name).ConfigureAwait(false))
                         continue;
 
-                    Sets.Add(new Set
+                    await Sets.AddAsync(new Set
                     {
                         Name = set.Name,
                         Aliases = set.Aliases,
@@ -99,25 +105,53 @@ namespace Succubus.Database.Context
                         Size = (uint)set.Size,
                         SetPreview = $@"{CloudUrl}{cp.Aliases}/{set.FolderName}/{set.FilePrefix ?? set.FolderName}_001.jpg",
                         YabaiLevel = (YabaiLevel)set.YabaiLevel
-                    });
 
-                    SaveChanges();
+                    }).ConfigureAwait(false);
+
+                    await SaveChangesAsync().ConfigureAwait(false);
 
                     for (int i = 0; i < set.Size - 1; i += 1)
                     {
-                        Images.Add(new Image
+                        await Images.AddAsync(new Image
                         {
                             Name = $"{set.Name} {String.Format("{0:000}", i + 1)}",
                             Cosplayer = Cosplayers.FirstOrDefault(y => y.Name == cp.Name),
                             Set = Sets.FirstOrDefault(y => y.Name == set.Name),
                             Url = $"{CloudUrl}{cp.Aliases}/{set.FolderName}/{set.FilePrefix ?? set.FolderName}_{String.Format("{0:000}", i + 1)}.jpg",
                             Number = i + 1
-                        });
+
+                        }).ConfigureAwait(false);
                     }
 
-                    SaveChanges();
+                    await SaveChangesAsync().ConfigureAwait(false);
                 }
             }
+
+            #endregion
+
+            #region YouTube
+
+            using var ytStore = new NamedResourceStore<byte[]>(new DllResourceStore(new AssemblyName("Succubus.Resources")), @"Youtube");
+            store.AddExtension(".json");
+
+            List<YoutubeModel> channels = Utf8Json.JsonSerializer.Deserialize<List<YoutubeModel>>(ytStore.Get("Channels"));
+
+            foreach (var channel in channels)
+            {
+                if (await YoutubeChannels.AsQueryable().AnyAsync(x => x.ChannelId == channel.ChannelId).ConfigureAwait(false))
+                    continue;
+
+                await YoutubeChannels.AddAsync(new YoutubeChannel
+                {
+                    Name = channel.Name,
+                    ChannelId = channel.ChannelId
+
+                }).ConfigureAwait(false);
+            }
+
+            await SaveChangesAsync().ConfigureAwait(false);
+
+            #endregion
         }
     }
 

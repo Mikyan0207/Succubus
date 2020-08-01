@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Discord.WebSocket;
+using System.ComponentModel.DataAnnotations;
 
 namespace Succubus.Database.Models
 {

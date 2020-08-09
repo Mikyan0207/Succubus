@@ -8,7 +8,7 @@ namespace Succubus.Database.Models
         [Required]
         public string Name { get; set; }
 
-        public string Aliases { get; set; }
+        public List<string> Aliases { get; set; }
 
         [Required]
         public uint Size { get; set; }
@@ -16,7 +16,9 @@ namespace Succubus.Database.Models
         [Required]
         public string SetPreview { get; set; }
 
-        public List<Image> Images { get; set; }
+        public string FolderName { get; set; }
+
+        public string FilePrefix { get; set; }
 
         public Cosplayer Cosplayer { get; set; }
 

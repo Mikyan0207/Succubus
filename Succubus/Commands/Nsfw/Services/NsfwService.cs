@@ -4,13 +4,12 @@ using Succubus.Commands.Nsfw.Options;
 using Succubus.Database.Models;
 using Succubus.Services;
 using System.Threading.Tasks;
-using Image = Succubus.Database.Models.Image;
 
 namespace Succubus.Commands.Nsfw.Services
 {
     public class NsfwService : IService
     {
-        private readonly DbService DbService;
+        private DbService DbService { get; }
 
         public NsfwService(DbService db)
         {
@@ -25,12 +24,10 @@ namespace Succubus.Commands.Nsfw.Services
             }
         }
 
-        public async Task<Image> GetImageAsync(YabaiOptions options)
+        public async Task<Set> GetSetAsync(YabaiOptions options)
         {
-            using (var uow = DbService.GetDbContext())
-            {
-                return await uow.Images.GetImageAsync(options).ConfigureAwait(false);
-            }
+            using var uow = DbService.GetDbContext();
+            return await uow.Sets.GetSetAsync(options).ConfigureAwait(false);
         }
 
         public async Task<bool> AddImageToCollectionAsync(IUser discordUser, string setName, int number)
@@ -47,22 +44,6 @@ namespace Succubus.Commands.Nsfw.Services
             {
                 return await uow.Users.RemoveImageFromCollectionAsync(discordUser, setName, number)
                     .ConfigureAwait(false);
-            }
-        }
-
-        public Image GetRandomImageFromCosplayer(string name)
-        {
-            using (var uow = DbService.GetDbContext())
-            {
-                return uow.Images.GetImageFromCosplayer(name.Trim());
-            }
-        }
-
-        public Image GetRandomImageFromSet(string set)
-        {
-            using (var uow = DbService.GetDbContext())
-            {
-                return uow.Images.GetImageFromSet(set.Trim());
             }
         }
     }

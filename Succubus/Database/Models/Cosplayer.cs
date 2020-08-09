@@ -9,7 +9,7 @@ namespace Succubus.Database.Models
         public string Name { get; set; }
 
         [Required]
-        public string Aliases { get; set; }
+        public List<string> Aliases { get; set; }
 
         public string ProfilePicture { get; set; }
 

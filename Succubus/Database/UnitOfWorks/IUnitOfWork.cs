@@ -11,7 +11,7 @@ namespace Succubus.Database.UnitOfWorks
 
         public IUserRepository Users { get; }
         public IServerRepository Servers { get; }
-        public IImageRepository Images { get; }
+        public ISetRepository Sets { get; }
         public ICosplayerRepository Cosplayers { get; }
         public IColorRepository Colors { get; }
 

@@ -1,4 +1,5 @@
-﻿using Discord;
+﻿using System;
+using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Mikyan.Framework.Commands;
@@ -10,18 +11,19 @@ using Succubus.Commands.Nsfw.Services;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mikyan.Framework.Commands.Colors;
 
 namespace Succubus.Commands.Nsfw
 {
     public class NsfwCommands : Module<NsfwService>
     {
-        private readonly NLog.Logger _Logger;
-        private readonly DiscordShardedClient Client;
+        private DiscordShardedClient Client { get; }
+
+        private const string CloudUrl = "https://storage.sbg.cloud.ovh.net/v1/AUTH_9ee93fe3cd9447b4a674a76457cc78a1/SuccubusImages/";
 
         public NsfwCommands(DiscordShardedClient client)
         {
             Client = client;
-            _Logger = LogManager.GetCurrentClassLogger();
 
             Client.ReactionAdded += Client_ReactionAdded;
             Client.ReactionRemoved += Client_ReactionRemoved;
@@ -96,28 +98,15 @@ namespace Succubus.Commands.Nsfw
         [RequireBotPermission(GuildPermission.EmbedLinks)]
         public async Task CosplayerAsync([Remainder] string name)
         {
-            var embed = new EmbedBuilder();
-
-            if (name == null)
-            {
-                embed.WithTitle("No Cosplayer found");
-                embed.WithColor(new Color(255, 30, 30));
-                await ReplyAsync("", false, embed.Build()).ConfigureAwait(false);
-
-                return;
-            }
-
             var cosplayer = Service.GetCosplayer(name);
 
             if (cosplayer == null)
             {
-                embed.WithTitle("No Cosplayer found");
-                embed.WithColor(new Color(255, 30, 30));
-                await ReplyAsync("", false, embed.Build()).ConfigureAwait(false);
-
+                await SendErrorAsync("[NSFW] Cosplayer", $"Cosplayer {name} not found").ConfigureAwait(false);
                 return;
             }
 
+            var embed = new EmbedBuilder();
             uint totalPictures = 0;
             cosplayer.Sets.ForEach(x => totalPictures += x.Size);
 
@@ -159,44 +148,31 @@ namespace Succubus.Commands.Nsfw
             await ReplyAsync("", false, embed.Build()).ConfigureAwait(false);
         }
 
-        [Command("yabai", RunMode = RunMode.Async)]
+        [Command("Yabai", RunMode = RunMode.Async)]
         [Options(typeof(YabaiOptions))]
         [RequireBotPermission(ChannelPermission.SendMessages)]
         [RequireBotPermission(GuildPermission.EmbedLinks)]
         public async Task YabaiAsync(params string[] options)
         {
-            var embed = new EmbedBuilder();
-            var image = await Service.GetImageAsync(OptionsParser.Parse<YabaiOptions>(options)).ConfigureAwait(false);
+            var set = await Service.GetSetAsync(OptionsParser.Parse<YabaiOptions>(options)).ConfigureAwait(false);
 
-            if (image == null)
+            if (set == null)
             {
-                embed.WithTitle("No image found");
-                embed.WithColor(new Color(255, 30, 30));
-                await ReplyAsync("", false, embed.Build()).ConfigureAwait(false);
-
+                await SendErrorAsync("[NSFW] Yabai", "No Image found").ConfigureAwait(false);
                 return;
             }
 
-            embed.Author = new EmbedAuthorBuilder
-            {
-                IconUrl = image.Cosplayer.ProfilePicture,
-                Url = image.Cosplayer.Twitter,
-                Name = image.Cosplayer.Name
-            };
+            var imgNumber = new Random().Next(1, (int)set.Size);
+            var message = await EmbedAsync(
+                new EmbedBuilder()
+                    .WithAuthor(set.Cosplayer.Name, set.Cosplayer.ProfilePicture, set.Cosplayer.Twitter)
+                    .WithFooter($"{set.Name} - {imgNumber:000}/{set.Size:000}")
+                    .WithImageUrl($"{CloudUrl}{set.Cosplayer.Aliases.FirstOrDefault()}/{set.FolderName}/{set.FilePrefix ?? set.FolderName}_{imgNumber:000}.jpg")
+                    .WithCurrentTimestamp()
+                    .WithColor(DefaultColors.Purple)
+            ).ConfigureAwait(false);
 
-            embed.Footer = new EmbedFooterBuilder
-            {
-                Text =
-                    $"{image.Set.Name} - {string.Format("{0:000}", image.Number)}/{string.Format("{0:000}", image.Set.Size)}"
-            };
-
-            embed.WithImageUrl(image.Url);
-            embed.WithCurrentTimestamp();
-            embed.WithColor(new Color(255, 255, 255));
-
-            var msg = await ReplyAsync("", false, embed.Build()).ConfigureAwait(false);
-
-            await msg.AddReactionsAsync(new[]
+            await message.AddReactionsAsync(new IEmote[]
             {
                 new Emoji("❤️"),
                 new Emoji("❌")

@@ -31,7 +31,6 @@
 
   <ItemGroup>
     <Folder Include="Commands\Administration\" />
-    <Folder Include="Database\" />
   </ItemGroup>
 
 </Project>

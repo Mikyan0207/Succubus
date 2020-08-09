@@ -23,8 +23,8 @@ namespace Succubus.Database.UnitOfWorks
         private IServerRepository _serverRepository;
         public IServerRepository Servers => _serverRepository ??= new ServerRepository(Context);
 
-        private IImageRepository _imageRepository;
-        public IImageRepository Images => _imageRepository ??= new ImageRepository(Context);
+        private ISetRepository _imageRepository;
+        public ISetRepository Sets => _imageRepository ??= new SetRepository(Context);
 
         private ICosplayerRepository _cosplayerRepository;
         public ICosplayerRepository Cosplayers => _cosplayerRepository ??= new CosplayerRepository(Context);

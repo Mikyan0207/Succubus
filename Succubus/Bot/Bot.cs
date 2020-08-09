@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Mikyan.Framework;
 using Mikyan.Framework.Stores;
 using Newtonsoft.Json;
+using NLog;
 using Succubus.Handlers;
 using Succubus.Services;
 
@@ -28,6 +29,7 @@ namespace Succubus.Bot
 
         public SuccubusBot()
         {
+            Logger = LogManager.GetCurrentClassLogger();
             ConfigurationStore =
                 new NamedResourceStore<byte[]>(new DllResourceStore(new AssemblyName("Succubus.Resources")),
                     @"Configuration");

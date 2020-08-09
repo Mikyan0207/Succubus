@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using NLog;
+using Succubus.Commands.Nsfw.Options;
 using Succubus.Database.Context;
 using Succubus.Database.Extensions;
 using Succubus.Database.Models;
+using Succubus.Database.Repositories.Interfaces;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Succubus.Commands.Nsfw.Options;
-using Succubus.Database.Repositories.Interfaces;
 
 namespace Succubus.Database.Repositories
 {

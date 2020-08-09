@@ -1,6 +1,6 @@
-﻿using Succubus.Database.Models;
+﻿using Succubus.Commands.Nsfw.Options;
+using Succubus.Database.Models;
 using System.Threading.Tasks;
-using Succubus.Commands.Nsfw.Options;
 
 namespace Succubus.Database.Repositories.Interfaces
 {

@@ -41,7 +41,7 @@ namespace Succubus.Database.UnitOfWorks
         public void Dispose()
         {
             Context.Dispose();
-            GC.SuppressFinalize(this);
+            GC.SuppressFinalize(obj: this);
         }
     }
 }

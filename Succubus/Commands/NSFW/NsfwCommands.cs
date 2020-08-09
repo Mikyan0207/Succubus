@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Mikyan.Framework.Commands;
@@ -10,6 +7,9 @@ using Mikyan.Framework.Commands.Parsers;
 using NLog;
 using Succubus.Commands.Nsfw.Options;
 using Succubus.Commands.Nsfw.Services;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Succubus.Commands.Nsfw
 {

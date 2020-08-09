@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Succubus.Bot;
+﻿using Succubus.Bot;
+using System.Threading.Tasks;
 
 namespace Succubus
 {

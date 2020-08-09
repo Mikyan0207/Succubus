@@ -1,10 +1,10 @@
-﻿using System;
-using System.Reflection;
-using System.Threading.Tasks;
-using Discord.Commands;
+﻿using Discord.Commands;
 using Discord.WebSocket;
 using Mikyan.Framework.Services;
 using NLog;
+using System;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Succubus.Handlers
 {

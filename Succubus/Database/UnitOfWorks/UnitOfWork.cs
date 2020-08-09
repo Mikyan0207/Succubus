@@ -1,8 +1,8 @@
 ﻿using Succubus.Database.Context;
 using Succubus.Database.Repositories;
+using Succubus.Database.Repositories.Interfaces;
 using System;
 using System.Threading.Tasks;
-using Succubus.Database.Repositories.Interfaces;
 
 namespace Succubus.Database.UnitOfWorks
 {
@@ -41,7 +41,7 @@ namespace Succubus.Database.UnitOfWorks
         public void Dispose()
         {
             Context.Dispose();
-            GC.SuppressFinalize(obj: this);
+            GC.SuppressFinalize(this);
         }
     }
 }

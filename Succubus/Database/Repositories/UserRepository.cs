@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using NLog;
 using Succubus.Database.Context;
 using Succubus.Database.Models;
+using Succubus.Database.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Succubus.Database.Repositories.Interfaces;
 
 namespace Succubus.Database.Repositories
 {

@@ -1,8 +1,7 @@
 ﻿using Succubus.Database.Context;
-using Succubus.Database.Repositories;
+using Succubus.Database.Repositories.Interfaces;
 using System;
 using System.Threading.Tasks;
-using Succubus.Database.Repositories.Interfaces;
 
 namespace Succubus.Database.UnitOfWorks
 {

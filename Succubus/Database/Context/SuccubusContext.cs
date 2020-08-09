@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
+using Mikyan.Framework.Stores;
 using Succubus.Database.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Mikyan.Framework.Stores;
 
 namespace Succubus.Database.Context
 {
@@ -28,6 +27,7 @@ namespace Succubus.Database.Context
         public DbSet<Image> Images { get; set; }
         public DbSet<Set> Sets { get; set; }
         public DbSet<UserImage> UserImages { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             ConfigurationStore = new NamedResourceStore<byte[]>(new DllResourceStore(new AssemblyName("Succubus.Resources")), @"Configuration");
@@ -83,7 +83,6 @@ namespace Succubus.Database.Context
                         Instagram = cp.Instagram,
                         Booth = cp.Booth,
                         ProfilePicture = $"{CloudUrl}{cp.ProfilePicture}"
-
                     }).ConfigureAwait(false);
 
                     await SaveChangesAsync().ConfigureAwait(false);
@@ -102,7 +101,6 @@ namespace Succubus.Database.Context
                         Size = (uint)set.Size,
                         SetPreview = $@"{CloudUrl}{cp.Aliases}/{set.FolderName}/{set.FilePrefix ?? set.FolderName}_001.jpg",
                         YabaiLevel = (YabaiLevel)set.YabaiLevel
-
                     }).ConfigureAwait(false);
 
                     await SaveChangesAsync().ConfigureAwait(false);
@@ -116,7 +114,6 @@ namespace Succubus.Database.Context
                             Set = Sets.FirstOrDefault(y => y.Name == set.Name),
                             Url = $"{CloudUrl}{cp.Aliases}/{set.FolderName}/{set.FilePrefix ?? set.FolderName}_{String.Format("{0:000}", i + 1)}.jpg",
                             Number = i + 1
-
                         }).ConfigureAwait(false);
                     }
 
@@ -124,7 +121,7 @@ namespace Succubus.Database.Context
                 }
             }
 
-            #endregion
+            #endregion Cosplayers
 
             #region Colors
 
@@ -136,13 +133,12 @@ namespace Succubus.Database.Context
                     Red = 196,
                     Green = 145,
                     Blue = 132
-
                 }).ConfigureAwait(false);
 
                 await SaveChangesAsync().ConfigureAwait(false);
             }
 
-            #endregion
+            #endregion Colors
         }
     }
 

@@ -2,8 +2,8 @@
 using Succubus.Database.Context;
 using Succubus.Database.Extensions;
 using Succubus.Database.Models;
-using System.Linq;
 using Succubus.Database.Repositories.Interfaces;
+using System.Linq;
 
 namespace Succubus.Database.Repositories
 {

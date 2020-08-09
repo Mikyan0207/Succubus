@@ -1,8 +1,4 @@
-﻿using System;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +8,9 @@ using Newtonsoft.Json;
 using NLog;
 using Succubus.Handlers;
 using Succubus.Services;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Succubus.Bot
 {

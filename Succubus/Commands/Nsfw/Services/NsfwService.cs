@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Mikyan.Framework.Services;
 using Succubus.Commands.Nsfw.Options;
 using Succubus.Database.Models;
 using Succubus.Services;
+using System.Threading.Tasks;
 using Image = Succubus.Database.Models.Image;
 
 namespace Succubus.Commands.Nsfw.Services

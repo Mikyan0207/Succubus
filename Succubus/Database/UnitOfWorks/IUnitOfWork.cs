@@ -14,7 +14,6 @@ namespace Succubus.Database.UnitOfWorks
         public IServerRepository Servers { get; }
         public IImageRepository Images { get; }
         public ICosplayerRepository Cosplayers { get; }
-        public IYoutubeChannelRepository YoutubeChannels { get; }
         public IColorRepository Colors { get; }
 
         int SaveChanges();

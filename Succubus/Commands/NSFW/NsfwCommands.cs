@@ -4,15 +4,16 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using Mikyan.Framework.Commands;
+using Mikyan.Framework.Commands.Attributes;
+using Mikyan.Framework.Commands.Parsers;
 using NLog;
-using Succubus.Attributes;
 using Succubus.Commands.Nsfw.Options;
 using Succubus.Commands.Nsfw.Services;
-using Succubus.Utils;
 
 namespace Succubus.Commands.Nsfw
 {
-    public class NsfwCommands : SuccubusModule<NsfwService>
+    public class NsfwCommands : Module<NsfwService>
     {
         private readonly NLog.Logger _Logger;
         private readonly DiscordShardedClient Client;

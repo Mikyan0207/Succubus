@@ -1,5 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Mikyan.Framework.Services;
 using Succubus.Database.Context;
 using Succubus.Database.UnitOfWorks;
 

@@ -3,8 +3,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Discord.Commands;
 using Discord.WebSocket;
+using Mikyan.Framework.Services;
 using NLog;
-using Succubus.Services;
 
 namespace Succubus.Handlers
 {

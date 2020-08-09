@@ -32,9 +32,6 @@ namespace Succubus.Database.UnitOfWorks
         private IColorRepository _colorRepository;
         public IColorRepository Colors => _colorRepository ??= new ColorRepository(Context);
 
-        private IYoutubeChannelRepository _youtubeChannelRepository;
-        public IYoutubeChannelRepository YoutubeChannels => _youtubeChannelRepository ??= new YoutubeChannelRepository(Context);
-
         #endregion Repositories
 
         public int SaveChanges() => Context.SaveChanges();

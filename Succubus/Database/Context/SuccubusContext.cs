@@ -1,13 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Succubus.Database.Models;
-using Succubus.Store;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
+using Mikyan.Framework.Stores;
 
 namespace Succubus.Database.Context
 {
@@ -29,10 +28,6 @@ namespace Succubus.Database.Context
         public DbSet<Image> Images { get; set; }
         public DbSet<Set> Sets { get; set; }
         public DbSet<UserImage> UserImages { get; set; }
-        public DbSet<DiscordChannel> DiscordChannels { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<YoutubeChannel> YoutubeChannels { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             ConfigurationStore = new NamedResourceStore<byte[]>(new DllResourceStore(new AssemblyName("Succubus.Resources")), @"Configuration");
@@ -63,12 +58,6 @@ namespace Succubus.Database.Context
                 .HasOne(x => x.User)
                 .WithMany(x => x.Collection)
                 .HasForeignKey(x => x.UserId);
-
-            modelBuilder.Entity<YoutubeChannel>()
-                .Property(e => e.Keywords)
-                .HasConversion(
-                    v => JsonConvert.SerializeObject(v),
-                    v => JsonConvert.DeserializeObject<List<string>>(v));
         }
 
         public async void Initialize()
@@ -134,32 +123,6 @@ namespace Succubus.Database.Context
                     await SaveChangesAsync().ConfigureAwait(false);
                 }
             }
-
-            #endregion
-
-            #region YouTube
-
-            using var ytStore = new NamedResourceStore<byte[]>(new DllResourceStore(new AssemblyName("Succubus.Resources")), @"Youtube");
-            ytStore.AddExtension(".json");
-
-            List<YoutubeModel> channels = Utf8Json.JsonSerializer.Deserialize<List<YoutubeModel>>(ytStore.Get("Channels"));
-
-            foreach (var channel in channels)
-            {
-                if (await YoutubeChannels.AsQueryable().AnyAsync(x => x.ChannelId == channel.ChannelId).ConfigureAwait(false))
-                    continue;
-
-                await YoutubeChannels.AddAsync(new YoutubeChannel
-                {
-                    Name = channel.Name,
-                    Keywords = channel.Keywords,
-                    ChannelId = channel.ChannelId,
-                    Icon = channel.Icon
-
-                }).ConfigureAwait(false);
-            }
-
-            await SaveChangesAsync().ConfigureAwait(false);
 
             #endregion
 

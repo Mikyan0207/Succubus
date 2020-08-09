@@ -8,7 +8,6 @@
     <None Remove="Configuration\Bot.json" />
     <None Remove="Configuration\Cloud.json" />
     <None Remove="Configuration\Database.json" />
-    <None Remove="Configuration\Youtube.json" />
     <None Remove="Yabai\Fleia.json" />
     <None Remove="Yabai\Ikumi.json" />
     <None Remove="Yabai\Miri.json" />
@@ -21,7 +20,6 @@
     <EmbeddedResource Include="Configuration\Bot.json" />
     <EmbeddedResource Include="Configuration\Cloud.json" />
     <EmbeddedResource Include="Configuration\Database.json" />
-    <EmbeddedResource Include="Configuration\Youtube.json" />
     <EmbeddedResource Include="Yabai\Fleia.json" />
     <EmbeddedResource Include="Yabai\Ikumi.json" />
     <EmbeddedResource Include="Yabai\Miri.json" />

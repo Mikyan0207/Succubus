@@ -9,6 +9,7 @@ using NLog;
 using Succubus.Commands.Nsfw.Options;
 using Succubus.Commands.Nsfw.Services;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Mikyan.Framework.Commands.Colors;
@@ -19,7 +20,7 @@ namespace Succubus.Commands.Nsfw
     {
         private DiscordShardedClient Client { get; }
 
-        private const string CloudUrl = "https://storage.sbg.cloud.ovh.net/v1/AUTH_9ee93fe3cd9447b4a674a76457cc78a1/SuccubusImages/";
+        private const string CloudUrl = "";
 
         public NsfwCommands(DiscordShardedClient client)
         {
@@ -98,54 +99,28 @@ namespace Succubus.Commands.Nsfw
         [RequireBotPermission(GuildPermission.EmbedLinks)]
         public async Task CosplayerAsync([Remainder] string name)
         {
-            var cosplayer = Service.GetCosplayer(name);
+            var c = Service.GetCosplayer(name);
 
-            if (cosplayer == null)
+            if (c == null)
             {
                 await SendErrorAsync("[NSFW] Cosplayer", $"Cosplayer {name} not found").ConfigureAwait(false);
                 return;
             }
 
-            var embed = new EmbedBuilder();
-            uint totalPictures = 0;
-            cosplayer.Sets.ForEach(x => totalPictures += x.Size);
-
-            var sb = new StringBuilder();
-            cosplayer.Sets.OrderBy(x => x.Name).ToList().ForEach(x => sb.AppendLine($"{x.Name}"));
-
-            embed.Footer = new EmbedFooterBuilder
-            {
-                Text = $@"Requested by {Context.Message.Author.Username}"
-            };
-
-            embed.WithTitle($"{cosplayer.Name}");
-            embed.WithThumbnailUrl($"{cosplayer.ProfilePicture}");
-            embed.WithCurrentTimestamp();
-            embed.WithColor(new Color(156, 39, 176));
-
-            embed.AddField("Sets", $"{cosplayer.Sets.Count}", true);
-            embed.AddField("Images", $"{totalPictures}");
-            embed.AddField(efb =>
-            {
-                efb.Name = "";
-                efb.Value = !string.IsNullOrEmpty(cosplayer.Twitter) ? $"[Link]({cosplayer.Twitter})" : "None";
-                efb.IsInline = true;
-            });
-            embed.AddField(efb =>
-            {
-                efb.Name = "";
-                efb.Value = !string.IsNullOrEmpty(cosplayer.Instagram) ? $"[Link]({cosplayer.Instagram})" : "None";
-                efb.IsInline = true;
-            });
-            embed.AddField(efb =>
-            {
-                efb.Name = "";
-                efb.Value = !string.IsNullOrEmpty(cosplayer.Booth) ? $"[Link]({cosplayer.Booth})" : "None";
-                efb.IsInline = true;
-            });
-            embed.AddField("Collection", $"{sb}");
-
-            await ReplyAsync("", false, embed.Build()).ConfigureAwait(false);
+            await EmbedAsync(
+                new EmbedBuilder()
+                    .WithTitle(c.Name)
+                    .WithThumbnailUrl(c.ProfilePicture)
+                    .WithCurrentTimestamp()
+                    .WithFooter($"Requested by {Context.Message.Author.Username}")
+                    .AddField("Sets", $"{c.Sets.Count}", true)
+                    .AddField("Images", $"{c.Sets.Sum(x => x.Size)}", false)
+                    .AddField("Twitter", $"[Twitter]({c.Twitter})", true)
+                    .AddField("Instagram", $"[Instagram]({c.Instagram})", true)
+                    .AddField("Booth", $"[Booth]({c.Booth})", true)
+                    .AddField("Collection", string.Join("\n", c.Sets.Select(x => x.Name)), false)
+                    .WithColor(DefaultColors.Purple)
+            ).ConfigureAwait(false);
         }
 
         [Command("Yabai", RunMode = RunMode.Async)]

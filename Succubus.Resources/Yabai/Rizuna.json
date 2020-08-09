@@ -1,14 +1,14 @@
 ﻿{
   "Name": "りずな",
-  "Aliases": "Rizuna",
+  "Aliases": [ "Rizuna" ],
+  "ProfilePicture": "Rizuna/ProfilePicture.jpg",
   "Twitter": "https://mobile.twitter.com/rizunya",
   "Instagram": "https://www.instagram.com/rizuna1228/",
   "Booth": "https://rizunya.booth.pm/",
-  "ProfilePicture": "Rizuna/ProfilePicture.jpg",
   "Sets": [
     {
       "Name": "Great Ocean",
-      "Aliases": "",
+      "Aliases": [],
       "Size": 101,
       "FolderName": "GreatOcean",
       "FilePrefix": null,
@@ -16,7 +16,7 @@
     },
     {
       "Name": "冴えない彼女の裏のかお",
-      "Aliases": "Saenai Kanojo",
+      "Aliases": [ "Saenai Kanojo", "saekano" ],
       "Size": 100,
       "FolderName": "SaenaiKanojo",
       "FilePrefix": null,
@@ -24,7 +24,7 @@
     },
     {
       "Name": "Hedonistic Labyrinth",
-      "Aliases": "Labyrinth",
+      "Aliases": [ "Labyrinth" ],
       "Size": 100,
       "FolderName": "HedonisticLabyrinth",
       "FilePrefix": null,

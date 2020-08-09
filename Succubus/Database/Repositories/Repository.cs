@@ -59,20 +59,5 @@ namespace Succubus.Database.Repositories
         {
             Set.RemoveRange(entities);
         }
-
-        public IEnumerable<T> Where(Expression<Func<T, bool>> predicate)
-        {
-            return Set.Where(predicate);
-        }
-
-        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
-        {
-            return await Set.FirstOrDefaultAsync(predicate);
-        }
-
-        public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
-        {
-            return await Set.AnyAsync(predicate).ConfigureAwait(false);
-        }
     }
 }

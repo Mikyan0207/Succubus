@@ -1,5 +1,4 @@
-﻿using Discord;
-using Mikyan.Framework.Services;
+﻿using Mikyan.Framework.Services;
 using Succubus.Commands.Nsfw.Options;
 using Succubus.Database.Models;
 using Succubus.Services;
@@ -16,12 +15,10 @@ namespace Succubus.Commands.Nsfw.Services
             DbService = db;
         }
 
-        public Cosplayer GetCosplayer(string name)
+        public async Task<Cosplayer> GetCosplayerAsync(string name)
         {
-            using (var uow = DbService.GetDbContext())
-            {
-                return uow.Cosplayers.GetCosplayerByName(name.Trim());
-            }
+            using var uow = DbService.GetDbContext();
+            return await uow.Cosplayers.GetCosplayerAsync(name).ConfigureAwait(false);
         }
 
         public async Task<Set> GetSetAsync(YabaiOptions options)
@@ -30,21 +27,10 @@ namespace Succubus.Commands.Nsfw.Services
             return await uow.Sets.GetSetAsync(options).ConfigureAwait(false);
         }
 
-        public async Task<bool> AddImageToCollectionAsync(IUser discordUser, string setName, int number)
+        public async Task<Set> GetSetAsync(string name)
         {
-            using (var uow = DbService.GetDbContext())
-            {
-                return await uow.Users.AddImageToCollectionAsync(discordUser, setName, number).ConfigureAwait(false);
-            }
-        }
-
-        public async Task<bool> RemoveImageFromCollectionAsync(IUser discordUser, string setName, int number)
-        {
-            using (var uow = DbService.GetDbContext())
-            {
-                return await uow.Users.RemoveImageFromCollectionAsync(discordUser, setName, number)
-                    .ConfigureAwait(false);
-            }
+            using var uow = DbService.GetDbContext();
+            return await uow.Sets.GetSetAsync(name).ConfigureAwait(false);
         }
     }
 }

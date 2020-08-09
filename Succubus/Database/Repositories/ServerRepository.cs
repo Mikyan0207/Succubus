@@ -2,6 +2,7 @@
 using Succubus.Database.Models;
 using Succubus.Database.Repositories.Interfaces;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Succubus.Database.Repositories
@@ -16,10 +17,8 @@ namespace Succubus.Database.Repositories
         {
             try
             {
-                var e = await AnyAsync(x => x.ServerId == server.Id).ConfigureAwait(false);
-
-                if (e)
-                    return await FirstOrDefaultAsync(x => x.ServerId == server.Id).ConfigureAwait(false);
+                if (await Context.Servers.AnyAsync(x => x.ServerId == server.Id).ConfigureAwait(false))
+                    return await Context.Servers.FirstOrDefaultAsync(x => x.ServerId == server.Id).ConfigureAwait(false);
 
                 var guild = await Context.AddAsync(new Server
                 {
@@ -31,10 +30,9 @@ namespace Succubus.Database.Repositories
 
                 return guild.Entity;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e);
-                throw;
+                return null;
             }
         }
     }

@@ -7,5 +7,7 @@ namespace Succubus.Database.Repositories.Interfaces
     public interface ISetRepository : IRepository<Set>
     {
         Task<Set> GetSetAsync(YabaiOptions options);
+
+        Task<Set> GetSetAsync(string name);
     }
 }

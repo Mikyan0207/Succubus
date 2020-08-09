@@ -4,6 +4,7 @@ using Succubus.Database.Extensions;
 using Succubus.Database.Models;
 using Succubus.Database.Repositories.Interfaces;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Succubus.Database.Repositories
 {
@@ -13,19 +14,14 @@ namespace Succubus.Database.Repositories
         {
         }
 
-        public Cosplayer GetCosplayerByName(string name)
+        public async Task<Cosplayer> GetCosplayerAsync(string name)
         {
-            var cosplayer = Context.Cosplayers
+            return await Context.Cosplayers
                 .Include(x => x.Sets)
-                .AsEnumerable()
-                .Select(x => (x, Distance: x.Name.ToLowerInvariant().LevenshteinDistance(name), AliasDistance: x.Aliases.ToLowerInvariant().LevenshteinDistance(name)))
-                .Where(x => x.Distance < 3 || x.AliasDistance < 3)
-                .FirstOrDefault().x;
-
-            if (cosplayer == null)
-                return null;
-
-            return cosplayer;
+                .AsAsyncEnumerable()
+                .FirstOrDefaultAsync(x =>
+                    x.Name.ToLowerInvariant().LevenshteinDistance(name) < 2 ||
+                    x.Aliases.Any(y => y.ToLowerInvariant().LevenshteinDistance(name) < 2)).ConfigureAwait(false);
         }
     }
 }

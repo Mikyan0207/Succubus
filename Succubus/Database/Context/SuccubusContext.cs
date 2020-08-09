@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mikyan.Framework.Stores;
+using Newtonsoft.Json;
+using Succubus.Database.JsonModels;
 using Succubus.Database.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Newtonsoft.Json;
-using Succubus.Database.JsonModels;
 
 namespace Succubus.Database.Context
 {
@@ -22,11 +22,7 @@ namespace Succubus.Database.Context
 
         public DbSet<Cosplayer> Cosplayers { get; set; }
 
-        public DbSet<Image> Images { get; set; }
-
         public DbSet<Set> Sets { get; set; }
-
-        public DbSet<UserImage> UserImages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -41,7 +37,6 @@ namespace Succubus.Database.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<Set>()
                 .HasOne(x => x.Cosplayer)
                 .WithMany(x => x.Sets);
@@ -52,15 +47,11 @@ namespace Succubus.Database.Context
                     v => JsonConvert.SerializeObject(v),
                     v => JsonConvert.DeserializeObject<List<string>>(v));
 
-            modelBuilder.Entity<UserImage>()
-                .HasOne(x => x.Image)
-                .WithMany(x => x.Users)
-                .HasForeignKey(x => x.ImageId);
-
-            modelBuilder.Entity<UserImage>()
-                .HasOne(x => x.User)
-                .WithMany(x => x.Collection)
-                .HasForeignKey(x => x.UserId);
+            modelBuilder.Entity<Cosplayer>()
+                .Property(e => e.Aliases)
+                .HasConversion(
+                    v => JsonConvert.SerializeObject(v),
+                    v => JsonConvert.DeserializeObject<List<string>>(v));
         }
 
         public async void Initialize()
@@ -84,7 +75,7 @@ namespace Succubus.Database.Context
                             Twitter = cp.Twitter,
                             Instagram = cp.Instagram,
                             Booth = cp.Booth,
-                            ProfilePicture = $"{_cloudUrl}{cp.ProfilePicture}"
+                            ProfilePicture = $"{_cloudUrl}/{cp.ProfilePicture}"
                         }).ConfigureAwait(false);
 
                         await SaveChangesAsync().ConfigureAwait(false);
@@ -100,12 +91,11 @@ namespace Succubus.Database.Context
                             Name = set.Name,
                             Aliases = set.Aliases,
                             Cosplayer = Cosplayers.FirstOrDefault(y => y.Name == cp.Name),
-                            Size = (uint) set.Size,
+                            Size = (uint)set.Size,
                             FolderName = set.FolderName,
                             FilePrefix = set.FilePrefix,
-                            SetPreview = $@"{_cloudUrl}{cp.Aliases}/{set.FolderName}/{set.FilePrefix ?? set.FolderName}_001.jpg",
-                            YabaiLevel = (YabaiLevel) set.YabaiLevel
-
+                            SetPreview = $@"{_cloudUrl}/{cp.Aliases.FirstOrDefault()}/{set.FolderName}/{set.FilePrefix ?? set.FolderName}_001.jpg",
+                            YabaiLevel = (YabaiLevel)set.YabaiLevel
                         }).ConfigureAwait(false);
 
                         await SaveChangesAsync().ConfigureAwait(false);

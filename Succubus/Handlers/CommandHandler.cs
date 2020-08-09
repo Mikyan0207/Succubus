@@ -47,7 +47,7 @@ namespace Succubus.Handlers
             var context = new ShardedCommandContext(Client, message);
             var argPos = 0;
 
-            if (context.Message.HasStringPrefix("!", ref argPos, StringComparison.CurrentCultureIgnoreCase))
+            if (context.Message.HasStringPrefix("$", ref argPos, StringComparison.CurrentCultureIgnoreCase))
             {
                 await HandleCommandAsync(context, argPos);
 

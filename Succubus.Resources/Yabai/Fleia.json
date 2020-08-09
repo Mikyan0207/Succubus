@@ -1,6 +1,6 @@
 ﻿{
   "Name": "ふれいあ",
-  "Aliases": "Fleia",
+  "Aliases": [ "Fleia", "furemani", "flemani" ],
   "ProfilePicture": "Fleia/ProfilePicture.jpg",
   "Twitter": "https://twitter.com/fleia0124",
   "Instagram": "https://instagram.com/fleia0124",
@@ -8,7 +8,7 @@
   "Sets": [
     {
       "Name": "ふれみこ",
-      "Aliases": "FleiaMiko",
+      "Aliases": [ "FleiaMiko" ],
       "Size": 182,
       "FolderName": "FleiaMiko",
       "FilePrefix": null,
@@ -16,7 +16,7 @@
     },
     {
       "Name": "Honey Bunny",
-      "Aliases": "",
+      "Aliases": [ "bunny" ],
       "Size": 349,
       "FolderName": "HoneyBunny",
       "FilePrefix": null,
@@ -24,7 +24,7 @@
     },
     {
       "Name": "Immoral",
-      "Aliases": "",
+      "Aliases": [],
       "Size": 215,
       "FolderName": "Immoral",
       "FilePrefix": null,
@@ -32,7 +32,7 @@
     },
     {
       "Name": "Black or White",
-      "Aliases": "BoW",
+      "Aliases": [ "BoW" ],
       "Size": 322,
       "FolderName": "BoW",
       "FilePrefix": null,
@@ -40,7 +40,7 @@
     },
     {
       "Name": "ふれいあ、鬼がかってる？",
-      "Aliases": "Rem",
+      "Aliases": [ "Rem" ],
       "Size": 166,
       "FolderName": "Rem",
       "FilePrefix": null,
@@ -48,7 +48,7 @@
     },
     {
       "Name": "ふれいあに紐神様を求めるのは間違っているだろうか",
-      "Aliases": "Danmachi",
+      "Aliases": [ "Danmachi" ],
       "Size": 264,
       "FolderName": "Danmachi",
       "FilePrefix": null,
@@ -56,7 +56,7 @@
     },
     {
       "Name": "Beast Mode",
-      "Aliases": "",
+      "Aliases": [ "bm" ],
       "Size": 319,
       "FolderName": "BeastMode",
       "FilePrefix": null,
@@ -64,7 +64,7 @@
     },
     {
       "Name": "Summer Island",
-      "Aliases": "",
+      "Aliases": [ "shimakaze" ],
       "Size": 265,
       "FolderName": "SummerIsland",
       "FilePrefix": "Shimakaze",

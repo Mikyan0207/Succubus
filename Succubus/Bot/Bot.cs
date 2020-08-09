@@ -11,6 +11,7 @@ using Succubus.Services;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Mikyan.Framework.Services;
 
 namespace Succubus.Bot
 {
@@ -58,6 +59,7 @@ namespace Succubus.Bot
             Initialize(DiscordSocketConfig, CommandServiceConfig, BotConfiguration.Token);
 
             Services = InitializeDefaultServices()
+                .LoadFrom(Assembly.GetExecutingAssembly())
                 .AddSingleton(DbService)
                 .AddSingleton(DbService.GetDbContext())
                 .BuildServiceProvider();

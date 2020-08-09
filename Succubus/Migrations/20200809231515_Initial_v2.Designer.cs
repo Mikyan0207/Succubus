@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Succubus.Database.Context;
 
-namespace Succubus.Database.Migrations
+namespace Succubus.Migrations
 {
     [DbContext(typeof(SuccubusContext))]
-    [Migration("20200801152209_Succubus_v2")]
-    partial class Succubus_v2
+    [Migration("20200809231515_Initial_v2")]
+    partial class Initial_v2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -78,68 +78,6 @@ namespace Succubus.Database.Migrations
                     b.ToTable("Cosplayers");
                 });
 
-            modelBuilder.Entity("Succubus.Database.Models.DiscordChannel", b =>
-                {
-                    b.Property<ulong>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("NotificationActivated")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<Guid?>("ServerId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("YoutubeChannelId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ServerId");
-
-                    b.HasIndex("YoutubeChannelId");
-
-                    b.ToTable("DiscordChannels");
-                });
-
-            modelBuilder.Entity("Succubus.Database.Models.Image", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("CosplayerId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DateAdded")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Number")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<Guid?>("SetId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CosplayerId");
-
-                    b.HasIndex("SetId");
-
-                    b.ToTable("Images");
-                });
-
             modelBuilder.Entity("Succubus.Database.Models.Server", b =>
                 {
                     b.Property<Guid>("Id")
@@ -173,6 +111,12 @@ namespace Succubus.Database.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateAdded")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FilePrefix")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FolderName")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -227,95 +171,11 @@ namespace Succubus.Database.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Succubus.Database.Models.UserImage", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DateAdded")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("ImageId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ImageId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserImages");
-                });
-
-            modelBuilder.Entity("Succubus.Database.Models.YoutubeChannel", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ChannelId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DateAdded")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Keywords")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("YoutubeChannels");
-                });
-
-            modelBuilder.Entity("Succubus.Database.Models.DiscordChannel", b =>
-                {
-                    b.HasOne("Succubus.Database.Models.Server", "Server")
-                        .WithMany()
-                        .HasForeignKey("ServerId");
-
-                    b.HasOne("Succubus.Database.Models.YoutubeChannel", null)
-                        .WithMany("DiscordChannels")
-                        .HasForeignKey("YoutubeChannelId");
-                });
-
-            modelBuilder.Entity("Succubus.Database.Models.Image", b =>
-                {
-                    b.HasOne("Succubus.Database.Models.Cosplayer", "Cosplayer")
-                        .WithMany()
-                        .HasForeignKey("CosplayerId");
-
-                    b.HasOne("Succubus.Database.Models.Set", "Set")
-                        .WithMany("Images")
-                        .HasForeignKey("SetId");
-                });
-
             modelBuilder.Entity("Succubus.Database.Models.Set", b =>
                 {
                     b.HasOne("Succubus.Database.Models.Cosplayer", "Cosplayer")
                         .WithMany("Sets")
                         .HasForeignKey("CosplayerId");
-                });
-
-            modelBuilder.Entity("Succubus.Database.Models.UserImage", b =>
-                {
-                    b.HasOne("Succubus.Database.Models.Image", "Image")
-                        .WithMany("Users")
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Succubus.Database.Models.User", "User")
-                        .WithMany("Collection")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

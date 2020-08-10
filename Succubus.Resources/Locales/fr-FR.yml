@@ -4,12 +4,6 @@ nsfw:
   set_not_found: "Le Set `{Name}` n'a pas été trouvé"
   cosplayer_not_found: "La Cosplayeuse `{Name}` n'a pas été trouvé"
   image_not_found: 'Aucune image correspondante trouvée'
-  set_alias_add_title: 'Alias ajouté pour `{Name}`'
-  set_alias_add: '`{Alias}`
-
-  Vous pouvez maintenant utilisez `$set {NewAlias}`'
-  set_alias_remove_title: 'Alias supprimé pour `{Name}`'
-  set_alias_remove: '`{Alias}`'
 
 locale:
   get_locale_title: 'Langue du serveur `{Name}`'

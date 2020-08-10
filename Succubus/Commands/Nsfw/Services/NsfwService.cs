@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Mikyan.Framework.Services;
 using Succubus.Commands.Nsfw.Options;
 using Succubus.Database.Models;
@@ -37,24 +34,6 @@ namespace Succubus.Commands.Nsfw.Services
         {
             using var uow = DbService.GetDbContext();
             return await uow.Sets.GetSetAsync(name).ConfigureAwait(false);
-        }
-
-        public IEnumerable<Set> GetSets()
-        {
-            using var uow = DbService.GetDbContext();
-            return uow.Sets.GetAll();
-        }
-
-        public async Task<(bool, Set)> AddSetAliasAsync(string set, string alias)
-        {
-            using var uow = DbService.GetDbContext();
-            return await uow.Sets.AddAliasAsync(set, alias).ConfigureAwait(false);
-        }
-
-        public async Task<(bool, Set)> RemoveSetAliasAsync(string set, string alias)
-        {
-            using var uow = DbService.GetDbContext();
-            return await uow.Sets.RemoveAliasAsync(set, alias).ConfigureAwait(false);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -46,50 +45,6 @@ namespace Succubus.Database.Repositories
                     x.Name.ToLowerInvariant().LevenshteinDistance(name) < 2 ||
                     x.Aliases.Any(y => y.ToLowerInvariant().LevenshteinDistance(name) < 2))
                 .ConfigureAwait(false);
-        }
-
-        public async Task<(bool, Set)> AddAliasAsync(string set, string alias)
-        {
-            var dbSet = await GetSetAsync(set).ConfigureAwait(false);
-
-            if (dbSet.Aliases.Contains(alias))
-                return (false, dbSet);
-
-            dbSet.Aliases.Add(alias);
-
-            try
-            {
-                Context.Update(dbSet);
-                await Context.SaveChangesAsync().ConfigureAwait(false);
-
-                return (true, dbSet);
-            }
-            catch (DBConcurrencyException)
-            {
-                return (false, dbSet);
-            }
-        }
-
-        public async Task<(bool, Set)> RemoveAliasAsync(string set, string alias)
-        {
-            var dbSet = await GetSetAsync(set).ConfigureAwait(false);
-
-            if (!dbSet.Aliases.Contains(alias))
-                return (false, dbSet);
-
-            dbSet.Aliases.Remove(alias);
-
-            try
-            {
-                Context.Update(dbSet);
-                await Context.SaveChangesAsync().ConfigureAwait(false);
-
-                return (true, dbSet);
-            }
-            catch (DBConcurrencyException)
-            {
-                return (false, dbSet);
-            }
         }
     }
 }

@@ -1,6 +1,0 @@
-name: 'en-US'
-
-nsfw:
-  set_not_found: 'Set `{Name}` not found'
-  cosplayer_not_found: 'Cosplayer `{Name}` not found'
-  image_not_found: 'No Image found'

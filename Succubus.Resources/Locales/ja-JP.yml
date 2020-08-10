@@ -1,6 +1,0 @@
-name: 'ja-JP'
-
-nsfw:
-  set_not_found: 'Set `{Name}` が見つかりませんでした。'
-  cosplayer_not_found: 'コスプレイヤー `{Name}` が見つかりませんでした。'
-  image_not_found: '画像が見つかりません。'

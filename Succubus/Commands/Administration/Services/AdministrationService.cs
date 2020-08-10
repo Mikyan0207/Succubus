@@ -5,11 +5,5 @@ namespace Succubus.Commands.Administration.Services
 {
     public class AdministrationService : IService
     {
-        private SuccubusContext Context { get; }
-
-        public AdministrationService(SuccubusContext context)
-        {
-
-        }
     }
 }

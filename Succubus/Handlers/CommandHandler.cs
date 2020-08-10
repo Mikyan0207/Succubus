@@ -48,12 +48,7 @@ namespace Succubus.Handlers
             var argPos = 0;
 
             if (context.Message.HasStringPrefix("$", ref argPos, StringComparison.CurrentCultureIgnoreCase))
-            {
                 await HandleCommandAsync(context, argPos);
-
-                _Logger.Info(
-                    $"Command Executed\nUser: {message.Author.Username}\nChannel: {message.Channel.Name}\nCommand: {message.Content}");
-            }
         }
 
         public async Task HandleCommandAsync(ShardedCommandContext context, int argPos)
@@ -62,15 +57,10 @@ namespace Succubus.Handlers
             {
                 var searchResult = CommandService.Search(context, argPos);
 
-                // If no command were found, return
-                if (searchResult.Commands == null || searchResult.Commands.Count == 0) return;
+                if (searchResult.Commands == null || searchResult.Commands.Count == 0)
+                    return;
 
-                var result = await CommandService.ExecuteAsync(context, argPos, Services).ConfigureAwait(false);
-
-                if (!result.IsSuccess)
-                {
-                    // TO DO: Error Message+Log
-                }
+                await CommandService.ExecuteAsync(context, argPos, Services).ConfigureAwait(false);
             }
             catch (Exception e)
             {

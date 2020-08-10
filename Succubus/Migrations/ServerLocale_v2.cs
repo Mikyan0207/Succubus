@@ -7,16 +7,16 @@ namespace Succubus.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Locale",
-                table: "Servers",
+                "Locale",
+                "Servers",
                 nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Locale",
-                table: "Servers");
+                "Locale",
+                "Servers");
         }
     }
 }

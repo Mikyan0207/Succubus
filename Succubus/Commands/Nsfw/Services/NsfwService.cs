@@ -1,22 +1,22 @@
-﻿using Mikyan.Framework.Services;
+﻿using System.Threading.Tasks;
+using Mikyan.Framework.Services;
 using Succubus.Commands.Nsfw.Options;
 using Succubus.Database.Models;
 using Succubus.Services;
-using System.Threading.Tasks;
 
 namespace Succubus.Commands.Nsfw.Services
 {
     public class NsfwService : IService
     {
-        private DbService DbService { get; }
-
-        public BotService BotService { get; }
-
         public NsfwService(DbService db, BotService botService)
         {
             DbService = db;
             BotService = botService;
         }
+
+        private DbService DbService { get; }
+
+        public BotService BotService { get; }
 
         public async Task<Cosplayer> GetCosplayerAsync(string name)
         {

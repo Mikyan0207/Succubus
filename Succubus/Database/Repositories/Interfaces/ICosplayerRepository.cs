@@ -1,5 +1,5 @@
-﻿using Succubus.Database.Models;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Succubus.Database.Models;
 
 namespace Succubus.Database.Repositories.Interfaces
 {

@@ -1,9 +1,10 @@
-﻿using Succubus.Database.Context;
-using Succubus.Database.Models;
-using Succubus.Database.Repositories.Interfaces;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Discord;
+using Succubus.Database.Context;
+using Succubus.Database.Models;
+using Succubus.Database.Repositories.Interfaces;
 
 namespace Succubus.Database.Repositories
 {
@@ -13,12 +14,13 @@ namespace Succubus.Database.Repositories
         {
         }
 
-        public async Task<Server> GetOrCreate(Discord.IGuild server)
+        public async Task<Server> GetOrCreate(IGuild server)
         {
             try
             {
                 if (await Context.Servers.AnyAsync(x => x.ServerId == server.Id).ConfigureAwait(false))
-                    return await Context.Servers.FirstOrDefaultAsync(x => x.ServerId == server.Id).ConfigureAwait(false);
+                    return await Context.Servers.FirstOrDefaultAsync(x => x.ServerId == server.Id)
+                        .ConfigureAwait(false);
 
                 var guild = await Context.AddAsync(new Server
                 {

@@ -1,18 +1,19 @@
-﻿using NLog;
+﻿using System.Linq;
+using NLog;
 using Succubus.Database.Context;
 using Succubus.Database.Extensions;
 using Succubus.Database.Models;
 using Succubus.Database.Repositories.Interfaces;
-using System.Linq;
 
 namespace Succubus.Database.Repositories
 {
     public class ColorRepository : Repository<Color>, IColorRepository
     {
-        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public ColorRepository(SuccubusContext context) : base(context)
-        { }
+        {
+        }
 
         public Discord.Color GetDiscordColor(string name)
         {

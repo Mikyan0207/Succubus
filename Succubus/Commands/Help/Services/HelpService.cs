@@ -25,7 +25,7 @@ namespace Succubus.Commands.Help.Services
             if (command == null)
                 return null;
 
-            var eb = new EmbedBuilder()
+            var eb = new EmbedBuilder
             {
                 Color = DefaultColors.Info,
                 Timestamp = DateTimeOffset.Now

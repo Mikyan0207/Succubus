@@ -19,7 +19,9 @@ namespace Succubus.Services
         {
             _locales = new ConcurrentDictionary<string, IConfiguration>();
 
-            using var store = new NamedResourceStore<byte[]>(new DllResourceStore(new AssemblyName("Succubus.Resources")), @"Locales");
+            using var store =
+                new NamedResourceStore<byte[]>(new DllResourceStore(new AssemblyName("Succubus.Resources")),
+                    @"Locales");
             store.AddExtension(".yml");
 
             var files = store.GetResources();
@@ -27,7 +29,9 @@ namespace Succubus.Services
             foreach (var file in files)
             {
                 var builder = new ConfigurationBuilder()
-                    .SetBasePath(Path.Combine(Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.Parent.FullName, "Succubus.Resources/Locales/"))
+                    .SetBasePath(Path.Combine(
+                        Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.Parent.FullName,
+                        "Succubus.Resources/Locales/"))
                     .AddYamlFile(file);
                 var locale = builder.Build();
 
@@ -42,17 +46,23 @@ namespace Succubus.Services
 
         public string GetText(string id, object obj, string locale)
         {
-            return _locales.TryGetValue(locale, out var value) ? value?[id].FormatWith(obj, MissingKeyBehaviour.Ignore) : default;
+            return _locales.TryGetValue(locale, out var value)
+                ? value?[id].FormatWith(obj, MissingKeyBehaviour.Ignore)
+                : default;
         }
 
         public string GetText(string id, Dictionary<string, object> obj, string locale)
         {
-            return _locales.TryGetValue(locale, out var value) ? value[id].FormatWith(obj, MissingKeyBehaviour.Ignore) : default;
+            return _locales.TryGetValue(locale, out var value)
+                ? value[id].FormatWith(obj, MissingKeyBehaviour.Ignore)
+                : default;
         }
 
         public string GetText(string id, KeyValuePair<string, object> obj, string locale)
         {
-            return _locales.TryGetValue(locale, out var value) ? value[id].FormatWith(obj, MissingKeyBehaviour.Ignore) : default;
+            return _locales.TryGetValue(locale, out var value)
+                ? value[id].FormatWith(obj, MissingKeyBehaviour.Ignore)
+                : default;
         }
     }
 }

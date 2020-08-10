@@ -39,9 +39,9 @@ namespace Succubus.Commands.Locale
                         .AddField(e =>
                         {
                             e.Name = _localizationService.GetText("locale:get_locale_title",
-                                new Dictionary<string, object> { { "Name", Context.Guild.Name } }, locale);
+                                new Dictionary<string, object> {{"Name", Context.Guild.Name}}, locale);
                             e.Value = _localizationService.GetText("locale:get_locale",
-                                new Dictionary<string, object> { { "Code", locale } }, locale);
+                                new Dictionary<string, object> {{"Code", locale}}, locale);
                             e.IsInline = true;
                         })
                         .WithColor(DefaultColors.Info)
@@ -52,26 +52,20 @@ namespace Succubus.Commands.Locale
                 var result = await Service.SetServerLocale(Context.Guild, options.Locale).ConfigureAwait(false);
 
                 if (result)
-                {
                     await SendConfirmationAsync(
                         _localizationService.GetText("locale:set_locale_title",
-                            new Dictionary<string, object> { { "Name", Context.Guild.Name } }, options.Locale),
+                            new Dictionary<string, object> {{"Name", Context.Guild.Name}}, options.Locale),
                         _localizationService.GetText("locale:set_locale",
-                            new Dictionary<string, object> { { "Code", options.Locale } }, options.Locale)
+                            new Dictionary<string, object> {{"Code", options.Locale}}, options.Locale)
                     ).ConfigureAwait(false);
-                }
                 else
-                {
                     await SendErrorAsync(
                         _localizationService.GetText("locale:set_locale_error_title",
-                            new Dictionary<string, object> { { "Name", Context.Guild.Name } }, options.Locale),
+                            new Dictionary<string, object> {{"Name", Context.Guild.Name}}, options.Locale),
                         _localizationService.GetText("locale:set_locale_error",
-                            new Dictionary<string, object> { { "Code", options.Locale } }, options.Locale)
+                            new Dictionary<string, object> {{"Code", options.Locale}}, options.Locale)
                     ).ConfigureAwait(false);
-                }
             }
-
-
         }
     }
 }

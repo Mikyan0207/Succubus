@@ -1,20 +1,23 @@
-﻿using Mikyan.Framework.Services;
+﻿using System.Reflection;
+using Mikyan.Framework.Services;
 using Mikyan.Framework.Stores;
 using Succubus.Database.Context;
-using System.Reflection;
+using Utf8Json;
 
 namespace Succubus.Services
 {
     public class BotService : IService
     {
-        public string CloudUrl { get; }
-
         public BotService()
         {
-            using var configurationStore = new NamedResourceStore<byte[]>(new DllResourceStore(new AssemblyName("Succubus.Resources")), @"Configuration");
+            using var configurationStore =
+                new NamedResourceStore<byte[]>(new DllResourceStore(new AssemblyName("Succubus.Resources")),
+                    @"Configuration");
             configurationStore.AddExtension(".json");
 
-            CloudUrl = Utf8Json.JsonSerializer.Deserialize<ApiConfiguration>(configurationStore.Get("Cloud")).ApiUrl;
+            CloudUrl = JsonSerializer.Deserialize<ApiConfiguration>(configurationStore.Get("Cloud")).ApiUrl;
         }
+
+        public string CloudUrl { get; }
     }
 }

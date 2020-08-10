@@ -21,10 +21,11 @@ namespace Succubus.Commands.Administration
                 return;
             }
 
-            await Context.Guild.AddBanAsync(user, 7, message, new RequestOptions() {RetryMode = RetryMode.AlwaysRetry}).ConfigureAwait(false);
+            await Context.Guild.AddBanAsync(user, 7, message, new RequestOptions {RetryMode = RetryMode.AlwaysRetry})
+                .ConfigureAwait(false);
             await EmbedAsync(
                 new EmbedBuilder()
-                    .WithTitle($"User banned")
+                    .WithTitle("User banned")
                     .AddField($"{user.Username}", $"{user.Id}", true)
                     .WithCurrentTimestamp()
                     .WithColor(DefaultColors.Purple)

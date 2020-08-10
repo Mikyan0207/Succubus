@@ -1,9 +1,10 @@
-﻿using Succubus.Database.Context;
-using Succubus.Database.Models;
-using Succubus.Database.Repositories.Interfaces;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Discord;
+using Succubus.Database.Context;
+using Succubus.Database.Models;
+using Succubus.Database.Repositories.Interfaces;
 
 namespace Succubus.Database.Repositories
 {
@@ -13,7 +14,7 @@ namespace Succubus.Database.Repositories
         {
         }
 
-        public async Task<User> GetOrCreate(Discord.IUser usr)
+        public async Task<User> GetOrCreate(IUser usr)
         {
             try
             {
@@ -26,7 +27,7 @@ namespace Succubus.Database.Repositories
                     Discriminator = usr.Discriminator,
                     UserId = usr.Id,
                     Level = 0,
-                    Experience = 0,
+                    Experience = 0
                 }).ConfigureAwait(false);
 
                 await Context.SaveChangesAsync().ConfigureAwait(false);

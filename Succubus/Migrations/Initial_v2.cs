@@ -8,8 +8,8 @@ namespace Succubus.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Colors",
-                columns: table => new
+                "Colors",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     DateAdded = table.Column<DateTime>(nullable: false),
@@ -18,14 +18,11 @@ namespace Succubus.Migrations
                     Green = table.Column<byte>(nullable: false),
                     Blue = table.Column<byte>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Colors", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Colors", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Cosplayers",
-                columns: table => new
+                "Cosplayers",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     DateAdded = table.Column<DateTime>(nullable: false),
@@ -36,28 +33,22 @@ namespace Succubus.Migrations
                     Instagram = table.Column<string>(nullable: true),
                     Booth = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cosplayers", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Cosplayers", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Servers",
-                columns: table => new
+                "Servers",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     DateAdded = table.Column<DateTime>(nullable: false),
                     ServerId = table.Column<ulong>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Servers", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Servers", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
+                "Users",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     DateAdded = table.Column<DateTime>(nullable: false),
@@ -67,14 +58,11 @@ namespace Succubus.Migrations
                     Experience = table.Column<ulong>(nullable: false),
                     Level = table.Column<ulong>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Users", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Sets",
-                columns: table => new
+                "Sets",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     DateAdded = table.Column<DateTime>(nullable: false),
@@ -91,35 +79,35 @@ namespace Succubus.Migrations
                 {
                     table.PrimaryKey("PK_Sets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sets_Cosplayers_CosplayerId",
-                        column: x => x.CosplayerId,
-                        principalTable: "Cosplayers",
-                        principalColumn: "Id",
+                        "FK_Sets_Cosplayers_CosplayerId",
+                        x => x.CosplayerId,
+                        "Cosplayers",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sets_CosplayerId",
-                table: "Sets",
-                column: "CosplayerId");
+                "IX_Sets_CosplayerId",
+                "Sets",
+                "CosplayerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Colors");
+                "Colors");
 
             migrationBuilder.DropTable(
-                name: "Servers");
+                "Servers");
 
             migrationBuilder.DropTable(
-                name: "Sets");
+                "Sets");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                "Users");
 
             migrationBuilder.DropTable(
-                name: "Cosplayers");
+                "Cosplayers");
         }
     }
 }

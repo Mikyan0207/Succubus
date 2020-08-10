@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Succubus.Database.Context
+namespace Succubus.Database.JsonModels
 {
     public class YoutubeModel
     {

@@ -1,5 +1,4 @@
 ﻿using Mikyan.Framework.Services;
-using Succubus.Database.Context;
 
 namespace Succubus.Commands.Administration.Services
 {

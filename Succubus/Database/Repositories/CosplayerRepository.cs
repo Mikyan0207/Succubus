@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Succubus.Database.Context;
 using Succubus.Database.Extensions;
 using Succubus.Database.Models;
 using Succubus.Database.Repositories.Interfaces;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Succubus.Database.Repositories
 {

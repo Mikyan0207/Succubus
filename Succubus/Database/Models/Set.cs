@@ -5,16 +5,13 @@ namespace Succubus.Database.Models
 {
     public class Set : Entity
     {
-        [Required]
-        public string Name { get; set; }
+        [Required] public string Name { get; set; }
 
         public List<string> Aliases { get; set; }
 
-        [Required]
-        public uint Size { get; set; }
+        [Required] public uint Size { get; set; }
 
-        [Required]
-        public string SetPreview { get; set; }
+        [Required] public string SetPreview { get; set; }
 
         public string FolderName { get; set; }
 
@@ -23,11 +20,5 @@ namespace Succubus.Database.Models
         public Cosplayer Cosplayer { get; set; }
 
         public YabaiLevel YabaiLevel { get; set; } = YabaiLevel.Safe;
-    }
-
-    public enum YabaiLevel
-    {
-        Safe,
-        NotSafe
     }
 }

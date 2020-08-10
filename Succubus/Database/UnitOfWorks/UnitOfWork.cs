@@ -1,18 +1,34 @@
-﻿using Succubus.Database.Context;
+﻿using System;
+using System.Threading.Tasks;
+using Succubus.Database.Context;
 using Succubus.Database.Repositories;
 using Succubus.Database.Repositories.Interfaces;
-using System;
-using System.Threading.Tasks;
 
 namespace Succubus.Database.UnitOfWorks
 {
     public sealed class UnitOfWork : IUnitOfWork
     {
-        public SuccubusContext Context { get; }
-
         public UnitOfWork(SuccubusContext context)
         {
             Context = context;
+        }
+
+        public SuccubusContext Context { get; }
+
+        public int SaveChanges()
+        {
+            return Context.SaveChanges();
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await Context.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        public void Dispose()
+        {
+            Context.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         #region Repositories
@@ -33,15 +49,5 @@ namespace Succubus.Database.UnitOfWorks
         public IColorRepository Colors => _colorRepository ??= new ColorRepository(Context);
 
         #endregion Repositories
-
-        public int SaveChanges() => Context.SaveChanges();
-
-        public async Task<int> SaveChangesAsync() => await Context.SaveChangesAsync().ConfigureAwait(false);
-
-        public void Dispose()
-        {
-            Context.Dispose();
-            GC.SuppressFinalize(this);
-        }
     }
 }

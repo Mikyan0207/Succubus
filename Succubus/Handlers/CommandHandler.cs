@@ -1,16 +1,16 @@
-﻿using Discord.Commands;
+﻿using System;
+using System.Reflection;
+using System.Threading.Tasks;
+using Discord.Commands;
 using Discord.WebSocket;
 using Mikyan.Framework.Services;
 using NLog;
-using System;
-using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Succubus.Handlers
 {
     public class CommandHandler : IService
     {
-        private static readonly NLog.Logger _Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger _Logger = LogManager.GetCurrentClassLogger();
         private readonly DiscordShardedClient Client;
         private readonly CommandService CommandService;
         private readonly IServiceProvider Services;

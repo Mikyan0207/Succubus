@@ -1,4 +1,8 @@
-﻿using Discord;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Discord;
 using Discord.Commands;
 using Mikyan.Framework.Commands;
 using Mikyan.Framework.Commands.Attributes;
@@ -6,10 +10,6 @@ using Mikyan.Framework.Commands.Colors;
 using Mikyan.Framework.Commands.Parsers;
 using Succubus.Commands.Nsfw.Options;
 using Succubus.Commands.Nsfw.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Succubus.Database.Models;
 using Succubus.Services;
 
@@ -19,8 +19,8 @@ namespace Succubus.Commands.Nsfw
     [RequireNsfw]
     public class NsfwCommands : Module<NsfwService>
     {
-        private readonly LocalizationService _ls;
         private readonly DbService _db;
+        private readonly LocalizationService _ls;
         private Server _currentGuild;
 
         public NsfwCommands(LocalizationService localizationService, DbService dbService)
@@ -43,9 +43,9 @@ namespace Succubus.Commands.Nsfw
 
             if (c == null)
             {
-                await SendErrorAsync("[NSFW] Cosplayer", 
+                await SendErrorAsync("[NSFW] Cosplayer",
                     _ls.GetText("nsfw:cosplayer_not_found",
-                        new Dictionary<string, object> {{ "Name", name }}, _currentGuild.Locale)).ConfigureAwait(false);
+                        new Dictionary<string, object> {{"Name", name}}, _currentGuild.Locale)).ConfigureAwait(false);
                 return;
             }
 
@@ -56,11 +56,11 @@ namespace Succubus.Commands.Nsfw
                     .WithCurrentTimestamp()
                     .WithFooter($"Requested by {Context.Message.Author.Username}")
                     .AddField("Sets", $"{c.Sets.Count}", true)
-                    .AddField("Images", $"{c.Sets.Sum(x => x.Size)}", false)
+                    .AddField("Images", $"{c.Sets.Sum(x => x.Size)}")
                     .AddField("Twitter", $"[Twitter]({c.Twitter})", true)
                     .AddField("Instagram", $"[Instagram]({c.Instagram})", true)
                     .AddField("Booth", $"[Booth]({c.Booth})", true)
-                    .AddField("Collection", string.Join("\n", c.Sets.Select(x => x.Name)), false)
+                    .AddField("Collection", string.Join("\n", c.Sets.Select(x => x.Name)))
                     .WithColor(DefaultColors.Purple)
             ).ConfigureAwait(false);
         }
@@ -75,7 +75,7 @@ namespace Succubus.Commands.Nsfw
             if (s == null)
             {
                 await SendErrorAsync("[NSFW] Set", _ls.GetText("nsfw:set_not_found",
-                    new Dictionary<string, object> { { "Name", name } }, _currentGuild.Locale)).ConfigureAwait(false);
+                    new Dictionary<string, object> {{"Name", name}}, _currentGuild.Locale)).ConfigureAwait(false);
                 return;
             }
 
@@ -104,13 +104,15 @@ namespace Succubus.Commands.Nsfw
                 return;
             }
 
-            var imgNumber = new Random().Next(1, (int)set.Size);
+            var imgNumber = new Random().Next(1, (int) set.Size);
 
             await EmbedAsync(
                 new EmbedBuilder()
-                    .WithAuthor(set.Cosplayer.Name, $"{Service.BotService.CloudUrl}/{set.Cosplayer.ProfilePicture}", set.Cosplayer.Twitter)
+                    .WithAuthor(set.Cosplayer.Name, $"{Service.BotService.CloudUrl}/{set.Cosplayer.ProfilePicture}",
+                        set.Cosplayer.Twitter)
                     .WithFooter($"{set.Name} - {imgNumber:000}/{set.Size:000}")
-                    .WithImageUrl($"{Service.BotService.CloudUrl}/{set.Cosplayer.Aliases.FirstOrDefault()}/{set.FolderName}/{set.FilePrefix ?? set.FolderName}_{imgNumber:000}.jpg")
+                    .WithImageUrl(
+                        $"{Service.BotService.CloudUrl}/{set.Cosplayer.Aliases.FirstOrDefault()}/{set.FolderName}/{set.FilePrefix ?? set.FolderName}_{imgNumber:000}.jpg")
                     .WithCurrentTimestamp()
                     .WithColor(DefaultColors.Purple)
             ).ConfigureAwait(false);

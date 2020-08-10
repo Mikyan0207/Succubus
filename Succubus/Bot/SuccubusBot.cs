@@ -1,18 +1,18 @@
-﻿using Discord;
+﻿using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using Mikyan.Framework;
+using Mikyan.Framework.Services;
 using Mikyan.Framework.Stores;
 using Newtonsoft.Json;
 using NLog;
+using Succubus.Database.Context;
 using Succubus.Handlers;
 using Succubus.Services;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Mikyan.Framework.Services;
-using Succubus.Database.Context;
 
 namespace Succubus.Bot
 {
@@ -20,13 +20,13 @@ namespace Succubus.Bot
     {
         public readonly BotConfiguration BotConfiguration;
 
+        public readonly CommandServiceConfig CommandServiceConfig;
+
         public readonly NamedResourceStore<byte[]> ConfigurationStore;
 
         public readonly DbService DbService;
 
         public readonly DiscordSocketConfig DiscordSocketConfig;
-
-        public readonly CommandServiceConfig CommandServiceConfig;
 
         public SuccubusBot()
         {

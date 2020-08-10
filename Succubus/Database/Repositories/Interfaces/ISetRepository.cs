@@ -9,5 +9,9 @@ namespace Succubus.Database.Repositories.Interfaces
         Task<Set> GetSetAsync(YabaiOptions options);
 
         Task<Set> GetSetAsync(string name);
+
+        Task<(bool, Set)> AddAliasAsync(string set, string alias);
+
+        Task<(bool, Set)> RemoveAliasAsync(string set, string alias);
     }
 }

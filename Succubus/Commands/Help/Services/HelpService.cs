@@ -18,6 +18,37 @@ namespace Succubus.Commands.Help.Services
             _commandService = commandService;
         }
 
+        public Embed GetModuleCommands(string name)
+        {
+            var commands = _commandService.Commands.Where(c =>
+                    c.Module.Name.ToLowerInvariant().StartsWith(name, StringComparison.OrdinalIgnoreCase))
+                .OrderBy(c => c.Aliases[0])
+                .ToList();
+
+            if (!commands.Any())
+                return new EmbedBuilder()
+                    .WithTitle($"Module `{name}` not found. Try again.")
+                    .WithColor(DefaultColors.Error)
+                    .Build();
+
+            var eb = new EmbedBuilder()
+                .WithTitle($"List of commands for `{commands[0].Module.Name}`")
+                .WithColor(DefaultColors.Info)
+                .WithCurrentTimestamp();
+
+            foreach (var command in commands)
+            {
+                eb.AddField(e =>
+                {
+                    e.Name = command.Name;
+                    e.Value = !string.IsNullOrEmpty(command.Summary) ? command.Summary : "No description";
+                    e.IsInline = false;
+                });
+            }
+
+            return eb.Build();
+        }
+
         public Embed GetCommand(ShardedCommandContext ctx, string info)
         {
             var command = _commandService.Search(ctx, info).Commands.FirstOrDefault().Command;

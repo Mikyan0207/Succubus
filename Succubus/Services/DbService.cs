@@ -10,21 +10,19 @@ namespace Succubus.Services
     {
         public DbService()
         {
-            using (var context = new SuccubusContext())
+            using var context = new SuccubusContext();
+            if (context.Database.GetPendingMigrations().Any())
             {
-                if (context.Database.GetPendingMigrations().Any())
-                {
-                    context.Database.Migrate();
-                    context.SaveChanges();
-                }
-
-                context.Database.ExecuteSqlRaw("PRAGMA journal_mode=WAL");
-                context.Initialize();
+                context.Database.Migrate();
                 context.SaveChanges();
             }
+
+            context.Database.ExecuteSqlRaw("PRAGMA journal_mode=WAL");
+            context.Initialize();
+            context.SaveChanges();
         }
 
-        private SuccubusContext GetDbContextInternal()
+        private static SuccubusContext GetDbContextInternal()
         {
             var context = new SuccubusContext();
             context.Database.SetCommandTimeout(60);
@@ -32,11 +30,9 @@ namespace Succubus.Services
             var conn = context.Database.GetDbConnection();
             conn.Open();
 
-            using (var com = conn.CreateCommand())
-            {
-                com.CommandText = "PRAGMA journal_mode=WAL; PRAGMA synchronous=OFF";
-                com.ExecuteNonQuery();
-            }
+            using var com = conn.CreateCommand();
+            com.CommandText = "PRAGMA journal_mode=WAL; PRAGMA synchronous=OFF";
+            com.ExecuteNonQuery();
 
             return context;
         }

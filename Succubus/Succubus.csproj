@@ -30,8 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Administration\" />
-    <Folder Include="Database\Migrations\" />
+    <Folder Include="Commands\Administration\Services\" />
   </ItemGroup>
 
 </Project>

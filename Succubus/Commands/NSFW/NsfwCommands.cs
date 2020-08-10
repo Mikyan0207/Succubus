@@ -12,10 +12,12 @@ using System.Threading.Tasks;
 
 namespace Succubus.Commands.Nsfw
 {
+    [Name("NSFW")]
     [RequireNsfw]
     public class NsfwCommands : Module<NsfwService>
     {
         [Command("Cosplayer", RunMode = RunMode.Async)]
+        [Summary("Get information about a Cosplayer present on Succubus")]
         [RequireBotPermission(ChannelPermission.SendMessages)]
         public async Task CosplayerAsync([Remainder] string name)
         {
@@ -44,6 +46,7 @@ namespace Succubus.Commands.Nsfw
         }
 
         [Command("Set", RunMode = RunMode.Async)]
+        [Summary("Get information about a Set present on Succubus")]
         [RequireBotPermission(ChannelPermission.SendMessages)]
         public async Task SetAsync([Remainder] string name)
         {
@@ -66,6 +69,7 @@ namespace Succubus.Commands.Nsfw
         }
 
         [Command("Yabai", RunMode = RunMode.Async)]
+        [Summary("Get a random image from Succubus Database")]
         [Options(typeof(YabaiOptions))]
         [RequireBotPermission(ChannelPermission.SendMessages)]
         public async Task YabaiAsync(params string[] options)

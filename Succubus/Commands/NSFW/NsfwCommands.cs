@@ -9,6 +9,7 @@ using Succubus.Commands.Nsfw.Services;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Succubus.Services;
 
 namespace Succubus.Commands.Nsfw
 {
@@ -16,6 +17,13 @@ namespace Succubus.Commands.Nsfw
     [RequireNsfw]
     public class NsfwCommands : Module<NsfwService>
     {
+        private readonly LocalizationService _ls;
+
+        public NsfwCommands(LocalizationService localizationService)
+        {
+            _ls = localizationService;
+        }
+
         [Command("Cosplayer", RunMode = RunMode.Async)]
         [Summary("Get information about a Cosplayer present on Succubus")]
         [RequireBotPermission(ChannelPermission.SendMessages)]

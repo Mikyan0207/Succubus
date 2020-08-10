@@ -45,7 +45,7 @@ namespace Succubus.Commands.Nsfw
             {
                 await SendErrorAsync("[NSFW] Cosplayer",
                     _ls.GetText("nsfw:cosplayer_not_found",
-                        new Dictionary<string, object> {{"Name", name}}, _currentGuild.Locale)).ConfigureAwait(false);
+                        new Dictionary<string, object> { { "Name", name } }, _currentGuild.Locale)).ConfigureAwait(false);
                 return;
             }
 
@@ -75,7 +75,7 @@ namespace Succubus.Commands.Nsfw
             if (s == null)
             {
                 await SendErrorAsync("[NSFW] Set", _ls.GetText("nsfw:set_not_found",
-                    new Dictionary<string, object> {{"Name", name}}, _currentGuild.Locale)).ConfigureAwait(false);
+                    new Dictionary<string, object> { { "Name", name } }, _currentGuild.Locale)).ConfigureAwait(false);
                 return;
             }
 
@@ -104,7 +104,7 @@ namespace Succubus.Commands.Nsfw
                 return;
             }
 
-            var imgNumber = new Random().Next(1, (int) set.Size);
+            var imgNumber = new Random().Next(1, (int)set.Size);
 
             await EmbedAsync(
                 new EmbedBuilder()

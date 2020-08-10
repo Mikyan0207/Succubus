@@ -15,8 +15,6 @@ namespace Succubus.Commands.Nsfw
     [RequireNsfw]
     public class NsfwCommands : Module<NsfwService>
     {
-        private const string CloudUrl = "";
-
         [Command("Cosplayer", RunMode = RunMode.Async)]
         [RequireBotPermission(ChannelPermission.SendMessages)]
         public async Task CosplayerAsync([Remainder] string name)
@@ -32,7 +30,7 @@ namespace Succubus.Commands.Nsfw
             await EmbedAsync(
                 new EmbedBuilder()
                     .WithTitle($"{c.Name} ({c.Aliases.FirstOrDefault()})")
-                    .WithThumbnailUrl($"{CloudUrl}/{c.ProfilePicture}")
+                    .WithThumbnailUrl($"{Service.BotService.CloudUrl}/{c.ProfilePicture}")
                     .WithCurrentTimestamp()
                     .WithFooter($"Requested by {Context.Message.Author.Username}")
                     .AddField("Sets", $"{c.Sets.Count}", true)
@@ -61,7 +59,7 @@ namespace Succubus.Commands.Nsfw
                 new EmbedBuilder()
                     .WithTitle($"{s.Name} - {s.Size:000} Images")
                     .WithDescription($"by {s.Cosplayer.Name}")
-                    .WithImageUrl($"{s.SetPreview}")
+                    .WithImageUrl($"{Service.BotService.CloudUrl}/{s.SetPreview}")
                     .WithCurrentTimestamp()
                     .WithColor(DefaultColors.Purple)
             ).ConfigureAwait(false);
@@ -84,9 +82,9 @@ namespace Succubus.Commands.Nsfw
 
             await EmbedAsync(
                 new EmbedBuilder()
-                    .WithAuthor(set.Cosplayer.Name, $"{set.Cosplayer.ProfilePicture}", set.Cosplayer.Twitter)
+                    .WithAuthor(set.Cosplayer.Name, $"{Service.BotService.CloudUrl}/{set.Cosplayer.ProfilePicture}", set.Cosplayer.Twitter)
                     .WithFooter($"{set.Name} - {imgNumber:000}/{set.Size:000}")
-                    .WithImageUrl($"{CloudUrl}{set.Cosplayer.Aliases.FirstOrDefault()}/{set.FolderName}/{set.FilePrefix ?? set.FolderName}_{imgNumber:000}.jpg")
+                    .WithImageUrl($"{Service.BotService.CloudUrl}/{set.Cosplayer.Aliases.FirstOrDefault()}/{set.FolderName}/{set.FilePrefix ?? set.FolderName}_{imgNumber:000}.jpg")
                     .WithCurrentTimestamp()
                     .WithColor(DefaultColors.Purple)
             ).ConfigureAwait(false);

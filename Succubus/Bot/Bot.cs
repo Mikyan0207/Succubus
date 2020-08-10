@@ -60,6 +60,7 @@ namespace Succubus.Bot
 
             Services = InitializeDefaultServices()
                 .LoadFrom(Assembly.GetExecutingAssembly())
+                .AddSingleton(new BotService())
                 .AddSingleton(DbService)
                 .AddSingleton(DbService.GetDbContext())
                 .BuildServiceProvider();

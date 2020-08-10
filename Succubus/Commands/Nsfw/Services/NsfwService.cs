@@ -10,9 +10,12 @@ namespace Succubus.Commands.Nsfw.Services
     {
         private DbService DbService { get; }
 
-        public NsfwService(DbService db)
+        public BotService BotService { get; }
+
+        public NsfwService(DbService db, BotService botService)
         {
             DbService = db;
+            BotService = botService;
         }
 
         public async Task<Cosplayer> GetCosplayerAsync(string name)

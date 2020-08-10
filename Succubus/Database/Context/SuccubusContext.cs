@@ -75,7 +75,7 @@ namespace Succubus.Database.Context
                             Twitter = cp.Twitter,
                             Instagram = cp.Instagram,
                             Booth = cp.Booth,
-                            ProfilePicture = $"{_cloudUrl}/{cp.ProfilePicture}"
+                            ProfilePicture = $"{cp.ProfilePicture}"
                         }).ConfigureAwait(false);
 
                         await SaveChangesAsync().ConfigureAwait(false);
@@ -94,7 +94,7 @@ namespace Succubus.Database.Context
                             Size = (uint)set.Size,
                             FolderName = set.FolderName,
                             FilePrefix = set.FilePrefix,
-                            SetPreview = $@"{_cloudUrl}/{cp.Aliases.FirstOrDefault()}/{set.FolderName}/{set.FilePrefix ?? set.FolderName}_001.jpg",
+                            SetPreview = $@"{cp.Aliases.FirstOrDefault()}/{set.FolderName}/{set.FilePrefix ?? set.FolderName}_001.jpg",
                             YabaiLevel = (YabaiLevel)set.YabaiLevel
                         }).ConfigureAwait(false);
 

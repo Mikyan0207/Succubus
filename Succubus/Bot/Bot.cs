@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Mikyan.Framework.Services;
+using Succubus.Database.Context;
 
 namespace Succubus.Bot
 {
@@ -61,8 +62,7 @@ namespace Succubus.Bot
             Services = InitializeDefaultServices()
                 .LoadFrom(Assembly.GetExecutingAssembly())
                 .AddSingleton(new BotService())
-                .AddSingleton(DbService)
-                .AddSingleton(DbService.GetDbContext())
+                .AddDbContext<SuccubusContext>()
                 .BuildServiceProvider();
         }
 

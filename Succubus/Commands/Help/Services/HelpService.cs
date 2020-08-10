@@ -10,7 +10,7 @@ namespace Succubus.Commands.Help.Services
 {
     public class HelpService : IService
     {
-        private CommandService _commandService;
+        private readonly CommandService _commandService;
 
         public HelpService(CommandService commandService)
         {

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Succubus.Database.Context;
 
 namespace Succubus.Migrations
 {
     [DbContext(typeof(SuccubusContext))]
-    partial class SuccubusContextModelSnapshot : ModelSnapshot
+    [Migration("20200810123945_ServerLocale_v2")]
+    partial class ServerLocale_v2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

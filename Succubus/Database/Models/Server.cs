@@ -8,5 +8,7 @@ namespace Succubus.Database.Models
         public ulong ServerId { get; set; }
 
         public string Name { get; set; }
+
+        public string Locale { get; set; }
     }
 }

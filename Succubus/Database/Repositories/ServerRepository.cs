@@ -23,7 +23,8 @@ namespace Succubus.Database.Repositories
                 var guild = await Context.AddAsync(new Server
                 {
                     ServerId = server.Id,
-                    Name = server.Name
+                    Name = server.Name,
+                    Locale = "fr-FR"
                 }).ConfigureAwait(false);
 
                 await Context.SaveChangesAsync().ConfigureAwait(false);

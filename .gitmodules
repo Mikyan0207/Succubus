@@ -1,0 +1,3 @@
+[submodule "Mikyan.Framework"]
+	path = Mikyan.Framework
+	url = https://github.com/Mikyan0207/Mikyan.Framework.git

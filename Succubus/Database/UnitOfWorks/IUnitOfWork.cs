@@ -1,7 +1,6 @@
-﻿using Succubus.Database.Context;
-using Succubus.Database.Repositories;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Succubus.Database.Context;
 using Succubus.Database.Repositories.Interfaces;
 
 namespace Succubus.Database.UnitOfWorks
@@ -12,9 +11,8 @@ namespace Succubus.Database.UnitOfWorks
 
         public IUserRepository Users { get; }
         public IServerRepository Servers { get; }
-        public IImageRepository Images { get; }
+        public ISetRepository Sets { get; }
         public ICosplayerRepository Cosplayers { get; }
-        public IYoutubeChannelRepository YoutubeChannels { get; }
         public IColorRepository Colors { get; }
 
         int SaveChanges();

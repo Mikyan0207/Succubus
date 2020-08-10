@@ -6,31 +6,31 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommandLineParser" Version="2.8.0" />
     <PackageReference Include="Discord.Net" Version="2.2.0" />
     <PackageReference Include="Discord.Net.Commands" Version="2.2.0" />
     <PackageReference Include="Discord.Net.WebSocket" Version="2.2.0" />
-    <PackageReference Include="Google.Apis.Urlshortener.v1" Version="1.41.1.138" />
-    <PackageReference Include="Google.Apis.YouTube.v3" Version="1.47.0.2008" />
+    <PackageReference Include="FormatWith" Version="2.2.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.6" />
+    <PackageReference Include="NetEscapades.Configuration.Yaml" Version="2.0.1" />
     <PackageReference Include="NLog" Version="4.7.3" />
     <PackageReference Include="Utf8Json" Version="1.3.7" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Succubus.Logger\Succubus.Logger.csproj" />
+    <ProjectReference Include="..\Mikyan.Framework\Mikyan.Framework.Cache\Mikyan.Framework.Cache.csproj" />
+    <ProjectReference Include="..\Mikyan.Framework\Mikyan.Framework.Commands\Mikyan.Framework.Commands.csproj" />
+    <ProjectReference Include="..\Mikyan.Framework\Mikyan.Framework.Database\Mikyan.Framework.Database.csproj" />
+    <ProjectReference Include="..\Mikyan.Framework\Mikyan.Framework.Extensions\Mikyan.Framework.Extensions.csproj" />
+    <ProjectReference Include="..\Mikyan.Framework\Mikyan.Framework.Stores\Mikyan.Framework.Stores.csproj" />
+    <ProjectReference Include="..\Mikyan.Framework\Mikyan.Framework\Mikyan.Framework.csproj" />
     <ProjectReference Include="..\Succubus.Resources\Succubus.Resources.csproj" />
-    <ProjectReference Include="..\Succubus.Store\Succubus.Store.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Commands\Administration\" />
-    <Folder Include="Database\" />
   </ItemGroup>
 
 </Project>

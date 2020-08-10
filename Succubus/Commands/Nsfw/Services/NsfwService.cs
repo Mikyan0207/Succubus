@@ -1,68 +1,39 @@
 ﻿using System.Threading.Tasks;
-using Discord;
+using Mikyan.Framework.Services;
 using Succubus.Commands.Nsfw.Options;
 using Succubus.Database.Models;
 using Succubus.Services;
-using Image = Succubus.Database.Models.Image;
 
 namespace Succubus.Commands.Nsfw.Services
 {
     public class NsfwService : IService
     {
-        private readonly DbService DbService;
-
-        public NsfwService(DbService db)
+        public NsfwService(DbService db, BotService botService)
         {
             DbService = db;
+            BotService = botService;
         }
 
-        public Cosplayer GetCosplayer(string name)
+        private DbService DbService { get; }
+
+        public BotService BotService { get; }
+
+        public async Task<Cosplayer> GetCosplayerAsync(string name)
         {
-            using (var uow = DbService.GetDbContext())
-            {
-                return uow.Cosplayers.GetCosplayerByName(name.Trim());
-            }
+            using var uow = DbService.GetDbContext();
+            return await uow.Cosplayers.GetCosplayerAsync(name).ConfigureAwait(false);
         }
 
-        public async Task<Image> GetImageAsync(YabaiOptions options)
+        public async Task<Set> GetSetAsync(YabaiOptions options)
         {
-            using (var uow = DbService.GetDbContext())
-            {
-                return await uow.Images.GetImageAsync(options).ConfigureAwait(false);
-            }
+            using var uow = DbService.GetDbContext();
+            return await uow.Sets.GetSetAsync(options).ConfigureAwait(false);
         }
 
-        public async Task<bool> AddImageToCollectionAsync(IUser discordUser, string setName, int number)
+        public async Task<Set> GetSetAsync(string name)
         {
-            using (var uow = DbService.GetDbContext())
-            {
-                return await uow.Users.AddImageToCollectionAsync(discordUser, setName, number).ConfigureAwait(false);
-            }
-        }
-
-        public async Task<bool> RemoveImageFromCollectionAsync(IUser discordUser, string setName, int number)
-        {
-            using (var uow = DbService.GetDbContext())
-            {
-                return await uow.Users.RemoveImageFromCollectionAsync(discordUser, setName, number)
-                    .ConfigureAwait(false);
-            }
-        }
-
-        public Image GetRandomImageFromCosplayer(string name)
-        {
-            using (var uow = DbService.GetDbContext())
-            {
-                return uow.Images.GetImageFromCosplayer(name.Trim());
-            }
-        }
-
-        public Image GetRandomImageFromSet(string set)
-        {
-            using (var uow = DbService.GetDbContext())
-            {
-                return uow.Images.GetImageFromSet(set.Trim());
-            }
+            using var uow = DbService.GetDbContext();
+            return await uow.Sets.GetSetAsync(name).ConfigureAwait(false);
         }
     }
 }

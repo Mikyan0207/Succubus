@@ -1,14 +1,14 @@
 ﻿{
   "Name": "いくみ",
-  "Aliases": "iKkyu",
+  "Aliases": [ "iKkyu" ],
+  "ProfilePicture": "iKkyu/ProfilePicture.jpg",
   "Twitter": "https://twitter.com/193azs",
   "Instagram": "",
   "Booth": "https://ikkyu3.booth.pm/",
-  "ProfilePicture": "iKkyu/ProfilePicture.jpg",
   "Sets": [
     {
       "Name": "Ikumi Trip",
-      "Aliases": "",
+      "Aliases": [],
       "Size": 189,
       "FolderName": "IkumiTrip",
       "FilePrefix": null,
@@ -16,7 +16,7 @@
     },
     {
       "Name": "Skinny",
-      "Aliases": "",
+      "Aliases": [],
       "Size": 50,
       "FolderName": "Skinny",
       "FilePrefix": null,

@@ -8,7 +8,9 @@
     <None Remove="Configuration\Bot.json" />
     <None Remove="Configuration\Cloud.json" />
     <None Remove="Configuration\Database.json" />
-    <None Remove="Configuration\Youtube.json" />
+    <None Remove="Locales\en-US.yml" />
+    <None Remove="Locales\fr-FR.yml" />
+    <None Remove="Locales\ja-JP.yml" />
     <None Remove="Yabai\Fleia.json" />
     <None Remove="Yabai\Ikumi.json" />
     <None Remove="Yabai\Miri.json" />
@@ -18,10 +20,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Locales\fr-FR.yml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Configuration\Bot.json" />
     <EmbeddedResource Include="Configuration\Cloud.json" />
     <EmbeddedResource Include="Configuration\Database.json" />
-    <EmbeddedResource Include="Configuration\Youtube.json" />
+    <EmbeddedResource Include="Locales\en-US.yml" />
+    <EmbeddedResource Include="Locales\ja-JP.yml" />
     <EmbeddedResource Include="Yabai\Fleia.json" />
     <EmbeddedResource Include="Yabai\Ikumi.json" />
     <EmbeddedResource Include="Yabai\Miri.json" />

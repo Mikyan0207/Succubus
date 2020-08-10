@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Succubus.Database.Context;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Succubus.Database.Context;
 using Succubus.Database.Repositories.Interfaces;
 
 namespace Succubus.Database.Repositories
@@ -58,21 +57,6 @@ namespace Succubus.Database.Repositories
         public void RemoveRange(IEnumerable<T> entities)
         {
             Set.RemoveRange(entities);
-        }
-
-        public IEnumerable<T> Where(Expression<Func<T, bool>> predicate)
-        {
-            return Set.Where(predicate);
-        }
-
-        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
-        {
-            return await Set.FirstOrDefaultAsync(predicate);
-        }
-
-        public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
-        {
-            return await Set.AnyAsync(predicate).ConfigureAwait(false);
         }
     }
 }

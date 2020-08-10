@@ -1,9 +1,10 @@
-﻿using Succubus.Database.Models;
+﻿using System.Threading.Tasks;
+using Succubus.Database.Models;
 
 namespace Succubus.Database.Repositories.Interfaces
 {
     public interface ICosplayerRepository : IRepository<Cosplayer>
     {
-        Cosplayer GetCosplayerByName(string name);
+        Task<Cosplayer> GetCosplayerAsync(string name);
     }
 }

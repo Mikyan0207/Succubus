@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Succubus.Database.Repositories.Interfaces
@@ -22,11 +21,5 @@ namespace Succubus.Database.Repositories.Interfaces
         void Remove(T entity);
 
         void RemoveRange(IEnumerable<T> entities);
-
-        IEnumerable<T> Where(Expression<Func<T, bool>> predicate);
-
-        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
-
-        Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
     }
 }

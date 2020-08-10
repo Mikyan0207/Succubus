@@ -1,14 +1,14 @@
 ﻿{
   "Name": "水無月みり",
-  "Aliases": "Miri",
+  "Aliases": [ "Miri" ],
+  "ProfilePicture": "Miri/ProfilePicture.jpg",
   "Twitter": "",
   "Instagram": "",
   "Booth": "https://toge-kamosu.booth.pm/",
-  "ProfilePicture": "Miri/ProfilePicture.jpg",
   "Sets": [
     {
       "Name": "プリズマ サマータイム",
-      "Aliases": "Prisma Summer",
+      "Aliases": [ "Prisma Summer" ],
       "Size": 120,
       "FolderName": "PrismaSummer",
       "FilePrefix": null,
@@ -16,7 +16,7 @@
     },
     {
       "Name": "いっぱいだして💛よくってよ！",
-      "Aliases": "Elena",
+      "Aliases": [ "Elena" ],
       "Size": 121,
       "FolderName": "Elena",
       "FilePrefix": null,

@@ -3,6 +3,7 @@ using Discord;
 
 namespace Succubus.Extensions
 {
+    // ReSharper disable once InconsistentNaming
     public static class IUserExtensions
     {
         public static Uri GetUserAvatarUrl(this IUser usr)

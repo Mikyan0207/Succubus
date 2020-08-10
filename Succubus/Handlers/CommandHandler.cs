@@ -3,14 +3,14 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Discord.Commands;
 using Discord.WebSocket;
+using Mikyan.Framework.Services;
 using NLog;
-using Succubus.Services;
 
 namespace Succubus.Handlers
 {
     public class CommandHandler : IService
     {
-        private static readonly NLog.Logger _Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger _Logger = LogManager.GetCurrentClassLogger();
         private readonly DiscordShardedClient Client;
         private readonly CommandService CommandService;
         private readonly IServiceProvider Services;
@@ -47,7 +47,7 @@ namespace Succubus.Handlers
             var context = new ShardedCommandContext(Client, message);
             var argPos = 0;
 
-            if (context.Message.HasStringPrefix("!", ref argPos, StringComparison.CurrentCultureIgnoreCase))
+            if (context.Message.HasStringPrefix("$", ref argPos, StringComparison.CurrentCultureIgnoreCase))
             {
                 await HandleCommandAsync(context, argPos);
 

@@ -1,9 +1,8 @@
 ﻿using CommandLine;
-using Succubus.Utils;
 
 namespace Succubus.Commands.Nsfw.Options
 {
-    public class YabaiOptions : ICommandOptions
+    public class YabaiOptions
     {
         [Option("safe", Default = false, HelpText = "Succubus remove really dangerous images from selection pool.")]
         public bool SafeMode { get; set; }

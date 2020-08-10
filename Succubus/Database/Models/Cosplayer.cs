@@ -5,11 +5,9 @@ namespace Succubus.Database.Models
 {
     public class Cosplayer : Entity
     {
-        [Required]
-        public string Name { get; set; }
+        [Required] public string Name { get; set; }
 
-        [Required]
-        public string Aliases { get; set; }
+        [Required] public List<string> Aliases { get; set; }
 
         public string ProfilePicture { get; set; }
 

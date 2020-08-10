@@ -17,7 +17,7 @@ namespace Succubus.Services
                 context.SaveChanges();
             }
 
-            context.Database.ExecuteSqlRaw("PRAGMA journal_mode=WAL");
+            context.Database.ExecuteSqlRaw("PRAGMA journal_mode=WAL; PRAGMA synchronous=OFF");
             context.Initialize();
             context.SaveChanges();
         }

@@ -13,6 +13,7 @@ using NLog;
 using Succubus.Database.Context;
 using Succubus.Handlers;
 using Succubus.Services;
+using Victoria;
 
 namespace Succubus.Bot
 {
@@ -64,9 +65,14 @@ namespace Succubus.Bot
                 .AddSingleton(new BotService())
                 .AddSingleton(new LocalizationService())
                 .AddSingleton(DbService)
-                .AddSingleton(DbService.GetDbContext())
                 .AddDbContext<SuccubusContext>()
+                .AddLavaNode(x =>
+                {
+                    x.SelfDeaf = false;
+                })
                 .BuildServiceProvider();
+
+            Client.ShardReady += Client_ShardReady;
         }
 
         public new async Task RunAsync()
@@ -75,6 +81,18 @@ namespace Succubus.Bot
             await Client.LoginAsync(TokenType.Bot, Token).ConfigureAwait(false);
             await Client.StartAsync().ConfigureAwait(false);
             await Task.Delay(-1);
+        }
+
+        private Task Client_ShardReady(DiscordSocketClient e)
+        {
+            var lavaNode = Services.GetService<LavaNode>();
+
+            if (!lavaNode.IsConnected)
+                lavaNode.ConnectAsync().ConfigureAwait(false);
+
+            Logger.Info($"{e.CurrentUser.Username} [Shard #{e.ShardId}] Ready ✔️");
+
+            return Task.CompletedTask;
         }
     }
 }

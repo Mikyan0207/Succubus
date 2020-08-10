@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Mikyan.Framework.Extensions;
 using Succubus.Database.Context;
-using Succubus.Database.Extensions;
 using Succubus.Database.Models;
 using Succubus.Database.Repositories.Interfaces;
 

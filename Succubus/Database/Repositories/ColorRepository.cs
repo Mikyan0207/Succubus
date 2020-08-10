@@ -1,7 +1,7 @@
 ﻿using System.Linq;
+using Mikyan.Framework.Extensions;
 using NLog;
 using Succubus.Database.Context;
-using Succubus.Database.Extensions;
 using Succubus.Database.Models;
 using Succubus.Database.Repositories.Interfaces;
 

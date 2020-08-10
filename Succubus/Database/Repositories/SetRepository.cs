@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Mikyan.Framework.Extensions;
 using NLog;
 using Succubus.Commands.Nsfw.Options;
 using Succubus.Database.Context;
@@ -14,17 +15,15 @@ namespace Succubus.Database.Repositories
 {
     public class SetRepository : Repository<Set>, ISetRepository
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
         public SetRepository(SuccubusContext context) : base(context)
         {
         }
 
         public async Task<Set> GetSetAsync(YabaiOptions options)
         {
-            return Context.Sets
+            return await Context.Sets
                 .Include(x => x.Cosplayer)
-                .ToList()
+                .AsAsyncEnumerable()
                 .Where(x => options.SafeMode ? x.YabaiLevel == YabaiLevel.Safe : x.YabaiLevel >= YabaiLevel.Safe)
                 .ConditionalWhere(options.Set != null, x =>
                     x.Name.ToLowerInvariant().LevenshteinDistance(options.Set.ToLowerInvariant()) < 2
@@ -34,7 +33,8 @@ namespace Succubus.Database.Repositories
                     || x.Cosplayer.Aliases.Any(y => y.ToLowerInvariant().LevenshteinDistance(options.User) < 2))
                 .OrderBy(x => new Random().Next())
                 .Take(1)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync()
+                .ConfigureAwait(false);
         }
 
         public async Task<Set> GetSetAsync(string name)

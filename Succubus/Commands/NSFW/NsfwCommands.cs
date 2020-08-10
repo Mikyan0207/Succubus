@@ -7,8 +7,10 @@ using Mikyan.Framework.Commands.Parsers;
 using Succubus.Commands.Nsfw.Options;
 using Succubus.Commands.Nsfw.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Succubus.Database.Models;
 using Succubus.Services;
 
 namespace Succubus.Commands.Nsfw
@@ -18,10 +20,18 @@ namespace Succubus.Commands.Nsfw
     public class NsfwCommands : Module<NsfwService>
     {
         private readonly LocalizationService _ls;
+        private readonly DbService _db;
+        private Server _currentGuild;
 
-        public NsfwCommands(LocalizationService localizationService)
+        public NsfwCommands(LocalizationService localizationService, DbService dbService)
         {
             _ls = localizationService;
+            _db = dbService;
+        }
+
+        protected override async void BeforeExecute(CommandInfo command)
+        {
+            _currentGuild = await _db.GetDbContext().Servers.GetOrCreate(Context.Guild).ConfigureAwait(false);
         }
 
         [Command("Cosplayer", RunMode = RunMode.Async)]
@@ -33,7 +43,9 @@ namespace Succubus.Commands.Nsfw
 
             if (c == null)
             {
-                await SendErrorAsync("[NSFW] Cosplayer", $"Cosplayer {name} not found").ConfigureAwait(false);
+                await SendErrorAsync("[NSFW] Cosplayer", 
+                    _ls.GetText("nsfw:cosplayer_not_found",
+                        new Dictionary<string, object> {{ "Name", name }}, _currentGuild.Locale)).ConfigureAwait(false);
                 return;
             }
 
@@ -62,14 +74,15 @@ namespace Succubus.Commands.Nsfw
 
             if (s == null)
             {
-                await SendErrorAsync("[NSFW] Set", $"Set {name} not found").ConfigureAwait(false);
+                await SendErrorAsync("[NSFW] Set", _ls.GetText("nsfw:set_not_found",
+                    new Dictionary<string, object> { { "Name", name } }, _currentGuild.Locale)).ConfigureAwait(false);
                 return;
             }
 
             await EmbedAsync(
                 new EmbedBuilder()
                     .WithTitle($"{s.Name} - {s.Size:000} Images")
-                    .WithDescription($"by {s.Cosplayer.Name}")
+                    .WithDescription($"{s.Cosplayer.Name}")
                     .WithImageUrl($"{Service.BotService.CloudUrl}/{s.SetPreview}")
                     .WithCurrentTimestamp()
                     .WithColor(DefaultColors.Purple)
@@ -86,7 +99,8 @@ namespace Succubus.Commands.Nsfw
 
             if (set == null)
             {
-                await SendErrorAsync("[NSFW] Yabai", "No Image found").ConfigureAwait(false);
+                await SendErrorAsync("[NSFW] Yabai", _ls.GetText("nsfw:image_not_found",
+                    new Dictionary<string, object>(), _currentGuild.Locale)).ConfigureAwait(false);
                 return;
             }
 

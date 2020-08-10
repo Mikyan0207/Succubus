@@ -44,7 +44,7 @@ namespace Succubus.Commands.Locale
                                 new Dictionary<string, object> { { "Code", locale } }, locale);
                             e.IsInline = true;
                         })
-                        .WithColor(DefaultColors.Purple)
+                        .WithColor(DefaultColors.Info)
                 ).ConfigureAwait(false);
             }
             else

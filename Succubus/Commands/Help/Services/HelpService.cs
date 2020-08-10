@@ -4,6 +4,7 @@ using CommandLine;
 using Discord;
 using Discord.Commands;
 using Mikyan.Framework.Commands.Attributes;
+using Mikyan.Framework.Commands.Colors;
 using Mikyan.Framework.Services;
 
 namespace Succubus.Commands.Help.Services
@@ -26,7 +27,7 @@ namespace Succubus.Commands.Help.Services
 
             var eb = new EmbedBuilder()
             {
-                Color = new Color(21, 101, 192),
+                Color = DefaultColors.Info,
                 Timestamp = DateTimeOffset.Now
             };
 

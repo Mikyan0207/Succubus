@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Immutable;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
+using Newtonsoft.Json;
 using Succubus.Common;
+using Succubus.Common.Stores;
 using Succubus.Services.Interfaces;
 
 namespace Succubus.Services
@@ -16,13 +19,37 @@ namespace Succubus.Services
 
         private ConcurrentDictionary<CultureInfo, ConcurrentDictionary<string, string>> Responses { get; }
 
-        private ConcurrentDictionary<CultureInfo, ImmutableList<Command>> Commands { get; }
+        private ConcurrentDictionary<CultureInfo, IEnumerable<Command>> Commands { get; }
 
         public LocalizationService(DatabaseService dbService)
         {
             DbService = dbService;
             Responses = new ConcurrentDictionary<CultureInfo, ConcurrentDictionary<string, string>>();
-            Commands = new ConcurrentDictionary<CultureInfo, ImmutableList<Command>>();
+            Commands = new ConcurrentDictionary<CultureInfo, IEnumerable<Command>>();
+
+            {
+                using var store = new NamedStore(new Store("Succubus.Resources"), "Commands");
+
+                foreach (var resource in store.GetResources())
+                {
+                    var content = JsonConvert.DeserializeObject<List<Command>>(store.Get(resource));
+                    Commands.TryAdd(
+                        new CultureInfo(resource.Substring(resource.IndexOf('_'), resource.LastIndexOf('.'))),
+                        content);
+                }
+            }
+            {
+                using var store = new NamedStore(new Store("Succubus.Resources"), "Responses");
+
+                foreach (var resource in store.GetResources())
+                {
+                    var responses = JsonConvert.DeserializeObject<ConcurrentDictionary<string, string>>(store.Get(resource));
+
+                    Responses.TryAdd(
+                        new CultureInfo(resource.Substring(resource.IndexOf('_'), resource.LastIndexOf('.'))),
+                        responses);
+                }
+            }
         }
 
         public string GetText(string key, CultureInfo cultureInfo, params object[] replacements)

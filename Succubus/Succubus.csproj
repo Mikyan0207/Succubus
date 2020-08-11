@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Attributes\" />
+    <Folder Include="Modules\Administration\" />
+    <Folder Include="Modules\Help\" />
+    <Folder Include="Modules\Music\" />
+    <Folder Include="Modules\Notifications\" />
+    <Folder Include="Modules\Nsfw\" />
+    <Folder Include="Modules\Owner\" />
+    <Folder Include="Modules\Utility\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Discord.Net" Version="2.3.0-dev-20200806.2" />
+    <PackageReference Include="NLog" Version="4.7.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Succubus.Database\Succubus.Database.csproj" />
+    <ProjectReference Include="..\Succubus.Resources\Succubus.Resources.csproj" />
+  </ItemGroup>
+
+</Project>

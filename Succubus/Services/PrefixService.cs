@@ -1,6 +1,5 @@
 ﻿using Discord;
 using NLog;
-using Succubus.Database;
 using Succubus.Database.Models;
 using System.Data;
 using System.Linq;
@@ -9,14 +8,19 @@ namespace Succubus.Services
 {
     public class PrefixService : IService
     {
-        private readonly SuccubusContext _context;
-        private readonly Logger _logger;
+        private DatabaseService DbService { get; set; }
+        
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public PrefixService(SuccubusContext context)
+        private readonly string _defaultPrefix;
+
+        public PrefixService(DatabaseService dbService, ConfigurationService configService)
         {
-            _context = context;
-            _logger = LogManager.GetCurrentClassLogger();
+            DbService = dbService;
+            _defaultPrefix = configService.Configuration.DefaultPrefix;
         }
+
+        public string GetDefaultPrefix() => _defaultPrefix;
 
         public string GetPrefix(IGuild guild)
         {
@@ -25,21 +29,28 @@ namespace Succubus.Services
 
         public string GetPrefix(ulong guildId)
         {
-            return _context.Guilds
+            return DbService
+                .GetDbContext()
+                .Guilds
                 .FirstOrDefault(x => x.GuildId == guildId)
-                ?.Prefix;
+                ?.Prefix ?? GetDefaultPrefix();
         }
 
         public string GetPrefix(string name)
         {
-            return _context.Guilds
+            return DbService
+                .GetDbContext()
+                .Guilds
                 .FirstOrDefault(x => x.Name == name)
                 ?.Prefix;
         }
 
         public void SetPrefix(IGuild guild, string prefix)
         {
-            var g = _context.Guilds.FirstOrDefault(x => x.GuildId == guild.Id);
+            var g = DbService
+                .GetDbContext()
+                .Guilds
+                .FirstOrDefault(x => x.GuildId == guild.Id);
 
             if (g != null)
             {
@@ -58,18 +69,21 @@ namespace Succubus.Services
 
             try
             {
-                _context.Update(g);
-                _context.SaveChanges();
+                DbService.GetDbContext().Update(g);
+                DbService.GetDbContext().SaveChanges();
             }
             catch (DBConcurrencyException e)
             {
-                _logger.Error($"[SetPrefix] Failed to update {g.Name}'s prefix ({prefix})", e);
+                Logger.Error($"[SetPrefix] Failed to update {g.Name}'s prefix ({prefix})", e);
             }
         }
 
         public void SetPrefix(ulong guildId, string prefix)
         {
-            var g = _context.Guilds.FirstOrDefault(x => x.GuildId == guildId);
+            var g = DbService
+                .GetDbContext()
+                .Guilds
+                .FirstOrDefault(x => x.GuildId == guildId);
 
             if (g != null)
             {
@@ -88,12 +102,12 @@ namespace Succubus.Services
 
             try
             {
-                _context.Update(g);
-                _context.SaveChanges();
+                DbService.GetDbContext().Update(g);
+                DbService.GetDbContext().SaveChanges();
             }
             catch (DBConcurrencyException e)
             {
-                _logger.Error($"[SetPrefix] Failed to update {g.GuildId}'s prefix ({prefix})", e);
+                Logger.Error($"[SetPrefix] Failed to update {g.GuildId}'s prefix ({prefix})", e);
             }
         }
     }

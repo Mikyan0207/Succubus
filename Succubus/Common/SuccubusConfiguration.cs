@@ -11,5 +11,7 @@
         public string Owner { get; set; }
 
         public ulong SuccubusId { get; set; }
+
+        public string DefaultPrefix { get; set; }
     }
 }

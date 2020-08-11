@@ -6,11 +6,11 @@ using Succubus.Common;
 
 namespace Succubus.Services
 {
-    public class ConfigurationService : IService
+    public class ConfigurationService
     {
         public SuccubusConfiguration Configuration { get; }
 
-        public ConfigurationService(AssemblyName name,string file)
+        public ConfigurationService(string name, string file)
         {
             using var stream = Assembly.Load(name).GetManifestResourceStream($"{name}.{file}");
 

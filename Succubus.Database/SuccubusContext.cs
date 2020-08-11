@@ -11,7 +11,7 @@ namespace Succubus.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("File=Succubus.db", options =>
+            optionsBuilder.UseSqlite("Filename=Succubus.db", options =>
             {
                 options.CommandTimeout(60);
                 options.MigrationsAssembly("Succubus.Database");

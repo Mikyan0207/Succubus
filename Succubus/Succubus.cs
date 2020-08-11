@@ -4,7 +4,6 @@ using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using Succubus.Common;
-using Succubus.Database;
 using Succubus.Services;
 using System;
 using System.Reflection;
@@ -28,14 +27,13 @@ namespace Succubus
         {
             Log.InitializeLogger();
 
-            ConfigurationService = new ConfigurationService(new AssemblyName("Succubus.Resources"), "SuccubusConfiguration.json");
+            ConfigurationService = new ConfigurationService("Succubus.Resources", "SuccubusConfiguration.json");
 
             Client = new DiscordShardedClient(new DiscordSocketConfig
             {
                 AlwaysDownloadUsers = false,
                 MessageCacheSize = 0,
                 DefaultRetryMode = RetryMode.AlwaysRetry,
-                // TODO: Remove (?)
                 GatewayIntents = GatewayIntents.Guilds | GatewayIntents.GuildMessages | GatewayIntents.GuildBans | GatewayIntents.GuildVoiceStates | GatewayIntents.GuildMembers,
             });
 
@@ -50,14 +48,17 @@ namespace Succubus
                 .AddSingleton(Client)
                 .AddSingleton(CommandService)
                 .AddSingleton(ConfigurationService)
-                .AddDbContext<SuccubusContext>()
+                .AddSingleton(new DatabaseService())
                 .LoadSuccubusServices(Assembly.GetCallingAssembly())
                 .BuildServiceProvider()
                 .LoadSuccubusModules(Assembly.GetCallingAssembly(), CommandService);
 
+            Services.GetService<CommandHandler>();
+
             Client.ShardReady += Client_ShardReady;
             Client.JoinedGuild += Client_JoinedGuild;
             Client.LeftGuild += Client_LeftGuild;
+            CommandService.CommandExecuted += CommandService_CommandExecuted;
         }
 
         public async Task RunAsync()
@@ -92,6 +93,35 @@ namespace Succubus
                         + $"{"Owner",-12}{e.Owner.Username}\n\t"
                         + $"{"Members",-12}{e.MemberCount}\n\t"
                         + $"{"Created",-12}{e.CreatedAt.DateTime}\n]");
+
+            return Task.CompletedTask;
+        }
+
+        private static Task CommandService_CommandExecuted(Optional<CommandInfo> info, ICommandContext ctx, IResult res)
+        {
+            var e = info.Value;
+
+            if (res.IsSuccess)
+            {
+                Logger.Info($"Command Executed ✔️\n[\n\t"
+                            + $"{"Name",-12}{e.Name}\n\t"
+                            + $"{"User",-12}{ctx.Message.Author.Username}\n\t"
+                            + $"{"Channel",-12}{ctx.Channel.Name}\n\t"
+                            + $"{"Guild",-12}{ctx.Guild.Name ?? "Direct Message"}\n\t"
+                            + $"{"Date",-12}{ctx.Message.Timestamp}\n\t"
+                            + $"{"Raw Message",-12}{ctx.Message.Content}\n]");
+            }
+            else
+            {
+                Logger.Error($"Command Errored ❌\n[\n\t"
+                             + $"{"Name",-12}{e.Name}\n\t"
+                             + $"{"User",-12}{ctx.Message.Author.Username}\n\t"
+                             + $"{"Channel",-12}{ctx.Channel.Name}\n\t"
+                             + $"{"Guild",-12}{ctx.Guild.Name ?? "Direct Message"}\n\t"
+                             + $"{"Date",-12}{ctx.Message.Timestamp}\n\t"
+                             + $"{"Raw Message",-12}{ctx.Message.Content}\n\t"
+                             + $"{"Error Reason",-12}{res.ErrorReason}\n]");
+            }
 
             return Task.CompletedTask;
         }

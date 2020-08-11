@@ -12,7 +12,7 @@ namespace Succubus.Services
 
         public ConfigurationService(AssemblyName name,string file)
         {
-            using var stream = Assembly.Load(name).GetManifestResourceStream(file);
+            using var stream = Assembly.Load(name).GetManifestResourceStream($"{name}.{file}");
 
             if (stream == null)
                 throw new NullReferenceException(nameof(stream));

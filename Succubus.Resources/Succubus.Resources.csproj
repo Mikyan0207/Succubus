@@ -6,4 +6,12 @@
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
+  <ItemGroup>
+    <None Remove="SuccubusConfiguration.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="SuccubusConfiguration.json" />
+  </ItemGroup>
+
 </Project>

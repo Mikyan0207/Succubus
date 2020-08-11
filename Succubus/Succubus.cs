@@ -52,7 +52,8 @@ namespace Succubus
                 .AddSingleton(ConfigurationService)
                 .AddDbContext<SuccubusContext>()
                 .LoadSuccubusServices(Assembly.GetCallingAssembly())
-                .BuildServiceProvider();
+                .BuildServiceProvider()
+                .LoadSuccubusModules(Assembly.GetCallingAssembly(), CommandService);
 
             Client.ShardReady += Client_ShardReady;
             Client.JoinedGuild += Client_JoinedGuild;

@@ -1,14 +1,15 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using NLog;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Discord.Commands;
+using Microsoft.Extensions.DependencyInjection;
+using NLog;
+using Succubus.Services.Interfaces;
 
-namespace Succubus.Services
+namespace Succubus.Services.Extensions
 {
     public static class ServicesExtensions
     {

@@ -1,4 +1,4 @@
-﻿namespace Succubus.Services
+﻿namespace Succubus.Services.Interfaces
 {
     public interface IService
     {

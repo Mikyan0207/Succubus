@@ -8,6 +8,8 @@ using Succubus.Services;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
+using Succubus.Database;
+using Succubus.Services.Extensions;
 
 namespace Succubus
 {
@@ -120,7 +122,7 @@ namespace Succubus
                              + $"{"Guild",-12}{ctx.Guild.Name ?? "Direct Message"}\n\t"
                              + $"{"Date",-12}{ctx.Message.Timestamp}\n\t"
                              + $"{"Raw Message",-12}{ctx.Message.Content}\n\t"
-                             + $"{"Error Reason",-12}{res.ErrorReason}\n]");
+                             + $"{"Reason",-12}{res.ErrorReason}\n]");
             }
 
             return Task.CompletedTask;

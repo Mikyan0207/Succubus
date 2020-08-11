@@ -3,12 +3,13 @@ using NLog;
 using Succubus.Database.Models;
 using System.Data;
 using System.Linq;
+using Succubus.Services.Interfaces;
 
 namespace Succubus.Services
 {
     public class PrefixService : IService
     {
-        private DatabaseService DbService { get; set; }
+        private DatabaseService DbService { get; }
         
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -30,7 +31,7 @@ namespace Succubus.Services
         public string GetPrefix(ulong guildId)
         {
             return DbService
-                .GetDbContext()
+                .GetContext()
                 .Guilds
                 .FirstOrDefault(x => x.GuildId == guildId)
                 ?.Prefix ?? GetDefaultPrefix();
@@ -39,7 +40,7 @@ namespace Succubus.Services
         public string GetPrefix(string name)
         {
             return DbService
-                .GetDbContext()
+                .GetContext()
                 .Guilds
                 .FirstOrDefault(x => x.Name == name)
                 ?.Prefix;
@@ -47,9 +48,8 @@ namespace Succubus.Services
 
         public void SetPrefix(IGuild guild, string prefix)
         {
-            var g = DbService
-                .GetDbContext()
-                .Guilds
+            var ctx = DbService.GetContext();
+            var g = ctx.Guilds
                 .FirstOrDefault(x => x.GuildId == guild.Id);
 
             if (g != null)
@@ -69,20 +69,19 @@ namespace Succubus.Services
 
             try
             {
-                DbService.GetDbContext().Update(g);
-                DbService.GetDbContext().SaveChanges();
+                ctx.Update(g);
+                ctx.SaveChanges();
             }
             catch (DBConcurrencyException e)
             {
-                Logger.Error($"[SetPrefix] Failed to update {g.Name}'s prefix ({prefix})", e);
+                Logger.Error($"[SetPrefix] Failed to update {g.Name}'s prefix ({prefix})", e.Message);
             }
         }
 
         public void SetPrefix(ulong guildId, string prefix)
         {
-            var g = DbService
-                .GetDbContext()
-                .Guilds
+            var ctx = DbService.GetContext();
+            var g = ctx.Guilds
                 .FirstOrDefault(x => x.GuildId == guildId);
 
             if (g != null)
@@ -102,8 +101,8 @@ namespace Succubus.Services
 
             try
             {
-                DbService.GetDbContext().Update(g);
-                DbService.GetDbContext().SaveChanges();
+                ctx.Update(g);
+                ctx.SaveChanges();
             }
             catch (DBConcurrencyException e)
             {

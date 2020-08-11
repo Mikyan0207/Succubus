@@ -5,6 +5,7 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using NLog;
+using Succubus.Services.Interfaces;
 
 namespace Succubus.Services
 {

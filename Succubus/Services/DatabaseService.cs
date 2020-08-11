@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Succubus.Database;
+using Succubus.Services.Interfaces;
 
 namespace Succubus.Services
 {
@@ -19,7 +20,7 @@ namespace Succubus.Services
             context.SaveChanges();
         }
 
-        public SuccubusContext GetDbContext()
+        public SuccubusContext GetContext()
         {
             var context = new SuccubusContext();
             context.Database.SetCommandTimeout(60);

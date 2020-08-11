@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Succubus.Services
 {
@@ -10,7 +10,7 @@ namespace Succubus.Services
     {
         public static IServiceCollection LoadSuccubusServices(this IServiceCollection collection, Assembly assembly)
         {
-            var types = assembly.GetTypesWithInterface();
+            var types = assembly.GetTypesWithInterface(typeof(IService));
 
             foreach (var type in types)
                 collection.AddSingleton(type, typeof(IService));
@@ -33,9 +33,9 @@ namespace Succubus.Services
             }
         }
 
-        private static IEnumerable<Type> GetTypesWithInterface(this Assembly assembly)
+        private static IEnumerable<Type> GetTypesWithInterface(this Assembly assembly, Type type)
         {
-            return assembly.GetLoadableTypes().Where(typeof(IService).IsAssignableFrom);
+            return assembly.GetLoadableTypes().Where(type.IsAssignableFrom);
         }
     }
 }

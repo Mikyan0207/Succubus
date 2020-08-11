@@ -8,7 +8,6 @@
   <ItemGroup>
     <Folder Include="Attributes\" />
     <Folder Include="Modules\Administration\" />
-    <Folder Include="Modules\Help\" />
     <Folder Include="Modules\Music\" />
     <Folder Include="Modules\Notifications\" />
     <Folder Include="Modules\Nsfw\" />

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using NLog;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -10,10 +12,18 @@ namespace Succubus.Services
     {
         public static IServiceCollection LoadSuccubusServices(this IServiceCollection collection, Assembly assembly)
         {
+            var sw = Stopwatch.StartNew();
+            var logger = LogManager.GetCurrentClassLogger();
             var types = assembly.GetTypesWithInterface(typeof(IService));
 
             foreach (var type in types)
-                collection.AddSingleton(type, typeof(IService));
+            {
+                collection.AddSingleton(type);
+                logger.Info($"Loading {type.Name} from {type.Assembly.GetName().Name}");
+            }
+
+            sw.Stop();
+            logger.Info($"Succubus Services loaded in {sw.Elapsed.TotalSeconds:F2}s");
 
             return collection;
         }
@@ -35,7 +45,7 @@ namespace Succubus.Services
 
         private static IEnumerable<Type> GetTypesWithInterface(this Assembly assembly, Type type)
         {
-            return assembly.GetLoadableTypes().Where(type.IsAssignableFrom);
+            return assembly.GetLoadableTypes().Where(x => x.GetInterfaces().Contains(type)).ToList();
         }
     }
 }

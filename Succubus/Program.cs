@@ -1,12 +1,12 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 
 namespace Succubus
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static async Task Main()
         {
-            Console.WriteLine("Hello World!");
+            await new Succubus().RunAsync().ConfigureAwait(false);
         }
     }
 }

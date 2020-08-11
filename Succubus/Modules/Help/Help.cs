@@ -1,13 +1,10 @@
 ﻿using Discord.Commands;
-using Succubus.Services;
+using Succubus.Modules.Help.Services;
 
 namespace Succubus.Modules.Help
 {
     [Name("Help")]
-    public class Help : SuccubusModule
+    public class Help : SuccubusModule<HelpService>
     {
-        public Help(LocalizationService ls) : base(ls)
-        {
-        }
     }
 }

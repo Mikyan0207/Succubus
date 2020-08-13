@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
-using Discord.Commands;
 using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using Succubus.Services.Interfaces;
@@ -21,7 +19,7 @@ namespace Succubus.Services.Extensions
 
             foreach (var type in types)
             {
-                collection.AddSingleton(type);
+                collection.AddTransient(type);
                 logger.Info($"Loading {type.Name} from {type.Assembly.GetName().Name}");
             }
 
@@ -29,16 +27,6 @@ namespace Succubus.Services.Extensions
             logger.Info($"Succubus Services loaded in {sw.Elapsed.TotalSeconds:F2}s");
 
             return collection;
-        }
-
-        public static IServiceProvider LoadSuccubusModules(this IServiceProvider provider, Assembly assembly, CommandService cmdService)
-        {
-            Task.Run(async () =>
-            {
-                await cmdService.AddModulesAsync(assembly, provider).ConfigureAwait(false);
-            });
-
-            return provider;
         }
 
         private static IEnumerable<Type> GetLoadableTypes(this Assembly assembly)

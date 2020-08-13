@@ -1,4 +1,6 @@
-﻿namespace Succubus.Database.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Succubus.Database.Models
 {
     public class User : Entity
     {

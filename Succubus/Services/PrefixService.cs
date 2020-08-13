@@ -1,8 +1,8 @@
-﻿using Discord;
-using NLog;
+﻿using NLog;
 using Succubus.Database.Models;
 using System.Data;
 using System.Linq;
+using DSharpPlus.Entities;
 using Succubus.Services.Interfaces;
 
 namespace Succubus.Services
@@ -23,7 +23,7 @@ namespace Succubus.Services
 
         public string GetDefaultPrefix() => _defaultPrefix;
 
-        public string GetPrefix(IGuild guild)
+        public string GetPrefix(DiscordGuild guild)
         {
             return GetPrefix(guild.Id);
         }
@@ -46,7 +46,7 @@ namespace Succubus.Services
                 ?.Prefix;
         }
 
-        public void SetPrefix(IGuild guild, string prefix)
+        public void SetPrefix(DiscordGuild guild, string prefix)
         {
             var ctx = DbService.GetContext();
             var g = ctx.Guilds

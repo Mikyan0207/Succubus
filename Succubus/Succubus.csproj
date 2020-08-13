@@ -6,17 +6,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Cosplayers.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Cosplayers.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Attributes\" />
     <Folder Include="Modules\Administration\" />
     <Folder Include="Modules\Music\" />
     <Folder Include="Modules\Notifications\" />
-    <Folder Include="Modules\Nsfw\" />
     <Folder Include="Modules\Owner\" />
     <Folder Include="Modules\Utility\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Discord.Net" Version="2.3.0-dev-20200806.2" />
+    <PackageReference Include="CommandLineParser" Version="2.9.0-preview1" />
+    <PackageReference Include="DSharpPlus" Version="4.0.0-nightly-00711" />
+    <PackageReference Include="DSharpPlus.CommandsNext" Version="4.0.0-nightly-00711" />
+    <PackageReference Include="DSharpPlus.Interactivity" Version="4.0.0-nightly-00711" />
+    <PackageReference Include="DSharpPlus.VoiceNext" Version="4.0.0-nightly-00711" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0-preview.7.20365.15">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

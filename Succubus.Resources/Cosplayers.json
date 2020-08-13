@@ -1,0 +1,70 @@
+﻿[
+  {
+    "Keywords": [ "ふれいあ", "fleia", "flemani", "ふれまに" ],
+    "Sets": [
+      {
+        "Keywords": [ "ふれみこ", "FleiaMiko" ],
+        "Size": 182,
+        "Folder": "FleiaMiko",
+        "Prefix": null
+      },
+      {
+        "Keywords": [ "Honey Bunny", "bunny" ],
+        "Size": 349,
+        "Folder": "HoneyBunny",
+        "Prefix": null
+      },
+      {
+        "Keywords": [ "Immoral" ],
+        "Size": 215,
+        "Folder": "Immoral",
+        "Prefix": null
+      },
+      {
+        "Keywords": [ "Black or White", "BoW" ],
+        "Size": 322,
+        "Folder": "BoW",
+        "Prefix": null
+      },
+      {
+        "Keywords": [ "ふれいあ、鬼がかってる？", "Rem" ],
+        "Size": 166,
+        "Folder": "Rem",
+        "Prefix": null
+      },
+      {
+        "Keywords": [ "ふれいあに紐神様を求めるのは間違っているだろうか", "Danmachi", "Hestia" ],
+        "Size": 264,
+        "Folder": "Danmachi",
+        "Prefix": null
+      },
+      {
+        "Keywords": [ "Beast Mode", "bm" ],
+        "Size": 319,
+        "Folder": "BeastMode",
+        "Prefix": null
+      },
+      {
+        "Name": "Summer Island",
+        "Keywords": [ "Summer Island", "shimakaze" ],
+        "Size": 265,
+        "Folder": "SummerIsland",
+        "Prefix": "Shimakaze"
+      }
+    ],
+    "Socials": [
+      {
+        "Name": "ふれいあ",
+        "Url": "https://twitter.com/fleia0124"
+      },
+      {
+        "Name": "ふれまに",
+        "Url": "https://flemani.booth.pm/"
+      },
+      {
+        "Name": "fleia0124",
+        "Url": "https://www.instagram.com/fleia0124/"
+      }
+    ] 
+  }
+]

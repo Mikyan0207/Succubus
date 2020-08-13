@@ -1,16 +1,13 @@
-﻿using System.Globalization;
-using Discord.Commands;
-using Discord.Commands.Builders;
-using NLog;
-using Succubus.Services;
+﻿using DSharpPlus.CommandsNext;
+using Succubus.Services.Interfaces;
 
 namespace Succubus.Modules
 {
-    public abstract class SuccubusModule : ModuleBase<ShardedCommandContext>
+    public class SuccubusModule : BaseCommandModule
     {
     }
 
-    public abstract class SuccubusModule<TService> : SuccubusModule where TService : class
+    public class SuccubusModule<TService> : SuccubusModule where TService : IService
     {
         public TService Service { get; set; }
     }

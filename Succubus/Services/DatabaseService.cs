@@ -18,6 +18,7 @@ namespace Succubus.Services
 
             context.Database.ExecuteSqlRaw("PRAGMA journal_mode=WAL; PRAGMA synchronous=OFF");
             context.SaveChanges();
+            Initialize(context);
         }
 
         public SuccubusContext GetContext()
@@ -33,6 +34,17 @@ namespace Succubus.Services
             com.ExecuteNonQuery();
 
             return context;
+        }
+
+        private static void Initialize(SuccubusContext context)
+        {
+            //var store = new Store("Succubus.Resources");
+            //var cosplayers = store.Get("Cosplayers");
+
+            //foreach (var c in cosplayers)
+            //{
+                
+            //}
         }
     }
 }

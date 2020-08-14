@@ -8,7 +8,7 @@ namespace Succubus.Database.Models
         [JsonIgnore]
         public string Name { get; set; }
 
-        public IReadOnlyCollection<string> Keywords { get; set; }
+        public List<string> Keywords { get; set; }
 
         public int Size { get; set; }
 

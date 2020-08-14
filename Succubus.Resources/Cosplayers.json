@@ -1,6 +1,6 @@
 ﻿[
   {
-    "Keywords": [ "ふれいあ", "fleia", "flemani", "ふれまに" ],
+    "Keywords": [ "ふれいあ", "Fleia", "flemani", "ふれまに" ],
     "Sets": [
       {
         "Keywords": [ "ふれみこ", "FleiaMiko" ],
@@ -65,6 +65,112 @@
         "Name": "fleia0124",
         "Url": "https://www.instagram.com/fleia0124/"
       }
-    ] 
+    ]
+  },
+  {
+    "Keywords": [ "いくみ", "iKkyu" ],
+    "Sets": [
+      {
+        "Keywords": [ "Ikumi Trip" ],
+        "Size": 189,
+        "Folder": "IkumiTrip",
+        "Prefix": null
+      }
+    ],
+    "Socials": [
+      {
+        "Name": "いくみ",
+        "Url": "https://ikkyu3.booth.pm/"
+      },
+      {
+        "Name": "いくみ",
+        "Url": "https://twitter.com/193azs"
+      }
+    ]
+  },
+  {
+    "Keywords": [ "水無月みり", "Miri" ],
+    "Sets": [
+      {
+        "Keywords": [ "プリズマ サマータイム", "Prisma Summer" ],
+        "Size": 120,
+        "Folder": "PrismaSummer",
+        "Prefix": null
+      },
+      {
+        "Keywords": [ "いっぱいだして💛よくってよ！", "Elena" ],
+        "Size": 121,
+        "Folder": "Elena",
+        "Prefix": null
+      }
+    ],
+    "Socials": [
+      {
+        "Name": "みりROM通販",
+        "Url": "https://toge-kamosu.booth.pm/"
+      }
+    ]
+  },
+  {
+    "Keywords": [ "ぽにょ", "Ponyo" ],
+    "Sets": [
+      {
+        "Keywords": [ "Succubus" ],
+        "Size": 218,
+        "Folder": "Succubus",
+        "Prefix": null
+      }
+    ],
+    "Socials": [
+      {
+        "Name": "ぽにょ皇子Photo！",
+        "Url": "https://ponyophoto.booth.pm/"
+      },
+      {
+        "Name": "ponyoouji",
+        "Url": "https://www.instagram.com/ponyoouji/"
+      },
+      {
+        "Name": "ぽにょ皇子",
+        "Url": "https://twitter.com/white613like"
+      }
+    ]
+  },
+  {
+    "Keywords": [ "りずな", "Rizuna" ],
+    "Sets": [
+      {
+        "Keywords": [ "Great Ocean" ],
+        "Size": 101,
+        "Folder": "GreatOcean",
+        "Prefix": null
+      },
+      {
+        "Keywords": [ "冴えない彼女の裏のかお", "Saenai Kanojo", "saekano" ],
+        "Size": 100,
+        "Folder": "SaenaiKanojo",
+        "Prefix": null
+      },
+      {
+        "Keywords": [ "Hedonistic Labyrinth", "Labyrinth" ],
+        "Size": 100,
+        "Folder": "HedonisticLabyrinth",
+        "Prefix": null
+      }
+    ],
+    "Socials": [
+      {
+        "Name": "りずな",
+        "Url": "https://rizunya.booth.pm/"
+      },
+      {
+        "Name": "rizuna1228",
+        "Url": "https://www.instagram.com/rizuna1228/"
+      },
+      {
+        "Name": "りずな",
+        "Url": "https://mobile.twitter.com/rizunya"
+      }
+    ]
   }
 ]

@@ -32,7 +32,7 @@ namespace Succubus.Database
                 .Property(p => p.Keywords)
                 .HasConversion(
                     c => JsonSerializer.Serialize(c, null),
-                    c => JsonSerializer.Deserialize<IReadOnlyCollection<string>>(c, null));
+                    c => JsonSerializer.Deserialize<List<string>>(c, null));
 
             mb.Entity<Cosplayer>()
                 .HasMany(c => c.Socials)
@@ -46,7 +46,7 @@ namespace Succubus.Database
                 .Property(p => p.Keywords)
                 .HasConversion(
                     c => JsonSerializer.Serialize(c, null),
-                    c => JsonSerializer.Deserialize<IReadOnlyCollection<string>>(c, null));
+                    c => JsonSerializer.Deserialize<List<string>>(c, null));
         }
     }
 }

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using DSharpPlus.CommandsNext;
+﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using Succubus.Common;
 using Succubus.Modules.Nsfw.Options;
 using Succubus.Modules.Nsfw.Services;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Succubus.Modules.Nsfw
 {

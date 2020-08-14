@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Succubus.Common;
 using System.IO;
 using System.Reflection;
-using Newtonsoft.Json;
-using Succubus.Common;
 
 namespace Succubus.Services
 {
@@ -10,16 +9,12 @@ namespace Succubus.Services
     {
         public SuccubusConfiguration Configuration { get; }
 
-        public ConfigurationService(string name, string file)
+        public ConfigurationService()
         {
-            using var stream = Assembly.Load(name).GetManifestResourceStream($"{name}.{file}");
+            var folder = Directory.GetParent(Assembly.GetCallingAssembly().Location)?.Parent?.Parent?.Parent?.FullName;
+            var content = File.ReadAllText($"{folder}/Resources/Cosplayers.json");
 
-            if (stream == null)
-                throw new NullReferenceException(nameof(stream));
-
-            using var reader = new StreamReader(stream);
-
-            Configuration = JsonConvert.DeserializeObject<SuccubusConfiguration>(reader.ReadToEnd());
+            Configuration = JsonConvert.DeserializeObject<SuccubusConfiguration>(content);
         }
     }
 }

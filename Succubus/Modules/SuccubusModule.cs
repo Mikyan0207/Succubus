@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using DSharpPlus.CommandsNext;
+﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
 using Succubus.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace Succubus.Modules
 {
@@ -18,7 +18,5 @@ namespace Succubus.Modules
     public class SuccubusModule<TService> : SuccubusModule where TService : IService
     {
         public TService Service { get; set; }
-
-
     }
 }

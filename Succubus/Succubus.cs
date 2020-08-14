@@ -27,7 +27,7 @@ namespace Succubus
         {
             Log.InitializeLogger();
 
-            ConfigurationService = new ConfigurationService("Succubus.Resources", "SuccubusConfiguration.json");
+            ConfigurationService = new ConfigurationService();
 
             Client = new DiscordClient(new DiscordConfiguration
             {
@@ -44,7 +44,7 @@ namespace Succubus
 
             CommandService = Client.UseCommandsNext(new CommandsNextConfiguration
             {
-                StringPrefixes = new [] { "$" },
+                StringPrefixes = new [] { "$", "!", "." },
                 EnableDms = false,
                 EnableMentionPrefix = false,
                 Services = Services

@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Succubus.Database.Models;
+using System.Collections.Generic;
+using System.Text.Json;
 
 namespace Succubus.Database
 {

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Succubus.Common
+﻿namespace Succubus.Common
 {
     public class Command
     {

@@ -1,16 +1,16 @@
-﻿using NLog;
+﻿using DSharpPlus.Entities;
+using NLog;
 using Succubus.Database.Models;
+using Succubus.Services.Interfaces;
 using System.Data;
 using System.Linq;
-using DSharpPlus.Entities;
-using Succubus.Services.Interfaces;
 
 namespace Succubus.Services
 {
     public class PrefixService : IService
     {
         private DatabaseService DbService { get; }
-        
+
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private readonly string _defaultPrefix;

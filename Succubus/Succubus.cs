@@ -1,13 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DSharpPlus;
+using DSharpPlus.CommandsNext;
+using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using Succubus.Common;
 using Succubus.Services;
+using Succubus.Services.Extensions;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
-using DSharpPlus;
-using DSharpPlus.CommandsNext;
-using Succubus.Services.Extensions;
 
 namespace Succubus
 {
@@ -44,7 +44,7 @@ namespace Succubus
 
             CommandService = Client.UseCommandsNext(new CommandsNextConfiguration
             {
-                StringPrefixes = new [] { "$", "!", "." },
+                StringPrefixes = new[] { "$", "!", "." },
                 EnableDms = false,
                 EnableMentionPrefix = false,
                 Services = Services

@@ -5,9 +5,7 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Succubus", "Succubus\Succubus.csproj", "{E78A090E-C3CC-4244-B069-8C574BAC5C1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Succubus.Resources", "Succubus.Resources\Succubus.Resources.csproj", "{6BB2C581-BA15-4A88-8D0E-FA264C6ABB44}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Succubus.Database", "Succubus.Database\Succubus.Database.csproj", "{E30775F8-0A51-40C7-A5A9-1267D27B89B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Succubus.Database", "Succubus.Database\Succubus.Database.csproj", "{E30775F8-0A51-40C7-A5A9-1267D27B89B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{E78A090E-C3CC-4244-B069-8C574BAC5C1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E78A090E-C3CC-4244-B069-8C574BAC5C1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E78A090E-C3CC-4244-B069-8C574BAC5C1E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6BB2C581-BA15-4A88-8D0E-FA264C6ABB44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BB2C581-BA15-4A88-8D0E-FA264C6ABB44}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6BB2C581-BA15-4A88-8D0E-FA264C6ABB44}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6BB2C581-BA15-4A88-8D0E-FA264C6ABB44}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E30775F8-0A51-40C7-A5A9-1267D27B89B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E30775F8-0A51-40C7-A5A9-1267D27B89B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E30775F8-0A51-40C7-A5A9-1267D27B89B7}.Release|Any CPU.ActiveCfg = Release|Any CPU

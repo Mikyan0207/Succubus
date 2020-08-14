@@ -4,10 +4,13 @@ using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using Succubus.Common;
 using Succubus.Services;
-using Succubus.Services.Extensions;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
+using DSharpPlus.Entities;
+using DSharpPlus.Interactivity;
+using DSharpPlus.Interactivity.Enums;
+using Succubus.Extensions;
 
 namespace Succubus
 {
@@ -16,6 +19,8 @@ namespace Succubus
         public DiscordClient Client { get; }
 
         public CommandsNextExtension CommandService { get; }
+
+        public InteractivityExtension InteractivityService { get; }
 
         public IServiceProvider Services { get; set; }
 
@@ -48,6 +53,14 @@ namespace Succubus
                 EnableDms = false,
                 EnableMentionPrefix = false,
                 Services = Services
+            });
+
+            InteractivityService = Client.UseInteractivity(new InteractivityConfiguration
+            {
+                PaginationBehaviour = PaginationBehaviour.WrapAround,
+                PaginationDeletion = PaginationDeletion.DeleteMessage,
+                Timeout = TimeSpan.FromMinutes(2),
+                PollBehaviour = PollBehaviour.KeepEmojis,
             });
 
             CommandService.RegisterCommands(Assembly.GetExecutingAssembly());

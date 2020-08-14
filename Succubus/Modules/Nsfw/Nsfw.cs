@@ -7,10 +7,12 @@ using Succubus.Modules.Nsfw.Services;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Succubus.Extensions;
 
 namespace Succubus.Modules.Nsfw
 {
     [RequireNsfw]
+    [RequirePrefixes("!", ShowInHelp = true)]
     public class Nsfw : SuccubusModule
     {
         private readonly NsfwService _service;
@@ -21,6 +23,7 @@ namespace Succubus.Modules.Nsfw
         }
 
         [Command("yabai")]
+        [Description("Yabai peko")]
         public async Task YabaiAsync(CommandContext ctx, params string[] args)
         {
             var options = OptionsParser.Parse<YabaiOptions>(args);
@@ -36,6 +39,8 @@ namespace Succubus.Modules.Nsfw
                     .WithTimestamp(DateTime.Now)
                     .WithColor(DiscordColor.Purple)
             ).ConfigureAwait(false);
+
+            ctx.Message.DeleteAfter("Succubus Auto-Message Delete", TimeSpan.FromSeconds(2));
         }
     }
 }

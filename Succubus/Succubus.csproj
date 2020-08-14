@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -17,6 +17,7 @@
     <Folder Include="Attributes\" />
     <Folder Include="Modules\Administration\" />
     <Folder Include="Modules\Music\" />
+    <Folder Include="Modules\Hololive\" />
     <Folder Include="Modules\Notifications\" />
     <Folder Include="Modules\Owner\" />
     <Folder Include="Modules\Utility\" />

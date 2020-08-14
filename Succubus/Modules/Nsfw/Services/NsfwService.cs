@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Succubus.Common.Extensions;
 using Succubus.Database.Models;
 using Succubus.Modules.Nsfw.Options;
 using Succubus.Services;
@@ -7,6 +6,7 @@ using Succubus.Services.Interfaces;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Succubus.Extensions;
 
 namespace Succubus.Modules.Nsfw.Services
 {

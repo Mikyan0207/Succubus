@@ -44,8 +44,7 @@ namespace Succubus.Services
 
         private static void Initialize(SuccubusContext context)
         {
-            var folder = Directory.GetParent(Assembly.GetCallingAssembly().Location)?.Parent?.Parent?.Parent?.FullName;
-            var content = File.ReadAllText($"{folder}/Resources/Cosplayers.json");
+            var content = File.ReadAllText($"Resources/Cosplayers.json");
 
             var cosplayers = JsonConvert.DeserializeObject<List<Cosplayer>>(content);
 

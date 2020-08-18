@@ -1,6 +1,6 @@
-﻿using DSharpPlus.CommandsNext;
+﻿using System;
+using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
-using Succubus.Services.Interfaces;
 using System.Threading.Tasks;
 
 namespace Succubus.Modules
@@ -13,10 +13,27 @@ namespace Succubus.Modules
 
             return await ctx.Channel.SendMessageAsync(message ?? "", false, embed).ConfigureAwait(false);
         }
-    }
 
-    public class SuccubusModule<TService> : SuccubusModule where TService : IService
-    {
-        public TService Service { get; set; }
+        protected virtual async Task<DiscordMessage> SendErrorAsync(CommandContext ctx, string title, string error)
+        {
+            var embedBuilder = new DiscordEmbedBuilder()
+                .WithTitle(title)
+                .WithDescription(error)
+                .WithTimestamp(DateTime.Now)
+                .WithColor(DiscordColor.Red);
+
+            return await EmbedAsync(ctx, embedBuilder).ConfigureAwait(false);
+        }
+
+        protected virtual async Task<DiscordMessage> SendConfirmationAsync(CommandContext ctx, string title, string message)
+        {
+            var embedBuilder = new DiscordEmbedBuilder()
+                .WithTitle(title)
+                .WithDescription(message)
+                .WithTimestamp(DateTime.Now)
+                .WithColor(DiscordColor.SpringGreen);
+
+            return await EmbedAsync(ctx, embedBuilder).ConfigureAwait(false);
+        }
     }
 }

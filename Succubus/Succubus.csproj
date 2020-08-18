@@ -1,8 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+    <OutputPath></OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,14 +15,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Cosplayers.json" />
+    <EmbeddedResource Include="Resources\Cosplayers.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Attributes\" />
-    <Folder Include="Modules\Administration\" />
+    <Folder Include="Modules\Hololive\Services\" />
     <Folder Include="Modules\Music\" />
-    <Folder Include="Modules\Hololive\" />
     <Folder Include="Modules\Notifications\" />
     <Folder Include="Modules\Owner\" />
     <Folder Include="Modules\Utility\" />
@@ -28,6 +34,7 @@
     <PackageReference Include="DSharpPlus" Version="4.0.0-nightly-00711" />
     <PackageReference Include="DSharpPlus.CommandsNext" Version="4.0.0-nightly-00711" />
     <PackageReference Include="DSharpPlus.Interactivity" Version="4.0.0-nightly-00711" />
+    <PackageReference Include="DSharpPlus.Lavalink" Version="4.0.0-nightly-00711" />
     <PackageReference Include="DSharpPlus.VoiceNext" Version="4.0.0-nightly-00711" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.7">
       <PrivateAssets>all</PrivateAssets>
@@ -39,6 +46,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Succubus.Database\Succubus.Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\libopus.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\libsodium.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\SuccubusConfiguration.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

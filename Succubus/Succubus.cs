@@ -7,9 +7,9 @@ using Succubus.Services;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
-using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Enums;
+using DSharpPlus.VoiceNext;
 using Succubus.Extensions;
 
 namespace Succubus
@@ -21,6 +21,8 @@ namespace Succubus
         public CommandsNextExtension CommandService { get; }
 
         public InteractivityExtension InteractivityService { get; }
+
+        public VoiceNextExtension VoiceService { get; }
 
         public IServiceProvider Services { get; set; }
 
@@ -37,7 +39,7 @@ namespace Succubus
             Client = new DiscordClient(new DiscordConfiguration
             {
                 MessageCacheSize = 0,
-                Token = ConfigurationService.Configuration.Token,
+                Token = ConfigurationService.Configuration.Token
             });
 
             Services = new ServiceCollection()
@@ -49,7 +51,7 @@ namespace Succubus
 
             CommandService = Client.UseCommandsNext(new CommandsNextConfiguration
             {
-                StringPrefixes = new[] { "$", "!", "." },
+                StringPrefixes = new[] { "$", "!", ".", "?" },
                 EnableDms = false,
                 EnableMentionPrefix = false,
                 Services = Services
@@ -61,6 +63,12 @@ namespace Succubus
                 PaginationDeletion = PaginationDeletion.DeleteMessage,
                 Timeout = TimeSpan.FromMinutes(2),
                 PollBehaviour = PollBehaviour.KeepEmojis,
+            });
+
+            VoiceService = Client.UseVoiceNext(new VoiceNextConfiguration
+            {
+                AudioFormat = AudioFormat.Default,
+                EnableIncoming = false
             });
 
             CommandService.RegisterCommands(Assembly.GetExecutingAssembly());

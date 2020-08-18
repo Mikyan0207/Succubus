@@ -22,11 +22,8 @@
 
   <ItemGroup>
     <Folder Include="Attributes\" />
-    <Folder Include="Modules\Hololive\Services\" />
     <Folder Include="Modules\Music\" />
-    <Folder Include="Modules\Notifications\" />
     <Folder Include="Modules\Owner\" />
-    <Folder Include="Modules\Utility\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +33,7 @@
     <PackageReference Include="DSharpPlus.Interactivity" Version="4.0.0-nightly-00711" />
     <PackageReference Include="DSharpPlus.Lavalink" Version="4.0.0-nightly-00711" />
     <PackageReference Include="DSharpPlus.VoiceNext" Version="4.0.0-nightly-00711" />
+    <PackageReference Include="GoogleTranslateFreeApi" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

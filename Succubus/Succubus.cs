@@ -5,8 +5,11 @@ using NLog;
 using Succubus.Common;
 using Succubus.Services;
 using System;
+using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Enums;
 using DSharpPlus.VoiceNext;
@@ -30,6 +33,8 @@ namespace Succubus
 
         public ConfigurationService ConfigurationService { get; }
 
+        private static readonly Regex TwitterRegex = new Regex("http(?:s)?:/\\/(?:www)?twitter\\.com\\/([a-zA-Z0-9_]+)\\/status\\/([0-9]+)");
+
         public Succubus()
         {
             Log.InitializeLogger();
@@ -45,7 +50,8 @@ namespace Succubus
             Services = new ServiceCollection()
                 .AddSingleton(Client)
                 .AddSingleton(ConfigurationService)
-                .AddSingleton(new DatabaseService())
+                .AddSingleton<DatabaseService>()
+                .AddSingleton<TranslationService>()
                 .LoadSuccubusServices(Assembly.GetCallingAssembly())
                 .BuildServiceProvider();
 
@@ -72,6 +78,28 @@ namespace Succubus
             });
 
             CommandService.RegisterCommands(Assembly.GetExecutingAssembly());
+
+            Client.MessageCreated += Client_MessageCreated;
+        }
+
+        private async Task Client_MessageCreated(DSharpPlus.EventArgs.MessageCreateEventArgs e)
+        {
+            if (!TwitterRegex.IsMatch(e.Message.Content))
+                return;
+
+            var discordEmbed = e.Message.Embeds.FirstOrDefault();
+            var translationService = Services.GetService<TranslationService>();
+            if (translationService != null)
+            {
+                var result = await translationService.TranslateAsync(discordEmbed?.Description, "French")
+                    .ConfigureAwait(false);
+                var embed = new DiscordEmbedBuilder()
+                    .AddField(
+                        $"Auto-Translation in {result.TargetLanguage.FullName} by Succubus",
+                        $"{result.MergedTranslation}")
+                    .WithColor(DiscordColor.Blurple);
+                await Client.SendMessageAsync(e.Channel, embed: embed).ConfigureAwait(false);
+            }
         }
 
         public async Task RunAsync()

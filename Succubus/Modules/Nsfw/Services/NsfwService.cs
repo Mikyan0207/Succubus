@@ -41,21 +41,21 @@ namespace Succubus.Modules.Nsfw.Services
         {
             try
             {
-                return await DbService
+                var r = await DbService
                     .GetContext()
                     .Sets
                     .Include(x => x.Cosplayer)
                     .AsNoTracking()
-                    .AsQueryable()
                     .ConditionalWhere(options.User != null, x => x.Keywords.Any(y => y.Equals(options.User)))
                     .ConditionalWhere(options.Set != null, x => x.Keywords.Any(y => y.Equals(options.Set)))
-                    .OrderBy(x => new Random().Next(1, 100))
-                    .FirstOrDefaultAsync()
+                    .ToListAsync()
                     .ConfigureAwait(false);
+
+                return r[new Random().Next(0, r.Count)];
             }
             catch (Exception ex)
             {
-                throw new SetException("", ex);
+                throw new SetException(ex.Message, ex);
             }
         }
 

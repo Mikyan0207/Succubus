@@ -79,10 +79,10 @@ namespace Succubus
 
             CommandService.RegisterCommands(Assembly.GetExecutingAssembly());
 
-            Client.MessageCreated += Client_MessageCreated;
+            Client.MessageCreated += Client_MessageCreated1;
         }
 
-        private async Task Client_MessageCreated(DSharpPlus.EventArgs.MessageCreateEventArgs e)
+        private async Task Client_MessageCreated1(DiscordClient sender, DSharpPlus.EventArgs.MessageCreateEventArgs e)
         {
             if (!TwitterRegex.IsMatch(e.Message.Content))
                 return;

@@ -11,19 +11,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Cosplayers.json" />
+    <None Remove="Resources\SuccubusConfiguration.json" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Cosplayers.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Attributes\" />
-    <Folder Include="Modules\Music\" />
-    <Folder Include="Modules\Owner\" />
+    <EmbeddedResource Include="Resources\libsodium.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SuccubusConfiguration.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -43,18 +43,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Include="Resources\SuccubusConfiguration.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Succubus.Database\Succubus.Database.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="Resources\libopus.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\libsodium.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\SuccubusConfiguration.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

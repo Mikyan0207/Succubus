@@ -18,8 +18,7 @@ namespace Succubus.Web
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
-                        .UseStartup<Startup>()
-                        .UseKestrel();
+                        .UseStartup<Startup>();
                 });
         }
     }

@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Succubus.Discord", "Succubu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{72E618FA-4324-4481-84C5-D6A48DE532BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Succubus.Web2", "Succubus.Web2\Succubus.Web2.csproj", "{1CFBBF9B-A53D-4DFC-B1CE-AE97C5F6B634}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{70F29DE4-F334-4254-963A-822219537B3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70F29DE4-F334-4254-963A-822219537B3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70F29DE4-F334-4254-963A-822219537B3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CFBBF9B-A53D-4DFC-B1CE-AE97C5F6B634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CFBBF9B-A53D-4DFC-B1CE-AE97C5F6B634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CFBBF9B-A53D-4DFC-B1CE-AE97C5F6B634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CFBBF9B-A53D-4DFC-B1CE-AE97C5F6B634}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{E5252C7E-7427-4C7D-AC5D-646DC22E685A} = {72E618FA-4324-4481-84C5-D6A48DE532BB}
 		{5C3A2DA9-02E4-41E1-BC2B-CE88A9BB1318} = {72E618FA-4324-4481-84C5-D6A48DE532BB}
 		{70F29DE4-F334-4254-963A-822219537B3B} = {72E618FA-4324-4481-84C5-D6A48DE532BB}
+		{1CFBBF9B-A53D-4DFC-B1CE-AE97C5F6B634} = {72E618FA-4324-4481-84C5-D6A48DE532BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A6C38DC-3E58-41EE-B04F-AA42C0F0204A}

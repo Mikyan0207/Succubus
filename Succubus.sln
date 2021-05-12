@@ -5,15 +5,17 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Succubus.Console", "Succubus.Console\Succubus.Console.csproj", "{B1609AFD-3659-4340-A16C-48C26480CB80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Succubus.Core", "Succubus.Core\Succubus.Core.csproj", "{138F1461-861B-4FB5-9368-492B8C938920}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Succubus.Core", "Succubus.Core\Succubus.Core.csproj", "{138F1461-861B-4FB5-9368-492B8C938920}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Succubus.Application", "Succubus.Application\Succubus.Application.csproj", "{5EC68325-A9D6-43AB-9345-5BE83EF866A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Succubus.Application", "Succubus.Application\Succubus.Application.csproj", "{5EC68325-A9D6-43AB-9345-5BE83EF866A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Succubus.Infrastructure", "Succubus.Infrastructure\Succubus.Infrastructure.csproj", "{E5252C7E-7427-4C7D-AC5D-646DC22E685A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Succubus.Infrastructure", "Succubus.Infrastructure\Succubus.Infrastructure.csproj", "{E5252C7E-7427-4C7D-AC5D-646DC22E685A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Succubus.Web", "Succubus.Web\Succubus.Web.csproj", "{5C3A2DA9-02E4-41E1-BC2B-CE88A9BB1318}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Succubus.Web", "Succubus.Web\Succubus.Web.csproj", "{5C3A2DA9-02E4-41E1-BC2B-CE88A9BB1318}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Succubus.Discord", "Succubus.Discord\Succubus.Discord.csproj", "{70F29DE4-F334-4254-963A-822219537B3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Succubus.Discord", "Succubus.Discord\Succubus.Discord.csproj", "{70F29DE4-F334-4254-963A-822219537B3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{72E618FA-4324-4481-84C5-D6A48DE532BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B1609AFD-3659-4340-A16C-48C26480CB80} = {72E618FA-4324-4481-84C5-D6A48DE532BB}
+		{138F1461-861B-4FB5-9368-492B8C938920} = {72E618FA-4324-4481-84C5-D6A48DE532BB}
+		{5EC68325-A9D6-43AB-9345-5BE83EF866A6} = {72E618FA-4324-4481-84C5-D6A48DE532BB}
+		{E5252C7E-7427-4C7D-AC5D-646DC22E685A} = {72E618FA-4324-4481-84C5-D6A48DE532BB}
+		{5C3A2DA9-02E4-41E1-BC2B-CE88A9BB1318} = {72E618FA-4324-4481-84C5-D6A48DE532BB}
+		{70F29DE4-F334-4254-963A-822219537B3B} = {72E618FA-4324-4481-84C5-D6A48DE532BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A6C38DC-3E58-41EE-B04F-AA42C0F0204A}

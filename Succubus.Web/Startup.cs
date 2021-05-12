@@ -1,15 +1,11 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Succubus.Web.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Succubus.Application.Interfaces;
+using Succubus.Infrastructure;
+using Succubus.Web.Services;
 
 namespace Succubus.Web
 {
@@ -28,7 +24,12 @@ namespace Succubus.Web
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+
+            services.AddInfrastructure(Configuration);
+
+            services.AddHttpContextAccessor();
+
+            services.AddSingleton<ICurrentUserService, CurrentUserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

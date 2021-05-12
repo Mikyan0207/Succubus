@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Succubus.Application\Succubus.Application.csproj" />
+    <ProjectReference Include="..\Succubus.Infrastructure\Succubus.Infrastructure.csproj" />
+  </ItemGroup>
 
 </Project>

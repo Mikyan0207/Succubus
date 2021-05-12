@@ -15,8 +15,7 @@ namespace Succubus.Web
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
-                        .UseKestrel()
-                        .UseUrls("http://*:80");
+                        .UseKestrel();
                 });
     }
 }

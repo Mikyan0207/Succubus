@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Succubus.Web2
 {
@@ -40,7 +41,13 @@ namespace Succubus.Web2
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost
+            });
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();

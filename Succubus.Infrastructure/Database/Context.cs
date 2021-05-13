@@ -10,20 +10,28 @@ namespace Succubus.Infrastructure.Database
 {
     public class Context : DbContext, IContext
     {
-        private ICurrentUserService CurrentUserService { get; }
+        private readonly ICurrentUserService CurrentUserService;
 
         public Context(DbContextOptions<Context> options, ICurrentUserService currentUserService) : base(options)
         {
             CurrentUserService = currentUserService;
+
+            Cosplayers = Set<Cosplayer>();
+            Images = Set<Image>();
+            Sets = Set<Set>();
+            Socials = Set<Social>();
+            Users = Set<User>();
         }
 
-        public DbSet<Cosplayer> Cosplayers => Set<Cosplayer>();
+        public DbSet<Cosplayer> Cosplayers { get; set; }
 
-        public DbSet<Set> Sets => Set<Set>();
+        public DbSet<Image> Images { get; set; }
 
-        public DbSet<Social> Socials => Set<Social>();
+        public DbSet<Set> Sets { get; set; }
 
-        public DbSet<User> Users => Set<User>();
+        public DbSet<Social> Socials { get; set; }
+
+        public DbSet<User> Users { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

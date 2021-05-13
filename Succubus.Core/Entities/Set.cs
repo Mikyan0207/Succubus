@@ -19,6 +19,8 @@ namespace Succubus.Core.Entities
 
         public int Size { get; set; }
 
+        public int CurrentIndex { get; set; }
+
         public string Folder { get; set; } = string.Empty;
 
         public IList<Image> Images { get; }
